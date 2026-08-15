@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: #0e0d12;
+  --color-surface: #17151d;
+  --color-surface-2: #201c27;
+  --color-ink: #f4f1ea;
+  --color-ink-muted: #948fa0;
+  --color-accent: #e0a458;
+  --color-accent-soft: #4a3d2a;
+  --color-line: #2c2833;
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* Ambient hero grain — a slow-drifting light leak, not a loud effect */
+@keyframes drift {
+  0% {
+    transform: translate3d(-2%, -2%, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(2%, 1%, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(-2%, -2%, 0) scale(1.1);
+  }
+}
+
+.animate-drift {
+  animation: drift 26s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift {
+    animation: none;
+  }
+}
+
+/* Focus visibility kept deliberate against the dark surface */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}

@@ -27,6 +27,17 @@ Claude Code로 프리미엄 웹사이트를 만들기 위한 스타터 저장소
     └── webapp-testing         Playwright 브라우저 테스트
 ```
 
+## 포트폴리오 사이트 실행하기
+
+이 저장소에는 `CLAUDE.md` 규칙에 따라 생성된 Next.js 포트폴리오 사이트(`app/`, `components/`)가 포함되어 있습니다.
+
+```bash
+npm install
+npm run dev      # http://localhost:3000
+```
+
+배포는 `npm run build` 후 Vercel에 연결하면 됩니다. 이름, 문구, 프로젝트 목록(`components/work.tsx`)은 실제 내용으로 교체해서 사용하세요.
+
 ## 추가 설치 (선택)
 
 - **ui-ux-pro-max 플러그인** (팔레트 161종, 폰트 페어링 57종):
