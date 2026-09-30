@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BLOOM 심미치과</title>
   <meta name="description" content="삭제는 필요한 만큼만, 색은 직접 보고 확인합니다. 라미네이트·심미레진·미백 BLOOM 심미치과.">
+  <script>document.documentElement.classList.add("js");</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -13,8 +14,7 @@
 </head>
 <body>
 
-<!-- 헤더 (톤 A) -->
-<header class="bl-header" id="top">
+<header class="bl-header">
   <div class="bl-header__inner">
     <a class="bl-logo" href="/" aria-label="BLOOM 메인으로">BLOOM</a>
     <nav class="bl-nav" id="bl-nav" aria-label="주요 메뉴">
@@ -25,7 +25,7 @@
       <a href="/general">일반진료</a>
       <a href="/visit">VISIT</a>
     </nav>
-    <a class="bl-btn bl-btn--solid bl-header__cta" href="/visit#reservation">예약하기</a>
+    <a class="bl-btn bl-btn--solid bl-header__cta" href="#reservation">예약하기</a>
     <button class="bl-menu" type="button" aria-expanded="false" aria-controls="bl-nav" aria-label="메뉴 열기">
       <span></span><span></span>
     </button>
@@ -34,240 +34,195 @@
 
 <main>
 
-  <!-- A-HERO -->
+  <!-- 1. Hero: 삶의 장면 -->
   <section class="bl-hero" aria-label="소개">
     <div class="bl-hero__media">
-      <!-- 영상이 준비되면 교체: <video autoplay loop muted playsinline poster="assets/img/hero.jpg"><source src="assets/hero.mp4" type="video/mp4"></video> -->
-      <div class="bl-ph bl-ph--hero">[영상: 자연광 속 20~30대 인물의 옆얼굴, 입가의 옅은 미소로 천천히 다가가는 컷, 저채도·톤다운, 가로형 루프]</div>
+      <!-- 영상 준비 후 교체: <video autoplay loop muted playsinline poster="assets/img/hero.jpg"><source src="assets/hero.mp4" type="video/mp4"></video> -->
+      <div class="bl-ph bl-ph--scene">[영상: 친구 결혼식 단체사진 촬영 순간. 뒷줄에서 고개를 젖히며 활짝 웃는 20대 후반 여성. 핸드헬드, 늦은 오후 자연광, 저채도, 8~12초 루프]</div>
     </div>
+    <p class="bl-hero__scene"><span>SCENE</span>토요일 오후, 친구 결혼식 단체사진</p>
     <div class="bl-hero__copy">
-      <h1 class="bl-hero__title">다시, 피어나다.</h1>
-      <p class="bl-hero__lead">원래 가지고 있던 자연스러움.</p>
-      <hr class="bl-hero__rule">
-      <p class="bl-hero__sub">BLOOM은 그걸 되찾는 일을 합니다.</p>
-      <a class="bl-btn bl-btn--pill" href="/visit#reservation">상담 예약하기</a>
+      <h1 class="bl-hero__title">단체사진 속 다문 입이<br>마음에 걸렸다면.</h1>
+      <p class="bl-hero__brand"><em>다시, 피어나다.</em> 원래 가지고 있던 자연스러움을 되찾는 일, BLOOM이 합니다.</p>
+      <a class="bl-btn bl-btn--pill" href="#reservation">상담 예약하기</a>
+    </div>
+    <span class="bl-hero__cue" aria-hidden="true"></span>
+  </section>
+
+  <!-- 2. Brand Principle: 검정, 좌측 정렬 대형 타이포 -->
+  <section class="bl-principle">
+    <div class="bl-wide">
+      <p class="bl-principle__copy rv">처음 하시는 분에게는 신중하게.<br><strong>다시 하시는 분에게는 조금 더 조심스럽게.</strong></p>
+      <ul class="bl-principle__list rv">
+        <li>삭제는 꼭 필요한 만큼만.</li>
+        <li>색은 사진이 아니라 직접 보고 확인합니다.</li>
+        <li>다시 하는 치료일수록 어디까지 손대지 않아도 되는지 먼저 봅니다.</li>
+      </ul>
     </div>
   </section>
 
-  <!-- A-STATEMENT -->
-  <section class="bl-statement">
-    <p class="bl-statement__copy">처음 하시는 분에게는 신중하게.<br>다시 하시는 분에게는 조금 더 조심스럽게.</p>
-    <p class="bl-statement__sub">삭제는 필요한 만큼만 하고, 색은 직접 보고 확인합니다.</p>
-    <a class="bl-btn bl-btn--pill bl-btn--ghost" href="/about">BLOOM의 원칙 보기</a>
+  <!-- 3a. Laminate: 베이지 반반 (가장 크게) -->
+  <section class="bl-lam">
+    <div class="bl-lam__media">
+      <div class="bl-ph bl-ph--warm">[사진: 기공사가 셰이드 탭을 환자 앞니 옆에 대고 비교하는 순간, 손과 시선 중심, 톤다운]</div>
+    </div>
+    <div class="bl-lam__text rv">
+      <p class="bl-name">Laminate <span>라미네이트</span></p>
+      <h2 class="bl-h2">깎는 대신,<br>필요한 만큼 다듬습니다.</h2>
+      <p class="bl-body">삭제량은 치료 전에 예상 범위부터 설명드립니다. 색은 사진 한 장으로 정하지 않고, 필요하면 기공사가 직접 치아를 보고 원장과 맞춥니다.</p>
+      <p class="bl-crew">원장 · 기공사 · 치과위생사</p>
+      <a class="bl-btn bl-btn--dark" href="/laminate">라미네이트 자세히 보기</a>
+    </div>
   </section>
 
-  <!-- B-SPLIT-HALF ×3 -->
-  <section class="bl-treat" aria-label="진료 안내">
-    <article class="bl-half">
-      <div class="bl-half__media">
-        <div class="bl-ph">[사진: 기공사가 셰이드 탭을 실제 치아 옆에 대고 비교하는 손, 흑백 또는 톤다운]</div>
-      </div>
-      <div class="bl-half__text">
-        <p class="bl-name">Laminate <span>라미네이트</span></p>
-        <h2 class="bl-title">깎는 대신,<br>필요한 만큼 다듬습니다.</h2>
-        <p class="bl-body">원장·기공사·치과위생사가 함께 봅니다. 삭제량은 치료 전에 예상 범위부터 설명드립니다.</p>
-        <a class="bl-btn bl-btn--line" href="/laminate">라미네이트 자세히 알아보기</a>
-      </div>
-    </article>
-    <article class="bl-half bl-half--flip">
-      <div class="bl-half__media">
-        <div class="bl-ph">[사진: 원장이 레진을 한 겹씩 쌓는 손과 기구 클로즈업, 톤다운]</div>
-      </div>
-      <div class="bl-half__text">
-        <p class="bl-name">Resin <span>심미레진</span></p>
-        <h2 class="bl-title">자연치를 최대한 보존하며<br>형태를 더합니다.</h2>
-        <p class="bl-body">앞니 사이의 작은 공간이나 한두 개 치아의 형태 차이처럼, 큰 치료까지는 필요 없을 때 먼저 검토합니다.</p>
-        <a class="bl-btn bl-btn--line" href="/resin">심미레진 자세히 알아보기</a>
-      </div>
-    </article>
-    <article class="bl-half bl-half--short">
-      <div class="bl-half__media">
-        <div class="bl-ph">[사진: 밝기 차이가 드러나는 치아 정면 클로즈업, 저채도]</div>
-      </div>
-      <div class="bl-half__text">
-        <p class="bl-name">Whitening <span>미백</span></p>
-        <h2 class="bl-title">색을 더하지 않고,<br>밝기를 되찾습니다.</h2>
-        <p class="bl-body">전문가 미백과 잇몸미백. 변색의 원인부터 확인합니다.</p>
-        <a class="bl-btn bl-btn--line" href="/whitening">미백 자세히 알아보기</a>
-      </div>
-    </article>
+  <!-- 3b. Resin: 풀블리드 사진 위 텍스트 -->
+  <section class="bl-resin">
+    <div class="bl-ph bl-ph--dark">[사진: 원장의 손이 레진을 한 겹씩 올리는 매크로 컷. 러버댐·기구가 살짝 보이게, 어두운 배경]</div>
+    <div class="bl-resin__text rv">
+      <p class="bl-name">Resin <span>심미레진</span></p>
+      <h2 class="bl-h2">자연치를 최대한 보존하며<br>형태를 더합니다.</h2>
+      <p class="bl-body">앞니 사이의 작은 공간, 한두 개 치아의 형태 차이. 큰 치료 전에 먼저 검토합니다.</p>
+      <a class="bl-link" href="/resin">심미레진 자세히 보기</a>
+    </div>
   </section>
 
-  <!-- B-TEAM (3열 응용) -->
+  <!-- 3c. Whitening: 밝은 섹션, 짧고 가볍게 -->
+  <section class="bl-white">
+    <div class="bl-white__inner rv">
+      <p class="bl-name">Whitening <span>미백</span></p>
+      <h2 class="bl-h2">색을 더하지 않고,<br>밝기를 되찾습니다.</h2>
+      <p class="bl-body">전문가 미백과 잇몸미백. 변색의 원인부터 확인합니다.</p>
+      <a class="bl-link" href="/whitening">미백 자세히 보기</a>
+    </div>
+  </section>
+
+  <!-- 4. Team: 풀블리드 세 폭 -->
   <section class="bl-team">
-    <div class="bl-wrap">
-      <p class="bl-eyebrow">필요한 치료에 필요한 사람이 함께합니다</p>
-      <h2 class="bl-title">예쁜 치아는 한 사람이<br>만드는 게 아닙니다.</h2>
+    <div class="bl-wide bl-team__head rv">
+      <h2 class="bl-h2">예쁜 치아는<br>한 사람이 만드는 게 아닙니다.</h2>
       <p class="bl-body">BLOOM은 필요한 사람이 함께 만듭니다.</p>
-
-      <div class="bl-team__grid">
-        <figure class="bl-role">
-          <div class="bl-ph bl-ph--light">[사진: 원장이 스캔 데이터를 확인하는 옆모습]</div>
-          <figcaption>
-            <p class="bl-role__name">원장</p>
-            <p class="bl-role__desc">어디까지 치료할지, 어디에서 멈출지를 판단합니다.</p>
-          </figcaption>
-        </figure>
-        <figure class="bl-role">
-          <div class="bl-ph bl-ph--light">[사진: 기공사가 세라믹을 다듬는 손]</div>
-          <figcaption>
-            <p class="bl-role__name">기공사</p>
-            <p class="bl-role__desc">자연치의 색과 형태를 보철물에 구현합니다.</p>
-          </figcaption>
-        </figure>
-        <figure class="bl-role">
-          <div class="bl-ph bl-ph--light">[사진: 치과위생사가 치료를 준비하는 손과 시선]</div>
-          <figcaption>
-            <p class="bl-role__name">치과위생사</p>
-            <p class="bl-role__desc">치료 전 준비부터 치료 후 관리까지 함께합니다.</p>
-          </figcaption>
-        </figure>
-      </div>
-
+    </div>
+    <div class="bl-team__row">
+      <figure class="bl-role">
+        <div class="bl-ph bl-ph--warm">[사진: 원장이 스캔 데이터를 들여다보는 옆모습]</div>
+        <figcaption><strong>원장</strong>어디까지 치료할지, 어디에서 멈출지를 판단합니다.</figcaption>
+      </figure>
+      <figure class="bl-role">
+        <div class="bl-ph bl-ph--warm">[사진: 기공사가 세라믹을 다듬는 손]</div>
+        <figcaption><strong>기공사</strong>자연치의 색과 형태를 보철물에 구현합니다.</figcaption>
+      </figure>
+      <figure class="bl-role">
+        <div class="bl-ph bl-ph--warm">[사진: 치과위생사가 치료를 준비하는 손과 시선]</div>
+        <figcaption><strong>치과위생사</strong>치료 전 준비부터 치료 후 관리까지 함께합니다.</figcaption>
+      </figure>
+    </div>
+    <div class="bl-wide bl-team__foot rv">
+      <p class="bl-team__line">필요한 사람만, 필요한 만큼.</p>
       <table class="bl-matrix">
-        <caption>시술별로 함께하는 사람</caption>
-        <thead>
-          <tr><th scope="col"><span class="bl-sr">시술</span></th><th scope="col">원장</th><th scope="col">기공사</th><th scope="col">치과위생사</th></tr>
-        </thead>
+        <caption class="bl-sr">시술별로 함께하는 사람</caption>
+        <thead><tr><td></td><th scope="col">원장</th><th scope="col">기공사</th><th scope="col">위생사</th></tr></thead>
         <tbody>
-          <tr><th scope="row">라미네이트</th><td>●<span class="bl-sr">참여</span></td><td>●<span class="bl-sr">참여</span></td><td>●<span class="bl-sr">참여</span></td></tr>
-          <tr><th scope="row">심미레진</th><td>●<span class="bl-sr">참여</span></td><td class="is-off">—<span class="bl-sr">해당 없음</span></td><td>●<span class="bl-sr">참여</span></td></tr>
-          <tr><th scope="row">미백</th><td>●<span class="bl-sr">참여</span></td><td class="is-off">—<span class="bl-sr">해당 없음</span></td><td>●<span class="bl-sr">참여</span></td></tr>
+          <tr><th scope="row">라미네이트</th><td>●</td><td>●</td><td>●</td></tr>
+          <tr><th scope="row">심미레진</th><td>●</td><td class="is-off" aria-label="해당 없음">—</td><td>●</td></tr>
+          <tr><th scope="row">미백</th><td>●</td><td class="is-off" aria-label="해당 없음">—</td><td>●</td></tr>
         </tbody>
       </table>
-      <p class="bl-team__foot">필요한 사람만, 필요한 만큼.</p>
     </div>
   </section>
 
-  <!-- B-RESULT -->
+  <!-- 5. Before & After: 밝은 에디토리얼 -->
   <!-- 의료광고 심의/규정 확인 필요 -->
   <section class="bl-result">
-    <div class="bl-wrap">
-      <div class="bl-result__head">
-        <div>
-          <p class="bl-eyebrow">후기 없이, 사진과 치료 범위만 보여드립니다</p>
-          <h2 class="bl-title">말보다 확실한 건, 결과입니다.</h2>
-        </div>
+    <div class="bl-wide">
+      <div class="bl-result__head rv">
+        <h2 class="bl-h2">말보다 확실한 건,<br>결과입니다.</h2>
         <a class="bl-link" href="/laminate#before-after">치료결과 사진 더 보기</a>
       </div>
       <div class="bl-result__grid">
-        <figure class="bl-case">
-          <div class="bl-case__pair">
-            <div class="bl-ph">[BEFORE 사진]</div>
-            <div class="bl-ph">[AFTER 사진]</div>
-          </div>
-          <div class="bl-case__bar"><span>BEFORE</span><span>AFTER</span></div>
-          <figcaption><strong>LAMINATE · [N] UNITS</strong> [치료 범위 · 주요 개선 항목]</figcaption>
+        <figure class="bl-case rv">
+          <div class="bl-case__pair"><div class="bl-ph bl-ph--paper">BEFORE</div><div class="bl-ph bl-ph--paper">AFTER</div></div>
+          <figcaption><strong>LAMINATE · [N] UNITS</strong>[기존 보철물 재제작 여부 · 주요 개선 항목]</figcaption>
         </figure>
-        <figure class="bl-case">
-          <div class="bl-case__pair">
-            <div class="bl-ph">[BEFORE 사진]</div>
-            <div class="bl-ph">[AFTER 사진]</div>
-          </div>
-          <div class="bl-case__bar"><span>BEFORE</span><span>AFTER</span></div>
-          <figcaption><strong>LAMINATE · [N] UNITS</strong> [기존 보철물 재제작 여부 · 주요 개선 항목]</figcaption>
-        </figure>
-        <figure class="bl-case">
-          <div class="bl-case__pair">
-            <div class="bl-ph">[BEFORE 사진]</div>
-            <div class="bl-ph">[AFTER 사진]</div>
-          </div>
-          <div class="bl-case__bar"><span>BEFORE</span><span>AFTER</span></div>
-          <figcaption><strong>RESIN · [N] UNITS</strong> [치료 범위 · 주요 개선 항목]</figcaption>
-        </figure>
-        <figure class="bl-case">
-          <div class="bl-case__pair">
-            <div class="bl-ph">[BEFORE 사진]</div>
-            <div class="bl-ph">[AFTER 사진]</div>
-          </div>
-          <div class="bl-case__bar"><span>BEFORE</span><span>AFTER</span></div>
-          <figcaption><strong>WHITENING</strong> [치료 범위 · 주요 개선 항목]</figcaption>
+        <figure class="bl-case bl-case--offset rv">
+          <div class="bl-case__pair"><div class="bl-ph bl-ph--paper">BEFORE</div><div class="bl-ph bl-ph--paper">AFTER</div></div>
+          <figcaption><strong>RESIN · [N] UNITS</strong>[치료 범위 · 주요 개선 항목]</figcaption>
         </figure>
       </div>
-      <p class="bl-notice">개인에 따라 시림, 붓기 등의 부작용이 발생할 수 있으며 치료 결과는 치아 상태에 따라 다를 수 있습니다.</p>
+      <p class="bl-notice">후기와 감상평은 싣지 않습니다. 개인에 따라 시림, 붓기 등의 부작용이 발생할 수 있으며 결과는 치아 상태에 따라 다를 수 있습니다.</p>
     </div>
   </section>
 
-  <!-- A-GALLERY (Journal) -->
+  <!-- 6. Journal: 목차형 리스트 -->
   <section class="bl-journal">
-    <div class="bl-wrap">
-      <p class="bl-eyebrow">상담 때 자주 받는 질문을 글로 정리했습니다</p>
-      <h2 class="bl-title bl-title--serif">Journal</h2>
-      <div class="bl-journal__grid">
-        <a class="bl-post" href="/journal/laminate-remake">
-          <div class="bl-ph">[사진: 기존 보철물을 살펴보는 원장과 기공사]</div>
-          <p class="bl-post__type">아티클</p>
-          <p class="bl-post__title">라미네이트를 다시 할 때 먼저 확인하는 것</p>
-        </a>
-        <a class="bl-post" href="/journal/tooth-shade">
-          <div class="bl-ph">[사진: 자연광 아래 셰이드 탭 비교]</div>
-          <p class="bl-post__type">아티클</p>
-          <p class="bl-post__title">사진 한 장으로 색을 정하지 않는 이유</p>
-        </a>
-        <a class="bl-post" href="/journal/resin-vs-laminate">
-          <div class="bl-ph">[영상 썸네일: 원장 인터뷰]</div>
-          <p class="bl-post__type">인터뷰 영상</p>
-          <p class="bl-post__title">레진과 라미네이트, 어떤 경우에 무엇이 맞을까</p>
-        </a>
+    <div class="bl-wide">
+      <div class="bl-journal__head rv">
+        <h2 class="bl-display">Journal</h2>
+        <p class="bl-body">상담 때 자주 받는 질문을 글과 영상으로 정리했습니다.</p>
       </div>
-      <a class="bl-link" href="https://www.instagram.com/" rel="noopener">Instagram에서 작업 과정 보기</a>
+      <ul class="bl-index">
+        <li class="rv"><a href="/journal/laminate-remake">
+          <span class="bl-index__type">아티클</span>
+          <span class="bl-index__title">라미네이트를 다시 할 때 먼저 확인하는 것</span>
+          <span class="bl-index__go" aria-hidden="true">→</span>
+        </a></li>
+        <li class="rv"><a href="/journal/tooth-shade">
+          <span class="bl-index__type">아티클</span>
+          <span class="bl-index__title">사진 한 장으로 색을 정하지 않는 이유</span>
+          <span class="bl-index__go" aria-hidden="true">→</span>
+        </a></li>
+        <li class="rv"><a href="/journal/resin-vs-laminate">
+          <span class="bl-index__type">인터뷰 영상</span>
+          <span class="bl-index__title">레진과 라미네이트, 어떤 경우에 무엇이 맞을까</span>
+          <span class="bl-index__go" aria-hidden="true">→</span>
+        </a></li>
+        <li class="rv"><a href="https://www.instagram.com/" rel="noopener">
+          <span class="bl-index__type">Instagram</span>
+          <span class="bl-index__title">작업 과정 기록</span>
+          <span class="bl-index__go" aria-hidden="true">↗</span>
+        </a></li>
+      </ul>
     </div>
   </section>
 
-  <!-- B-SPLIT (General Care) -->
+  <!-- 7. General Care: 토프, 가운데 좁은 폭 -->
   <section class="bl-general">
-    <div class="bl-wrap bl-split">
-      <div class="bl-split__media">
-        <div class="bl-ph">[사진: 치과위생사가 잇몸 상태를 확인하는 장면, 흑백]</div>
-      </div>
-      <div class="bl-split__text">
-        <p class="bl-eyebrow">심미치료 전에 먼저 보는 것</p>
-        <h2 class="bl-title">심미는 기본 위에<br>올라갑니다.</h2>
-        <p class="bl-body">충치와 잇몸이 건강해야 아름다운 치료도 오래 갈 수 있으니까요.</p>
-        <dl class="bl-list">
-          <div><dt>신경치료</dt><dd>가능한 경우 자연치를 오래 보존하는 방향을 먼저 고민합니다.</dd></div>
-          <div><dt>잇몸치료</dt><dd>보철을 시작하기 전에 잇몸 상태부터 확인합니다.</dd></div>
-          <div><dt>충치치료</dt><dd>다시 문제가 생길 위험을 줄일 수 있도록 접착과 마무리까지 꼼꼼하게 봅니다.</dd></div>
-        </dl>
-        <a class="bl-link" href="/general">일반진료 보기</a>
-      </div>
+    <div class="bl-general__inner rv">
+      <p class="bl-general__quote">심미는<br>기본 위에 올라갑니다.</p>
+      <p class="bl-body">심미치료 상담으로 오셨어도 잇몸이나 충치 치료가 먼저 필요한 경우가 있습니다. 조금 돌아가는 것처럼 느껴질 수 있지만, 오래 쓰려면 기본이 먼저입니다.</p>
+      <dl class="bl-general__list">
+        <div><dt>신경치료</dt><dd>가능한 경우 자연치를 오래 보존하는 방향을 먼저 고민합니다.</dd></div>
+        <div><dt>잇몸치료</dt><dd>보철을 시작하기 전에 잇몸 상태부터 확인합니다.</dd></div>
+        <div><dt>충치치료</dt><dd>다시 문제가 생길 위험을 줄이도록 접착과 마무리까지 봅니다.</dd></div>
+      </dl>
+      <a class="bl-link" href="/general">일반진료 보기</a>
     </div>
   </section>
 
-  <!-- B-MAP + A-CLOSING -->
-  <section class="bl-visit" id="visit">
-    <div class="bl-wrap">
-      <div class="bl-map">
-        <div class="bl-ph bl-map__canvas">[지도 삽입 자리]</div>
-        <div class="bl-map__info">
-          <p class="bl-eyebrow">궁금한 게 있다면 먼저 물어보셔도 됩니다</p>
-          <h2 class="bl-title">BLOOM 오시는 길</h2>
-          <dl class="bl-info">
-            <div><dt>주소</dt><dd>[주소]</dd></div>
-            <div><dt>대표번호</dt><dd>[전화번호]</dd></div>
-            <div><dt>진료시간</dt><dd>[평일 · 토요일 · 점심시간 · 휴진일]</dd></div>
-            <div><dt>대중교통</dt><dd>[가까운 역·출구, 버스 정류장]</dd></div>
-            <div><dt>주차</dt><dd>[주차 가능 여부와 위치]</dd></div>
-          </dl>
-          <a class="bl-link" href="/visit">비용안내 · 오시는 길 보기</a>
-        </div>
-      </div>
-
-      <div class="bl-closing" id="reservation">
-        <p class="bl-closing__copy">상담은 편하게.<br>시작은 신중하게.</p>
-        <div class="bl-closing__actions">
+  <!-- 8. Visit / CTA -->
+  <section class="bl-visit" id="reservation">
+    <div class="bl-wide">
+      <div class="bl-visit__cta rv">
+        <p class="bl-visit__copy">상담은 편하게.<br>시작은 신중하게.</p>
+        <div class="bl-visit__actions">
           <a class="bl-btn bl-btn--solid" href="#" data-todo="카카오 채널 링크">카카오 상담</a>
           <a class="bl-btn bl-btn--line" href="tel:" data-todo="대표번호">전화 상담</a>
           <a class="bl-btn bl-btn--line" href="/visit#reservation">온라인 예약</a>
         </div>
       </div>
+      <dl class="bl-visit__info rv">
+        <div><dt>주소</dt><dd>[주소]</dd></div>
+        <div><dt>진료시간</dt><dd>[평일 · 토요일 · 점심시간 · 휴진일]</dd></div>
+        <div><dt>대중교통 · 주차</dt><dd>[가까운 역·출구, 주차 위치]</dd></div>
+        <div><dt>대표번호</dt><dd>[전화번호]</dd></div>
+      </dl>
     </div>
+    <div class="bl-ph bl-ph--map">[지도 삽입 자리]</div>
   </section>
 
 </main>
 
-<!-- 푸터 (톤 A) -->
 <footer class="bl-footer">
+  <p class="bl-logo bl-footer__logo">BLOOM</p>
   <ul class="bl-footer__sns">
     <li><a href="#" data-todo="블로그 링크">블로그</a></li>
     <li><a href="https://www.instagram.com/" rel="noopener">인스타그램</a></li>
@@ -277,10 +232,9 @@
     <span>BLOOM 심미치과</span><span>대표자 [이름]</span><span>[주소]</span><span>대표번호 [번호]</span><span>사업자등록번호 [번호]</span><span>개인정보보호책임자 [이름]</span>
   </p>
   <p class="bl-footer__legal"><a href="/terms">이용약관</a><a href="/privacy">개인정보처리방침</a></p>
-  <p class="bl-logo bl-footer__logo">BLOOM</p>
 </footer>
 
-<a class="bl-float" href="/visit#reservation">간편 1:1 상담</a>
+<a class="bl-float" href="#reservation">간편 1:1 상담</a>
 
 <script src="main.js" defer></script>
 </body>
