@@ -1,0 +1,71 @@
+@import "tailwindcss";
+@import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
+
+@theme inline {
+  --color-bg: #fbfaf7;
+  --color-surface: #f3f0ea;
+  --color-surface-2: #ece7dd;
+  --color-ink: #211e1b;
+  --color-ink-muted: #6b665f;
+  --color-line: #e2ddd2;
+  --color-accent: #a85a3f;
+  --color-accent-soft: #efe0d8;
+
+  --font-display: var(--font-display-kr);
+  --font-body: "Pretendard Variable", "Pretendard", -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Placeholder visual frame for photography not yet delivered (B&A, team, process) */
+.photo-placeholder {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-ink) 4%, transparent) 0px,
+      color-mix(in srgb, var(--color-ink) 4%, transparent) 1px,
+      transparent 1px,
+      transparent 14px
+    ),
+    linear-gradient(160deg, var(--color-surface-2), var(--color-surface));
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(-2%, -2%, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(2%, 1%, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(-2%, -2%, 0) scale(1.1);
+  }
+}
+
+.animate-drift {
+  animation: drift 30s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift {
+    animation: none;
+  }
+}
