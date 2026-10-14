@@ -1,0 +1,61 @@
+/* Layout fixes (spacing, card alignment, responsive). Loaded last; visual design unchanged. */
+
+/* [1] Doctor photo bleeds past the viewport and causes horizontal scroll at tablet widths. */
+.doctor{overflow-x:clip}
+
+/* [2] Section rhythm: promise band and implant grid were far off the 56–80px rhythm used elsewhere. */
+@media(min-width:1101px){.promise{padding-top:56px;padding-bottom:56px}.implant-treatment-grid{padding-top:72px}}
+@media(min-width:701px) and (max-width:1100px){.promise{padding-top:48px;padding-bottom:48px}.implant-treatment-grid{padding-top:64px}}
+
+/* [3] Implant cards: equal column widths, dividers drawn in the gap, photos aligned on one line. */
+.implant-treatment-grid{--g:64px;column-gap:var(--g)}
+.implant-treatment-grid article{position:relative;display:flex;flex-direction:column}
+.implant-treatment-grid article+article{border-left:0;border-top:0;padding-left:0}
+.implant-treatment-grid article+article:before{content:'';position:absolute;top:0;bottom:0;left:calc(var(--g) / -2);border-left:1px solid var(--line)}
+.implant-photo{aspect-ratio:330/313;height:auto;margin-top:auto}
+@media(max-width:1100px){.implant-treatment-grid{--g:44px}}
+@media(max-width:700px){.implant-treatment-grid{--g:20px}.implant-treatment-grid article+article{padding:0}}
+@media(max-width:360px){.implant-treatment-grid{--g:14px}}
+
+/* [4] Footer: social links wrapped "인스타그램" onto its own line on desktop. */
+@media(min-width:1101px){.footer-social{max-width:none;flex-wrap:nowrap}.footer-social button{white-space:nowrap}}
+
+/* [5] Sterile banner: fixed aspect ratio cut off the "개별포장 · 세척 · 고압증기멸균" line on tablets. */
+@media(min-width:701px) and (max-width:1100px){.first-visit .sterile-banner{aspect-ratio:auto;height:260px}}
+
+/* [6] Exam cards: centre the orphaned last row (3+2 on tablet, 2+2+1 on mobile). */
+@media(min-width:701px) and (max-width:800px){
+.exam-cards{grid-template-columns:repeat(6,minmax(0,1fr))}.exam-cards .exam-card{grid-column:span 2}.exam-cards .exam-card:nth-child(4){grid-column:2/span 2}
+}
+@media(max-width:700px){
+.exam-cards{grid-template-columns:repeat(4,minmax(0,1fr))}.exam-cards .exam-card,.exam-cards .exam-card:last-child{grid-column:span 2}.exam-cards .exam-card:nth-child(5){grid-column:2/span 2}
+}
+
+/* [7] Comfort care: the overlay layout collapses at 701–900px (heading and copy sit on the photos). */
+@media(min-width:701px) and (max-width:900px){
+.comfort-stage{aspect-ratio:auto;padding:384px 6% 48px}
+.comfort-background{display:none}
+.comfort-mobile-photo{display:block;position:absolute;top:0;left:0;width:100%;height:340px}
+.comfort-heading{position:relative;top:auto;left:auto;width:100%;margin:0}
+.comfort-heading h2{white-space:normal}
+.comfort-grid{position:relative;top:auto;left:auto;width:100%;height:auto;margin-top:36px;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.comfort-grid article{display:flex;flex-direction:column;padding:0 22px}
+.comfort-grid article:first-child{padding-left:0}.comfort-grid article:last-child{padding-right:0}
+.comfort-grid article+article{border-left:1px solid var(--line);padding-left:22px}
+.comfort-detail{display:block;order:-1;width:110px;height:150px;border-radius:56px;overflow:hidden;margin-bottom:20px}
+.comfort h3{font-size:19px;white-space:normal}
+.comfort-text>p{font-size:14px}
+}
+
+/* [8] Aftercare list: four columns are too narrow at 701–1000px ("정기/검진" split). */
+@media(min-width:701px) and (max-width:1000px){
+.after-list{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px}.after-list p:nth-child(odd){border-left:0}
+}
+
+/* [9] Mobile readability: 10px two-line CTAs, 11px tabs, gallery narrower than the content column. */
+@media(max-width:700px){
+.insurance-reserve,.implant-cta{width:auto;max-width:100%;min-height:44px;padding:10px 22px;font-size:13px;line-height:1.4;white-space:nowrap}
+.symptom-tabs button{font-size:12px}
+.doctor-gallery{max-width:none}
+.implant-sample-note{font-size:11px}
+}
