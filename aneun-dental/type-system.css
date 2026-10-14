@@ -1,0 +1,26 @@
+/* One type family and size scale per content role throughout the site. */
+:root{--type-hero:56px;--type-section:40px;--type-feature:30px;--type-subtitle:22px;--type-body:16px;--type-detail:14px;--type-label:11px;--type-step:28px;--type-tracking:-.8px}
+body,button,input,select,textarea{font-family:var(--sans)}
+.hero h1{font:400 var(--type-hero)/1.5 var(--serif);letter-spacing:-1.4px}.hero-copy p{font:400 20px/1.85 var(--sans)}
+.promise h2,.doctor h2,.visit-heading h2,.comfort-heading h2,.symptoms-heading h2,.implant-hero h2,.location-section h2,.insurance-scaling .visit-scaling-heading h3{font:400 var(--type-section)/1.5 var(--serif);letter-spacing:var(--type-tracking)}
+.diagnostic-heading h3,.sterile-banner h3,.visit-decision h3,.manage-copy h3,.implant-after h3,.insurance-card h4{font:400 var(--type-feature)/1.55 var(--serif);letter-spacing:var(--type-tracking)}
+.promise h3,.doctor h3,.comfort h3,.symptom-panels h4,.implant-treatment-grid h3,.scaling-care-card h4{font:500 var(--type-subtitle)/1.6 var(--sans);letter-spacing:-.5px}
+.symptom-panels h3,.location-details h3{font:600 var(--type-feature)/1.5 var(--sans);letter-spacing:var(--type-tracking)}
+.promise-grid p,.doctor-opening,.doctor-principle p,blockquote span,.visit-heading>p,.visit-decision p,.comfort-text>p,.symptoms-heading>p,.treatment-intro,.implant-principles p,.implant-treatment-grid p,.implant-after>div>p,.location-section header>p,.clinic-address,.location-row p,.location-row h4,.insurance-lead,.scaling-care-card p{font:400 var(--type-body)/1.85 var(--sans);letter-spacing:0}
+.treatment-steps h5,.exam-copy h4,.after-list strong{font:500 20px/1.6 var(--sans);letter-spacing:-.4px}
+.treatment-purpose{font:500 var(--type-body)/1.8 var(--sans)}
+.treatment-detail,.exam-copy .exam-subtitle,.exam-copy>p:last-child,.after-list span,.insurance-facts dt,.insurance-facts dd,.sterile-banner p{font:400 var(--type-detail)/1.85 var(--sans);letter-spacing:0}
+.section-label{font:500 var(--type-label)/1.5 var(--sans);letter-spacing:3px}
+.symptom-tabs button{font:400 18px/1.7 var(--sans)}.symptom-tabs button[aria-selected=true]{font-weight:600}
+.insurance-card-bottom>p,blockquote p{font:400 24px/1.6 var(--serif);letter-spacing:-.5px}
+/* Identical 01/02/03 number, rule and caption scale in First Visit. */
+.first-visit .listen-label>span,.first-visit .step>span{font:400 var(--type-step)/1.2 var(--serif);letter-spacing:0;color:#61758b}
+.first-visit .listen-label{color:white}.first-visit .listen-label>span{color:white}
+.first-visit .step{font:400 14px/1.6 var(--sans);gap:16px}
+.first-visit .step>span:after{height:1px;width:28px;margin-left:16px}
+.first-visit .listen-label>span:after{width:28px;margin-top:12px}
+.first-visit .listen-label p{font:400 14px/1.6 var(--sans);top:38px;left:55px;white-space:nowrap}
+.promise-number,.comfort-number,.care-index{font:400 var(--type-step)/1.2 var(--serif)}
+.insurance-reserve,.implant-cta,.scaling-book,.scaling-jump{font:500 var(--type-detail)/1.6 var(--sans)}
+@media(min-width:701px) and (max-width:1100px){:root{--type-hero:44px;--type-section:32px;--type-feature:27px;--type-subtitle:20px;--type-body:15px;--type-detail:13px}.comfort h3{font-size:18px}.comfort-text>p{font-size:13px}.implant-treatment-grid h3{font-size:20px}}
+@media(max-width:700px){:root{--type-hero:32px;--type-section:28px;--type-feature:25px;--type-subtitle:20px;--type-body:15px;--type-detail:13px;--type-label:10px;--type-step:24px}.hero h1{font-size:clamp(28px,7vw,var(--type-hero));letter-spacing:-1px}.hero-copy p{font-size:17px}.promise h2,.doctor h2,.visit-heading h2,.comfort-heading h2,.symptoms-heading h2,.implant-hero h2,.location-section h2,.insurance-scaling .visit-scaling-heading h3{letter-spacing:-.7px}.symptom-tabs button{font-size:13px}.treatment-steps h5,.exam-copy h4,.after-list strong{font-size:18px}.insurance-card-bottom>p,blockquote p{font-size:22px}.first-visit .step{font-size:13px;gap:12px}.first-visit .step>span:after{width:24px;margin-left:12px}.first-visit .listen-label>span:after{width:24px;margin-top:10px}.first-visit .listen-label p{font-size:13px;top:32px;left:45px}.insurance-facts dt,.insurance-facts dd,.location-row p,.location-row h4{font-size:13px}.scaling-care-card h4{font-size:18px}.care-index{font-size:24px}.scaling-care-card{grid-template-columns:34px 1fr}.section-label{letter-spacing:2.5px}}

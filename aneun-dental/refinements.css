@@ -1,0 +1,10 @@
+/* Compact principles, warm comfort, and readable implant photography. */
+.promise{padding:30px 5%}.promise h2{line-height:1.35;margin-top:16px}.promise-grid{margin-top:22px}.promise-grid article{padding:0 18px 4px}.promise-number:after{margin:8px auto 10px}.promise-grid p{margin-top:8px}.promise h3{margin-top:0;margin-bottom:0}.promise .section-label:after{margin-top:10px}
+.comfort{background:#eeeae4}.comfort-background,.comfort-mobile-photo{filter:none}
+.implant-hero:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,31,50,.74),rgba(13,31,50,.48) 42%,rgba(13,31,50,.14));z-index:1;pointer-events:none}.implant-hero header{z-index:2}.implant-hero h2,.implant-hero .section-label{color:#fff;text-shadow:0 2px 12px #07172855}.implant-hero .section-label:after{background:#fff}
+.implant-principles{padding:40px 4%}.implant-treatment-grid{padding:104px 4% 58px;gap:32px;text-align:center}.implant-treatment-grid article+article{padding-left:30px}.implant-treatment-grid h3:before{margin:0 auto 24px}
+@media(max-width:700px){.promise{padding:28px 7%}.promise-grid{margin-top:18px}.promise-grid article{padding:12px 0}.promise-number:after{margin:6px auto 8px}.promise-grid p{margin-top:6px}.implant-principles{padding:28px 5%}.implant-treatment-grid{padding:68px 7% 44px;gap:34px}.implant-treatment-grid article+article{padding:32px 0 0}.implant-treatment-grid h3:before{margin:0 auto 20px}.implant-hero:after{background:linear-gradient(180deg,rgba(13,31,50,.78),rgba(13,31,50,.52) 55%,rgba(13,31,50,.18))}}
+
+/* Quiet rounded navigation and booking controls. */
+.header-book,.menu-toggle{border-radius:8px}.sticky-book{border-radius:10px}.desktop-nav a,.desktop-nav button{border-radius:6px}.mobile-menu a,.mobile-menu button{border-radius:6px}.desktop-nav a:focus-visible,.menu-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+@media(max-width:600px){.sticky-book{border-radius:10px 10px 0 0}}
