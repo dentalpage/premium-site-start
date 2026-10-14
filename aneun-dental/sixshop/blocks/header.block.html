@@ -1,0 +1,76 @@
+<style>
+/* 원본이 기대하던 브라우저 기본값 복원 (식스샵 블록 기본 스타일 초기화 대응) */
+.an{display:flow-root;-webkit-text-size-adjust:100%;line-height:normal;font-size:16px;font-weight:400;text-align:left}.an [hidden]{display:none!important}:where(.an) h1{font-size:2em;font-weight:700}:where(.an) h2{font-size:1.5em;font-weight:700}:where(.an) h3{font-size:1.17em;font-weight:700}:where(.an) h4{font-size:1em;font-weight:700;margin:1.33em 0}:where(.an) h5{font-size:.83em;font-weight:700;margin:1.67em 0}:where(.an) ol,:where(.an) ul{margin:1em 0;padding-left:40px}:where(.an) ol{list-style:decimal}:where(.an) ul{list-style:disc}:where(.an) dl{margin:1em 0}:where(.an) dd{margin-left:40px}:where(.an) blockquote{margin:1em 40px}:where(.an) figure{margin:1em 40px}:where(.an) small{font-size:smaller}:where(.an) strong,:where(.an) b{font-weight:700}:where(.an) em{font-style:italic}:where(.an) img,:where(.an) svg{max-width:none;vertical-align:middle}:where(.an) svg:not(:root){overflow:hidden}:where(.an) button{border:2px outset buttonborder;padding:1px 6px;background:buttonface;line-height:normal;text-align:center}:where(.an) dialog{position:fixed;inset:0;margin:auto;border:1.5px solid;padding:1em;background:#fff;color:#000;max-width:calc(100% - 2em - 6px);max-height:calc(100% - 2em - 6px);overflow:auto;z-index:1000}:where(.an) dialog:not([open]){display:none}:where(.an) dialog::backdrop{background:rgba(0,0,0,.1)}.an section[id],.an [id]{scroll-margin-top:90px}.an{--cream:#fbf9f5;--ink:#292725;--muted:#405c79;--brown:#61758b;--line:#d9e2ed;--header-height:88px;--serif: var(--font-family-heading),'Noto Serif KR',Batang,serif;--sans: var(--font-family-body),'Noto Sans KR',Arial,sans-serif;color:var(--ink);background:var(--cream);font-family:var(--sans);word-break:keep-all}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}a{color:inherit;text-decoration:none}button{color:inherit}button:focus-visible,a:focus-visible{outline:2px solid var(--brown);outline-offset:6px}.header{height:var(--header-height);padding:0 4%;display:flex;align-items:center;gap:35px;background:rgba(251,249,245,.96);border-bottom:1px solid rgba(148,125,102,.15);position:sticky;top:0;z-index:10;backdrop-filter:blur(18px)}.brand{font-family:var(--serif);font-size:28px;font-weight:600;letter-spacing:-1.3px;white-space:nowrap}.brand span{display:block;font-family:var(--sans);font-weight:400;font-size:8px;letter-spacing:2.4px;margin-top:2px}.desktop-nav{display:flex;justify-content:center;align-items:center;gap:clamp(18px,2.1vw,34px);flex:1;font-size:13px}.desktop-nav a{position:relative;padding:12px 0;white-space:nowrap;border:0;background:none}.desktop-nav a:after{content:'';height:1px;position:absolute;bottom:5px;left:0;right:100%;background:var(--brown);transition:right .2s}.desktop-nav a:hover:after,.desktop-nav a.is-active:after{right:0}.header-book{border:1px solid var(--brown);border-radius:0;background:transparent;color:#405c79;padding:10px 20px;white-space:nowrap;font-size:13px;transition:.2s}.header-book:hover{background:var(--brown);color:white}.menu-toggle{display:none}.mobile-menu[hidden]{display:none}.mobile-menu{display:none}@media(max-width:1100px){.header{gap:20px;padding:0 3%}.desktop-nav{gap:18px;font-size:12px}.brand{font-size:24px}.header-book{padding:9px 13px}}@media(max-width:860px){.an{--header-height:76px}.desktop-nav{display:none}.header{justify-content:space-between;padding:0 5%}.header-book{margin-left:auto}.menu-toggle{display:block;background:transparent;border:0;padding:12px 0 12px 8px;font-size:12px}.mobile-menu{display:flex;position:fixed;left:0;right:0;top:var(--header-height);z-index:9;background:var(--cream);padding:20px 6% 28px;border-bottom:1px solid var(--line);flex-direction:column;gap:5px;box-shadow:0 10px 20px #243a5208}.mobile-menu a{text-align:left;padding:11px 0;background:none;border:0;font-size:14px}}@media(max-width:600px){.an{--header-height:70px}.brand{font-size:23px}.brand span{font-size:7px}.header{gap:15px}.header-book{font-size:11px;padding:8px 12px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}.an{--title-size:clamp(32px,3.2vw,44px);--subtitle-size:24px;--body-size:16px;--small-size:14px;--section-space:80px;--heading-gap:40px;--copy-gap:18px}@media(min-width:701px) and (max-width:1100px){.an{--title-size:32px;--subtitle-size:21px;--body-size:15px;--section-space:64px}}@media(max-width:700px){.an{--title-size:28px;--subtitle-size:20px;--body-size:15px;--small-size:13px;--section-space:56px;--heading-gap:28px}}.an{--type-hero:56px;--type-section:40px;--type-feature:30px;--type-subtitle:22px;--type-body:16px;--type-detail:14px;--type-label:11px;--type-step:28px;--type-tracking:-.8px}.an,button{font-family:var(--sans)}@media(min-width:701px) and (max-width:1100px){.an{--type-hero:44px;--type-section:32px;--type-feature:27px;--type-subtitle:20px;--type-body:15px;--type-detail:13px}}@media(max-width:700px){.an{--type-hero:32px;--type-section:28px;--type-feature:25px;--type-subtitle:20px;--type-body:15px;--type-detail:13px;--type-label:10px;--type-step:24px}}.an{--cream:#ffffff;--ink:#1b3048;--muted:#657589;--brown:#2c628e;--line:#dce4ed;--accent:#2c628e;--soft-blue:#f1f6fb}.an{background:#fff;color:var(--ink)}.header{background:#fffffff5;border-bottom-color:var(--line)}.brand{color:var(--ink)}.desktop-nav,.header-book{color:#294e70}.header-book{border-color:#7696b3}.header-book:hover{background:#2c628e}.header-book,.menu-toggle{border-radius:8px}.desktop-nav a{border-radius:6px}.mobile-menu a{border-radius:6px}.desktop-nav a:focus-visible,.menu-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:4px}@media(max-width:700px){.an{--type-section:28px;--type-body:15px;--type-detail:13px;--header-height:68px}.an{word-break:keep-all;overflow-wrap:break-word}.header{height:68px;padding:0 20px;gap:12px}.brand{font-size:23px}.header-book{min-height:42px;padding:9px 13px;font-size:12px}.menu-toggle{min-height:44px;min-width:44px;padding:10px;font-size:12px}.mobile-menu{top:68px;padding:14px 20px 22px;max-height:calc(100svh - 144px);overflow-y:auto;background:#fff}.mobile-menu a{min-height:46px;padding:13px 12px}.mobile-menu a:hover{background:#f1f6fb}}@media(max-width:360px){.header{padding:0 14px;gap:8px}.brand{font-size:21px}.header-book{padding:8px 10px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}/* 블록 여백 설정 */
+.an-pad{padding:{{property.paddingTopDesktop}}px {{property.paddingRightDesktop}}px {{property.paddingBottomDesktop}}px {{property.paddingLeftDesktop}}px}@media (max-width:767px){.an-pad{padding:{{property.paddingTopMobile}}px {{property.paddingRightMobile}}px {{property.paddingBottomMobile}}px {{property.paddingLeftMobile}}px}}
+</style>
+
+<template>
+<div class="an-pad"><div class="an an-header"><header class="header" id="header"><a class="brand" href="/" aria-label="아는치과 처음으로">아는치과<span>ANEUN DENTAL</span></a><nav class="desktop-nav" aria-label="주요 메뉴"><a href="/#doctor">원장소개</a><a href="/#first-visit">첫방문</a><a href="/#symptoms">증상별 진료</a><a href="/#comfort">통증케어</a><a href="/#implant">임플란트</a><a href="/#location">오시는 길</a></nav><button class="header-book" type="button" data-book="">예약하기</button><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">메뉴</button></header><nav class="mobile-menu" id="mobile-menu" aria-label="모바일 메뉴" hidden=""><a href="/#doctor">원장소개</a><a href="/#first-visit">첫방문</a><a href="/#symptoms">증상별 진료</a><a href="/#comfort">통증케어</a><a href="/#implant">임플란트</a><a href="/#location">오시는 길</a></nav></div></div>
+</template>
+
+<script>
+  const container = bm.container;
+
+  // 예약 버튼: 푸터 블록의 예약 안내 팝업을 연다
+  function onBookClick(e) {
+    if (e.target.closest('[data-book]')) {
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('aneun:book'));
+    }
+  }
+  container.addEventListener('click', onBookClick);
+
+  function menuParts() {
+    return { button: container.querySelector('.menu-toggle'), menu: container.querySelector('#mobile-menu') };
+  }
+  function closeMenu() {
+    const { button, menu } = menuParts();
+    if (!menu) return;
+    menu.hidden = true;
+    button.setAttribute('aria-expanded', 'false');
+  }
+  // 모바일 메뉴 열기/닫기, 메뉴 링크 누르면 닫기
+  function onMenuClick(e) {
+    const { button, menu } = menuParts();
+    if (e.target.closest('.menu-toggle')) {
+      const open = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+    } else if (e.target.closest('#mobile-menu a')) {
+      closeMenu();
+    }
+  }
+  function onKey(e) { if (e.key === 'Escape') closeMenu(); }
+  function onResize() { if (window.innerWidth > 860) closeMenu(); }
+  container.addEventListener('click', onMenuClick);
+  document.addEventListener('keydown', onKey);
+  window.addEventListener('resize', onResize);
+
+  // 현재 보고 있는 섹션의 메뉴에 밑줄 표시 (같은 페이지의 다른 블록 섹션을 관찰)
+  let observer = null;
+  if ('IntersectionObserver' in window) {
+    observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const link = container.querySelector('.desktop-nav a[href$="#' + entry.target.id + '"]');
+        if (!link) return;
+        link.classList.toggle('is-active', entry.isIntersecting);
+        if (entry.isIntersecting) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-90px 0px -35% 0px', threshold: 0 });
+    setTimeout(() => {
+      container.querySelectorAll('.desktop-nav a').forEach(a => {
+        const target = document.getElementById(a.getAttribute('href').split('#')[1]);
+        if (target) observer.observe(target);
+      });
+    }, 300);
+  }
+
+  bm.onDestroy = () => {
+    container.removeEventListener('click', onBookClick);
+    container.removeEventListener('click', onMenuClick);
+    document.removeEventListener('keydown', onKey);
+    window.removeEventListener('resize', onResize);
+    if (observer) observer.disconnect();
+  };
+</script>

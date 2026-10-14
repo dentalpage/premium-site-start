@@ -1,0 +1,107 @@
+{
+ "title": "아는치과 · 푸터와 예약 안내",
+ "tags": [
+  "FOOTER",
+  "POPUP"
+ ],
+ "settings": [
+  {
+   "type": "TITLE",
+   "content": "블록 여백 (PC)"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingTopDesktop",
+   "label": "위쪽 여백 (PC)",
+   "description": "위쪽 여백 (PC)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingBottomDesktop",
+   "label": "아래쪽 여백 (PC)",
+   "description": "아래쪽 여백 (PC)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingLeftDesktop",
+   "label": "왼쪽 여백 (PC)",
+   "description": "왼쪽 여백 (PC)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingRightDesktop",
+   "label": "오른쪽 여백 (PC)",
+   "description": "오른쪽 여백 (PC)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "TITLE",
+   "content": "블록 여백 (모바일)"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingTopMobile",
+   "label": "위쪽 여백 (모바일)",
+   "description": "위쪽 여백 (모바일)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingBottomMobile",
+   "label": "아래쪽 여백 (모바일)",
+   "description": "아래쪽 여백 (모바일)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingLeftMobile",
+   "label": "왼쪽 여백 (모바일)",
+   "description": "왼쪽 여백 (모바일)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingRightMobile",
+   "label": "오른쪽 여백 (모바일)",
+   "description": "오른쪽 여백 (모바일)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  }
+ ],
+ "property": {
+  "paddingTopDesktop": 0,
+  "paddingTopMobile": 0,
+  "paddingBottomDesktop": 0,
+  "paddingBottomMobile": 0,
+  "paddingLeftDesktop": 0,
+  "paddingLeftMobile": 0,
+  "paddingRightDesktop": 0,
+  "paddingRightMobile": 0
+ }
+}

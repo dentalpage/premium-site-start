@@ -1,0 +1,170 @@
+{
+ "title": "아는치과 · 첫방문 안내",
+ "tags": [
+  "INFORMATION"
+ ],
+ "settings": [
+  {
+   "type": "TITLE",
+   "content": "이미지"
+  },
+  {
+   "type": "DESCRIPTION",
+   "content": "원본 사이트 assets 폴더의 같은 이름 파일을 올려 주세요. 크롭 위치가 원본 크기 기준이라 같은 파일을 쓰는 것이 좋아요."
+  },
+  {
+   "type": "IMAGE_PICKER",
+   "id": "imgFirstVisitIdentity",
+   "label": "\"먼저 듣습니다\" 배너 사진",
+   "description": "원본 파일: first-visit-identity.webp"
+  },
+  {
+   "type": "IMAGE_PICKER",
+   "id": "imgExamPanorama",
+   "label": "검사 카드: 파노라마",
+   "description": "원본 파일: exam-panorama-v2.webp"
+  },
+  {
+   "type": "IMAGE_PICKER",
+   "id": "imgExamCt",
+   "label": "검사 카드: CT",
+   "description": "원본 파일: exam-ct-v2.webp"
+  },
+  {
+   "type": "IMAGE_PICKER",
+   "id": "imgExamPa",
+   "label": "검사 카드: PA",
+   "description": "원본 파일: exam-pa-v2.webp"
+  },
+  {
+   "type": "IMAGE_PICKER",
+   "id": "imgExamOral",
+   "label": "검사 카드: 구내포토",
+   "description": "원본 파일: exam-oral-v2.webp"
+  },
+  {
+   "type": "IMAGE_PICKER",
+   "id": "imgExamQray",
+   "label": "검사 카드: 큐레이",
+   "description": "원본 파일: exam-qray-v2.webp"
+  },
+  {
+   "type": "IMAGE_PICKER",
+   "id": "imgFirstVisit",
+   "label": "멸균 배너 사진",
+   "description": "원본 파일: first-visit.webp"
+  },
+  {
+   "type": "IMAGE_PICKER",
+   "id": "imgScalingInsurance",
+   "label": "보험 스케일링 카드 배경",
+   "description": "원본 파일: scaling-insurance.webp"
+  },
+  {
+   "type": "TITLE",
+   "content": "블록 여백 (PC)"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingTopDesktop",
+   "label": "위쪽 여백 (PC)",
+   "description": "위쪽 여백 (PC)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingBottomDesktop",
+   "label": "아래쪽 여백 (PC)",
+   "description": "아래쪽 여백 (PC)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingLeftDesktop",
+   "label": "왼쪽 여백 (PC)",
+   "description": "왼쪽 여백 (PC)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingRightDesktop",
+   "label": "오른쪽 여백 (PC)",
+   "description": "오른쪽 여백 (PC)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "TITLE",
+   "content": "블록 여백 (모바일)"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingTopMobile",
+   "label": "위쪽 여백 (모바일)",
+   "description": "위쪽 여백 (모바일)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingBottomMobile",
+   "label": "아래쪽 여백 (모바일)",
+   "description": "아래쪽 여백 (모바일)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingLeftMobile",
+   "label": "왼쪽 여백 (모바일)",
+   "description": "왼쪽 여백 (모바일)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  },
+  {
+   "type": "RANGE",
+   "id": "paddingRightMobile",
+   "label": "오른쪽 여백 (모바일)",
+   "description": "오른쪽 여백 (모바일)이에요.",
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "px"
+  }
+ ],
+ "property": {
+  "imgFirstVisitIdentity": "",
+  "imgExamPanorama": "",
+  "imgExamCt": "",
+  "imgExamPa": "",
+  "imgExamOral": "",
+  "imgExamQray": "",
+  "imgFirstVisit": "",
+  "imgScalingInsurance": "",
+  "paddingTopDesktop": 0,
+  "paddingTopMobile": 0,
+  "paddingBottomDesktop": 0,
+  "paddingBottomMobile": 0,
+  "paddingLeftDesktop": 0,
+  "paddingLeftMobile": 0,
+  "paddingRightDesktop": 0,
+  "paddingRightMobile": 0
+ }
+}
