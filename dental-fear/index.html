@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>쉼표치과 — 무서워서 미룬 사람을 위한 치과</title>
+  <meta name="description" content="치과가 무서워 치료를 미뤄온 분만을 위한 치과. 첫날은 이야기만, 손 들면 바로 멈춥니다." />
+  <meta name="theme-color" content="#F4F1EC" />
+  <link rel="preload" as="image" href="assets/dive1.webp" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <style>
+    :root, .sw-root {
+      --sw-bg: #F4F1EC;
+      --sw-ink: #1F2A2C;
+      --sw-ink-soft: #6B7476;
+      --sw-accent: #2F9E8F;
+      --sw-font-display: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
+      --sw-font-body: "Pretendard Variable", Pretendard, -apple-system, system-ui, sans-serif;
+    }
+    html, body { margin: 0; background: var(--sw-bg); }
+    body { word-break: keep-all; -webkit-font-smoothing: antialiased; }
+    .sw-copy__title { letter-spacing: -0.035em; line-height: 1.12; }
+    .sw-copylayer .sw-copy:first-of-type .sw-copy__title { font-size: clamp(2.5rem, 5.4vw, 4.75rem); }
+    .sw-copy__eyebrow { letter-spacing: 0.02em; text-transform: none; }
+    .sw-btn--primary { background: var(--sw-accent); color: #FBFAF7; box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--sw-accent) 70%, transparent); }
+    .sw-btn--primary:hover { transform: translateY(-2px); }
+    .legal { position: fixed; right: 16px; bottom: 10px; z-index: 40; font: 11px/1.4 var(--sw-font-body); color: var(--sw-ink-soft); opacity: .7; }
+    @media (max-width: 860px) { .legal { display: none; } }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+  <div id="world"></div>
+  <noscript><p style="padding:24px;font-family:sans-serif">쉼표치과 — 무서워서 미룬 사람을 위한 치과. 상담 예약: 전화 문의</p></noscript>
+  <p class="legal">개인에 따라 통증·치료 결과는 다를 수 있습니다.</p>
+
+  <script src="scrub-engine.js"></script>
+  <script>
+    // Replace with the clinic's real booking link (네이버 예약, 전화 등).
+    const BOOKING_URL = '#reserve';
+
+    mountScrollWorld(document.getElementById('world'), {
+      brand: { name: '쉼표치과', href: '#top' },
+      hint: '스크롤해서 들어가 보세요',
+      diveScroll: 1.3,
+      connScroll: 0.9,
+      sections: [
+        {
+          id: 'door', label: '문 앞',
+          still: 'assets/dive1.webp', stillMobile: 'assets/dive1-m.webp',
+          clip: 'assets/vid/dive1.mp4', clipMobile: 'assets/vid/dive1-m.mp4',
+          accent: '#2F9E8F',
+          eyebrow: '치과가 무서워 몇 년째 미루고 계신가요?',
+          title: '무서워서 미룬 거, 다 알아요.',
+          body: '쉼표치과는 치과가 무서운 분만을 위해 만든 치과입니다. 혼내지 않고, 서두르지 않고, 당신이 정한 속도로.',
+          tags: [],
+        },
+        {
+          id: 'talk', label: '첫 상담',
+          still: 'assets/dive2.webp', stillMobile: 'assets/dive2-m.webp',
+          clip: 'assets/vid/dive2.mp4', clipMobile: 'assets/vid/dive2-m.mp4',
+          accent: '#2F9E8F',
+          eyebrow: '첫 방문',
+          title: '첫날은 이야기만 합니다.',
+          body: '입을 벌리기 전에, 무엇이 무서운지부터 듣습니다. 첫 방문엔 상담과 검진만, 비용은 치료 전에 전부 알려드려요.',
+          tags: ['치료 없는 첫 방문', '비용 사전 안내', '“왜 이제 왔어요” 금지'],
+        },
+        {
+          id: 'calm', label: '진료실',
+          still: 'assets/dive3.webp', stillMobile: 'assets/dive3-m.webp',
+          clip: 'assets/vid/dive3.mp4', clipMobile: 'assets/vid/dive3-m.mp4',
+          accent: '#2F9E8F',
+          eyebrow: '소리와 따끔함',
+          title: '드릴 소리도, 따끔함도 줄였어요.',
+          body: '노이즈캔슬링 헤드폰으로 소리를 덮고, 바르는 마취 뒤 천천히 주입하는 전동 마취기를 씁니다. 필요하면 진정치료도 상의해요.',
+          tags: ['노이즈캔슬링 헤드폰', '표면마취 먼저', '진정치료 상담'],
+        },
+        {
+          id: 'pause', label: '멈춤 신호',
+          still: 'assets/dive4.webp', stillMobile: 'assets/dive4-m.webp',
+          clip: 'assets/vid/dive4.mp4', clipMobile: 'assets/vid/dive4-m.mp4',
+          accent: '#2F9E8F',
+          eyebrow: '결정은 당신이',
+          title: '손 들면, 바로 멈춥니다.',
+          body: '치료 중 언제든 손을 들면 즉시 멈춥니다. 다음 단계는 미리 설명하고 동의한 뒤에만. 하루에 감당할 만큼만 해요.',
+          tags: ['손 들면 즉시 중단', '단계마다 미리 설명', '하루 한 단계씩'],
+        },
+        {
+          id: 'garden', label: '다시 웃는 날',
+          still: 'assets/dive5.webp', stillMobile: 'assets/dive5-m.webp',
+          clip: 'assets/vid/dive5.mp4', clipMobile: 'assets/vid/dive5-m.mp4',
+          accent: '#2F9E8F',
+          eyebrow: '다시 웃는 날까지',
+          title: '미뤄온 그 이, 이번엔 천천히.',
+          body: '첫 상담은 치료 없이 30분 대화로 끝납니다. 오늘은 예약만 해두세요.',
+          tags: [],
+          cta: { primary: { label: '치료 없이 상담만 예약하기', href: BOOKING_URL } },
+        },
+      ],
+      connectors: ['assets/vid/conn1.mp4', 'assets/vid/conn2.mp4', 'assets/vid/conn3.mp4', 'assets/vid/conn4.mp4'],
+      connectorsMobile: ['assets/vid/conn1-m.mp4', 'assets/vid/conn2-m.mp4', 'assets/vid/conn3-m.mp4', 'assets/vid/conn4-m.mp4'],
+    });
+  </script>
+</body>
+</html>
