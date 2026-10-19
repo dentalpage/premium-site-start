@@ -3,8 +3,15 @@ export type JournalArticle = {
   category: string;
   title: string;
   excerpt: string;
+  pullQuote: string;
   body: string[];
 };
+
+// Korean reading speed is roughly 500 characters per minute.
+export function readMinutes(article: JournalArticle) {
+  const chars = article.body.join("").length;
+  return Math.max(1, Math.round(chars / 500));
+}
 
 export const JOURNAL_ARTICLES: JournalArticle[] = [
   {
@@ -12,6 +19,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
     category: "아티클",
     title: "라미네이트, 다시 해야 할 때 확인할 것들",
     excerpt: "이미 치료받은 치아는 처음과 같은 상태가 아닙니다.",
+    pullQuote: "재제작일수록 더 많이 손대는 것보다, 어디까지 손대지 않아도 되는지를 먼저 봅니다.",
     body: [
       "개원 후 기존 라미네이트나 심미보철을 다시 하고 싶다며 찾아오는 분들을 자주 만났습니다. 시간이 지나며 색이나 형태가 처음과 달라졌거나, 잇몸과 보철의 경계가 신경 쓰이는 경우도 있었습니다.",
       "재제작 상담을 하다 보면 하나의 사실이 더욱 분명해집니다. 이미 치료받은 치아는 처음 치료하는 치아보다 더 조심스럽게 접근해야 한다는 것입니다. 기존 보철물을 제거한 뒤 남아 있는 치아의 양은 사람마다 다르고, 잇몸 상태 역시 함께 확인해야 합니다.",
@@ -23,6 +31,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
     category: "아티클",
     title: "치아 색, 사진 한 장으로 정하지 않는 이유",
     excerpt: "조명과 카메라에 따라 같은 치아도 다르게 보입니다.",
+    pullQuote: "사진 속 색은 조명과 화면에 따라 달라집니다. 그래서 직접 마주 앉아 확인합니다.",
     body: [
       "사진 속 치아 색은 조명, 카메라, 화면 설정에 따라 실제와 다르게 보일 수 있습니다. 그래서 BLOOM은 사진 한 장만으로 치아 색을 결정하지 않습니다.",
       "필요한 경우 원장과 기공사가 함께 실제 치아의 색과 특징을 확인하고, 조율한 결과를 제작에 반영합니다.",
@@ -34,6 +43,7 @@ export const JOURNAL_ARTICLES: JournalArticle[] = [
     category: "아티클",
     title: "심미레진과 라미네이트, 무엇이 다를까",
     excerpt: "치아 상태와 원하는 변화의 정도에 따라 방법이 달라집니다.",
+    pullQuote: "어느 쪽이 더 적합한지는 치아 상태와 원하는 변화의 정도에 따라 달라집니다.",
     body: [
       "두 시술 모두 치아의 색과 형태를 개선하는 심미치료지만, 접근 방식은 다릅니다. 심미레진은 자연치를 최대한 보존하며 필요한 부분에만 재료를 더하는 방식입니다. 앞니 사이의 작은 공간, 일부 파절, 한두 개 치아의 형태 차이처럼 비교적 국소적인 변화에 적합합니다.",
       "라미네이트는 치아 표면을 얇게 다듬고 그 위에 세라믹 보철물을 부착하는 방식입니다. 여러 개 치아의 색과 배열을 함께 정리하고 싶을 때 고려할 수 있습니다.",

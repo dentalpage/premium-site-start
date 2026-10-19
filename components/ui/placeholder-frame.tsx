@@ -3,6 +3,7 @@ const ASPECTS = {
   portrait: "aspect-[4/5]",
   landscape: "aspect-[4/3]",
   wide: "aspect-[16/9]",
+  cinema: "aspect-[4/3] sm:aspect-[21/9]",
 } as const;
 
 /** Stand-in for photography not yet delivered — deliberately abstract, never a stock photo. */

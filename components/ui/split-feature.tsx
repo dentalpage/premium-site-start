@@ -30,7 +30,7 @@ export function SplitFeature({
         )}
       </div>
       <Reveal className="flex items-center px-6 py-20 sm:px-14 lg:px-20">
-        <div className="max-w-md">{children}</div>
+        <div className="w-full max-w-md">{children}</div>
       </Reveal>
     </section>
   );

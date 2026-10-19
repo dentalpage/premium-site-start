@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CinematicHero } from "@/components/ui/cinematic-hero";
+import { SplitFeature } from "@/components/ui/split-feature";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionLabel } from "@/components/ui/section-label";
 import { ProblemList } from "@/components/ui/problem-list";
@@ -91,6 +92,20 @@ export default function WhiteningPage() {
           </Reveal>
         </div>
       </section>
+
+      <SplitFeature reverse photoNote="셰이드 가이드와 미백 준비 기구 디테일 (환자 구강 내 장면 제외)">
+        <SectionLabel>Simple · Controlled</SectionLabel>
+        <h2 className="mt-6 font-display text-3xl leading-[1.45] text-ink sm:text-[40px]">
+          밝기보다 먼저,
+          <br />
+          원인을 봅니다.
+        </h2>
+        <p className="mt-6 text-base leading-relaxed text-ink-muted">
+          같은 누런 빛이라도 표면의 착색인지, 치아 내부의 변색인지에 따라
+          방법과 기대할 수 있는 변화가 다릅니다. 미백 전에 원인을 먼저
+          확인하고, 가능한 범위를 함께 설명해 드립니다.
+        </p>
+      </SplitFeature>
 
       <section className="border-b border-line px-6 py-24 sm:px-10">
         <div className="mx-auto max-w-6xl">
