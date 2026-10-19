@@ -7,6 +7,7 @@ const BASE =
 const VARIANTS = {
   primary: "bg-ink text-bg hover:bg-accent",
   outline: "border border-ink/20 text-ink hover:border-accent hover:text-accent",
+  light: "bg-on-dark text-ink hover:bg-accent hover:text-on-dark",
 } as const;
 
 export function Button({

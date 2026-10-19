@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/page-hero";
+import { CinematicHero } from "@/components/ui/cinematic-hero";
+import { SplitFeature } from "@/components/ui/split-feature";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionLabel } from "@/components/ui/section-label";
 import { ProblemList } from "@/components/ui/problem-list";
@@ -65,7 +66,7 @@ const FAQ_ITEMS = [
 export default function ResinPage() {
   return (
     <>
-      <PageHero
+      <CinematicHero
         eyebrow="Resin"
         title={"필요한 만큼만 다듬고,\n자연스러운 결을 더합니다."}
         subtitle={"자연치를 최대한 보존하며\n형태와 색을 회복하는 심미레진."}
@@ -87,6 +88,20 @@ export default function ResinPage() {
           </Reveal>
         </div>
       </section>
+
+      <SplitFeature photoNote="모형 위에서 레진을 적층하는 원장의 손 (환자 구강 내 장면 제외)">
+        <SectionLabel>Chairside · Hand</SectionLabel>
+        <h2 className="mt-6 font-display text-3xl leading-[1.45] text-ink sm:text-[40px]">
+          한 겹씩 쌓아
+          <br />
+          자연스러운 결을 만듭니다.
+        </h2>
+        <p className="mt-6 text-base leading-relaxed text-ink-muted">
+          심미레진은 기공소를 거치지 않고 진료실에서 원장이 직접 완성합니다.
+          색과 투명도가 다른 재료를 단계적으로 쌓아 주변 치아와 어우러지게
+          다듬습니다.
+        </p>
+      </SplitFeature>
 
       <section id="process" className="border-b border-line px-6 py-24 sm:px-10">
         <div className="mx-auto max-w-6xl">

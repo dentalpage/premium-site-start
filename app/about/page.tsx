@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/page-hero";
+import { CinematicHero } from "@/components/ui/cinematic-hero";
+import { GiantType } from "@/components/ui/giant-type";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionLabel } from "@/components/ui/section-label";
 import { PlaceholderFrame } from "@/components/ui/placeholder-frame";
@@ -27,7 +28,7 @@ const ACADEMIC = ["학력", "수련 및 경력", "학술활동", "학회", "논�
 export default function AboutPage() {
   return (
     <>
-      <PageHero
+      <CinematicHero
         eyebrow="The BLOOM"
         title={"다시 하는 치료라면,\n조금 더 조심스러워야 하니까."}
       />
@@ -80,13 +81,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section id="director" className="scroll-mt-20 border-b border-line px-6 py-24 sm:px-10">
-        <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+      <section id="director" className="scroll-mt-20 border-b border-line pb-24 pt-16">
+        <GiantType lines={["Necessary,", "nothing more."]}>
+          <PlaceholderFrame aspect="portrait" caption="원장 사진 촬영 예정" />
+        </GiantType>
+        <div className="mx-auto mt-16 grid max-w-6xl gap-14 px-6 sm:px-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
           <Reveal>
-            <PlaceholderFrame aspect="portrait" caption="원장 사진 촬영 예정" />
-            <p className="mt-4 text-sm text-ink-muted">
-              원장 소개 · 실제 이력 입력 예정
+            <p className="font-display text-3xl leading-[1.45] text-ink sm:text-4xl">
+              대표원장
+              <br />
+              <span className="text-ink-muted">이름 입력 예정</span>
             </p>
+            <p className="mt-4 text-sm text-ink-muted">실제 이력은 Academic &amp; Career에서 안내합니다.</p>
           </Reveal>
           <div>
             <Reveal>

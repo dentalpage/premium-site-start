@@ -34,7 +34,7 @@ export default async function JournalArticlePage({
   if (!article) notFound();
 
   return (
-    <article className="px-6 py-20 sm:px-10">
+    <article className="px-6 pb-20 pt-[148px] sm:px-10">
       <div className="mx-auto max-w-2xl">
         <Link
           href="/journal"

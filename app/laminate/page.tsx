@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/page-hero";
+import { CinematicHero } from "@/components/ui/cinematic-hero";
+import { QuoteBand } from "@/components/ui/quote-band";
+import { SplitFeature } from "@/components/ui/split-feature";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionLabel } from "@/components/ui/section-label";
 import { ProblemList } from "@/components/ui/problem-list";
@@ -87,7 +89,7 @@ const FAQ_ITEMS = [
 export default function LaminatePage() {
   return (
     <>
-      <PageHero
+      <CinematicHero
         eyebrow="Laminate"
         title={"치아를 새로 만드는 것이 아니라,\n필요한 만큼 다듬습니다."}
         subtitle={"자연치는 최대한 남기고\n형태와 색을 자연스럽게 맞추는 라미네이트."}
@@ -124,7 +126,26 @@ export default function LaminatePage() {
         </div>
       </section>
 
-      <section className="border-b border-line bg-surface px-6 py-24 sm:px-10">
+      <SplitFeature reverse photoNote="원장과 기공사가 모형과 스캔 데이터로 케이스를 함께 보는 장면">
+        <SectionLabel>Craft · Shade</SectionLabel>
+        <h2 className="mt-6 font-display text-3xl leading-[1.45] text-ink sm:text-[40px]">
+          사진 한 장으로
+          <br />
+          색을 정하지 않습니다.
+        </h2>
+        <p className="mt-6 text-base leading-relaxed text-ink-muted">
+          조명과 카메라에 따라 같은 치아도 다르게 보입니다. 필요한 경우 원장과
+          기공사가 함께 실제 치아의 색과 특징을 확인하고, 조율한 결과를
+          보철물에 반영합니다.
+        </p>
+      </SplitFeature>
+
+      <QuoteBand
+        quote="A removed tooth never grows back."
+        ko={"한 번 삭제된 치아는 다시 돌아오지 않습니다.\n그래서 다시 하는 치료일수록 더 신중하게 봅니다."}
+      />
+
+      <section className="border-b border-line px-6 py-24 sm:px-10">
         <Reveal className="mx-auto max-w-3xl text-center">
           <h2 className="font-display text-2xl leading-[1.6] text-ink sm:text-3xl">
             다시 하는 치료는

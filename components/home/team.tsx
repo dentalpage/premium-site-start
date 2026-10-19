@@ -19,7 +19,7 @@ const ROLES = [
 
 export function Team() {
   return (
-    <section className="border-t border-line bg-surface px-6 py-28 sm:px-10">
+    <section className="bg-sand px-6 py-28 sm:px-10">
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <SectionLabel>Team</SectionLabel>

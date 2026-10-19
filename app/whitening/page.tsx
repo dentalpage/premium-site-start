@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/ui/page-hero";
+import { CinematicHero } from "@/components/ui/cinematic-hero";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionLabel } from "@/components/ui/section-label";
 import { ProblemList } from "@/components/ui/problem-list";
@@ -69,7 +69,7 @@ const FAQ_ITEMS = [
 export default function WhiteningPage() {
   return (
     <>
-      <PageHero
+      <CinematicHero
         eyebrow="Whitening"
         title={"색을 더하지 않습니다.\n밝기를 되찾습니다."}
         subtitle="변색의 원인부터 확인하는 치아미백."

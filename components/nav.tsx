@@ -1,7 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+// Pages whose first section is a dark CinematicHero; nav sits transparent on top of it.
+const DARK_HERO = new Set(["/", "/about", "/laminate", "/resin", "/whitening"]);
 
 const GNB = [
   {
@@ -61,11 +65,25 @@ const GNB = [
 
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const onDark = DARK_HERO.has(pathname) && !scrolled && !mobileOpen;
+
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > window.innerHeight * 0.6);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, [pathname]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg/90 backdrop-blur-md">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-500 ${
+        onDark ? "border-transparent bg-transparent" : "border-line bg-bg/90 backdrop-blur-md"
+      }`}
+    >
       <div className="mx-auto flex h-[68px] max-w-7xl items-center justify-between px-6 sm:px-10">
-        <Link href="/" className="font-display text-xl tracking-[0.05em] text-ink">
+        <Link href="/" className={`font-display text-xl tracking-[0.05em] transition-colors duration-500 ${onDark ? "text-on-dark" : "text-ink"}`}>
           BLOOM
         </Link>
 
@@ -74,7 +92,7 @@ export function Nav() {
             <div key={menu.label} className="group relative">
               <Link
                 href={menu.href}
-                className="flex h-[68px] items-center text-[13px] font-medium tracking-[0.08em] text-ink transition-colors duration-200 group-hover:text-accent"
+                className={`flex h-[68px] items-center text-[13px] font-medium tracking-[0.08em] transition-colors duration-200 group-hover:text-accent ${onDark ? "text-on-dark" : "text-ink"}`}
               >
                 {menu.label}
               </Link>
@@ -98,9 +116,9 @@ export function Nav() {
 
         <Link
           href="/visit#reservation"
-          className="hidden rounded-full bg-ink px-5 py-2.5 text-[13px] font-medium text-bg transition-colors duration-300 hover:bg-accent lg:inline-flex"
+          className={`hidden rounded-full px-5 py-2.5 text-[13px] font-medium transition-colors duration-300 hover:bg-accent hover:text-on-dark lg:inline-flex ${onDark ? "bg-on-dark text-ink" : "bg-ink text-bg"}`}
         >
-          예약 상담
+          온라인 예약
         </Link>
 
         <button
@@ -111,10 +129,10 @@ export function Nav() {
           className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 lg:hidden"
         >
           <span
-            className={`h-px w-5 bg-ink transition-transform duration-200 ${mobileOpen ? "translate-y-[3.5px] rotate-45" : ""}`}
+            className={`h-px w-5 transition-transform ${onDark ? "bg-on-dark" : "bg-ink"} duration-200 ${mobileOpen ? "translate-y-[3.5px] rotate-45" : ""}`}
           />
           <span
-            className={`h-px w-5 bg-ink transition-transform duration-200 ${mobileOpen ? "-translate-y-[3.5px] -rotate-45" : ""}`}
+            className={`h-px w-5 transition-transform ${onDark ? "bg-on-dark" : "bg-ink"} duration-200 ${mobileOpen ? "-translate-y-[3.5px] -rotate-45" : ""}`}
           />
         </button>
       </div>
@@ -150,7 +168,7 @@ export function Nav() {
             onClick={() => setMobileOpen(false)}
             className="mt-6 flex items-center justify-center rounded-full bg-ink px-5 py-3 text-sm font-medium text-bg"
           >
-            예약 상담
+            온라인 예약
           </Link>
         </div>
       ) : null}

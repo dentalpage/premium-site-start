@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Serif_KR } from "next/font/google";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { MotionProvider } from "@/components/motion-provider";
 import "./globals.css";
 
 const notoSerifKr = Noto_Serif_KR({
@@ -19,10 +20,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ko" className={`${notoSerifKr.variable} h-full`}>
-      <body className="flex min-h-full flex-col bg-bg font-body text-ink antialiased selection:bg-accent selection:text-bg">
-        <Nav />
-        <main className="flex-1 pt-[68px]">{children}</main>
-        <Footer />
+      <body className="flex min-h-full flex-col break-keep bg-bg font-body text-ink antialiased selection:bg-accent selection:text-bg">
+        <MotionProvider>
+          <Nav />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );
