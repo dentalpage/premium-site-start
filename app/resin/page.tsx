@@ -1,36 +1,35 @@
 import type { Metadata } from "next";
 import { CinematicHero } from "@/components/ui/cinematic-hero";
-import { SplitFeature } from "@/components/ui/split-feature";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionLabel } from "@/components/ui/section-label";
-import { ProblemList } from "@/components/ui/problem-list";
-import { ProtocolList } from "@/components/ui/protocol-list";
 import { ProcessSteps, type Step } from "@/components/ui/process-steps";
-import { BeforeAfterSection } from "@/components/ui/before-after-section";
-import { FAQ } from "@/components/ui/faq";
+import { TeamProtocol, type ProtocolMember } from "@/components/ui/team-protocol";
+import { FaqSection } from "@/components/ui/faq-section";
 import { VisitCta } from "@/components/home/visit-cta";
+import { ResinCaseChips } from "@/components/resin/case-chips";
+import { ResinOutlineIntro } from "@/components/resin/outline-intro";
+import { ResinChapters } from "@/components/resin/chapters";
+import { ResinCompare } from "@/components/resin/compare-table";
+import { ResinCaseRows } from "@/components/resin/case-rows";
+import { RESIN_FAQ } from "@/lib/faq";
 
 export const metadata: Metadata = {
   title: "심미레진 | BLOOM 심미치과",
   description: "자연치를 최대한 보존하며 형태와 색을 회복하는 심미레진.",
 };
 
-const PROBLEMS = [
-  "앞니 사이의 작은 공간",
-  "일부 치아 파절",
-  "한두 개 치아의 형태 차이",
-  "큰 보철치료까지는 부담스러운 경우",
-  "자연치를 최대한 보존하고 싶은 경우",
-];
-
-const PROTOCOL = [
+const TEAM: ProtocolMember[] = [
   {
     role: "원장",
-    text: "가능한 범위에서 자연치를 최대한 보존합니다.\n치료 부위에 맞는 방습과 접착 과정을 거쳐 색과 형태를 단계적으로 완성합니다.",
+    principle: "가능한 범위에서 자연치를 최대한 보존합니다.",
+    text: "치료 부위에 맞는 방습과 접착 과정을 거쳐 색과 형태를 단계적으로 완성합니다.",
+    photo: "적층 기구를 든 원장의 손",
   },
   {
-    role: "위생사",
+    role: "치과위생사",
+    principle: "준비부터 관리까지 함께합니다.",
     text: "치료 준비와 시술 보조, 치료 후 유지관리 안내까지 함께합니다.",
+    photo: "진료를 준비하는 치과위생사",
   },
 ];
 
@@ -44,25 +43,6 @@ const STEPS: Step[] = [
   { no: "07", title: "연마", desc: "자연스러운 광택과 질감을 위해 마무리 연마를 진행합니다." },
 ];
 
-const FAQ_ITEMS = [
-  {
-    q: "레진으로 가능한 범위는 어디까지인가요?",
-    a: "앞니 사이의 작은 틈, 일부 파절, 한두 개 치아의 형태 차이처럼 비교적 국소적인 변화에 적합합니다. 변화 범위가 크신 경우에는 상담 시 다른 방법도 함께 안내해 드립니다.",
-  },
-  {
-    q: "라미네이트가 더 적합한 경우는?",
-    a: "여러 개 치아의 색과 배열을 한 번에 정리하고 싶으신 경우에는 라미네이트가 더 적합할 수 있습니다.",
-  },
-  {
-    q: "변색이나 파절 가능성이 있나요?",
-    a: "레진은 시간이 지나며 변색되거나 일부 파절될 수 있습니다. 정기 점검을 통해 필요한 경우 부분적으로 보수합니다.",
-  },
-  {
-    q: "관리 및 정기 점검은 어떻게 하나요?",
-    a: "치료 후 관리 방법을 치과위생사가 안내해드리며, 정기적인 점검을 권해 드립니다.",
-  },
-];
-
 export default function ResinPage() {
   return (
     <>
@@ -71,77 +51,27 @@ export default function ResinPage() {
         title={"필요한 만큼만 다듬고,\n자연스러운 결을 더합니다."}
         subtitle={"자연치를 최대한 보존하며\n형태와 색을 회복하는 심미레진."}
       />
+      <ResinCaseChips />
+      <ResinOutlineIntro />
+      <ResinChapters />
+      <TeamProtocol heading={"필요한 사람이\n필요한 만큼 함께합니다."} members={TEAM} />
 
-      <section className="border-b border-line px-6 py-20 sm:px-10">
-        <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-          <Reveal>
-            <SectionLabel>이런 경우 찾아주십니다</SectionLabel>
-            <div className="mt-6">
-              <ProblemList items={PROBLEMS} />
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <SectionLabel>Signature Protocol</SectionLabel>
-            <div className="mt-6">
-              <ProtocolList items={PROTOCOL} />
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <SplitFeature photoNote="모형 위에서 레진을 적층하는 원장의 손 (환자 구강 내 장면 제외)">
-        <SectionLabel>Chairside · Hand</SectionLabel>
-        <h2 className="mt-6 font-display text-3xl leading-[1.45] text-ink sm:text-[40px]">
-          한 겹씩 쌓아
-          <br />
-          자연스러운 결을 만듭니다.
-        </h2>
-        <p className="mt-6 text-base leading-relaxed text-ink-muted">
-          심미레진은 기공소를 거치지 않고 진료실에서 원장이 직접 완성합니다.
-          색과 투명도가 다른 재료를 단계적으로 쌓아 주변 치아와 어우러지게
-          다듬습니다.
-        </p>
-      </SplitFeature>
-
-      <section id="process" className="border-b border-line px-6 py-24 sm:px-10">
+      <section id="process" className="scroll-mt-20 px-6 py-24 sm:px-10 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <SectionLabel>Chairside / Technique / Hand</SectionLabel>
-            <h2 className="mt-5 max-w-xl font-display text-3xl leading-tight text-ink sm:text-4xl">
-              제작 공정
-            </h2>
+            <SectionLabel>Process</SectionLabel>
+            <h2 className="mt-5 font-display text-3xl leading-tight text-ink sm:text-4xl">진행 과정</h2>
           </Reveal>
           <div className="mt-14">
             <ProcessSteps steps={STEPS} />
           </div>
+          <p className="mt-12 text-xs text-ink-muted">※ 러버댐 등 방습 방법은 치료 부위와 상황에 따라 달라질 수 있습니다.</p>
         </div>
       </section>
 
-      <BeforeAfterSection
-        id="before-after"
-        heading="작은 차이가, 인상을 바꿉니다."
-        cases={[
-          ["RESIN · 2 UNITS", "앞니 사이 공간 개선"],
-          ["RESIN · 1 UNIT", "앞니 일부 파절 회복"],
-          ["RESIN · 2 UNITS", "측절치 형태 보정"],
-        ]}
-        sideEffects="변색, 부분 파절, 시린 증상"
-      />
-
-      <section className="border-b border-line px-6 py-24 sm:px-10">
-        <div className="mx-auto max-w-3xl">
-          <Reveal>
-            <SectionLabel>FAQ</SectionLabel>
-            <h2 className="mt-5 font-display text-3xl text-ink sm:text-4xl">
-              자주 묻는 질문
-            </h2>
-          </Reveal>
-          <div className="mt-10">
-            <FAQ items={FAQ_ITEMS} />
-          </div>
-        </div>
-      </section>
-
+      <ResinCompare />
+      <ResinCaseRows />
+      <FaqSection items={RESIN_FAQ} />
       <VisitCta />
     </>
   );

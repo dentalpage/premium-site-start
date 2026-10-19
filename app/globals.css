@@ -14,6 +14,9 @@
   --color-graphite: #161412;
   --color-on-dark: #f5f2ec;
   --color-on-dark-muted: #b9b2a8;
+  --color-olive: #3c3a34;
+  --color-olive-deep: #2f2d29;
+  --color-bone: #e9e4da;
 
   --font-display: var(--font-display-kr);
   --font-body: "Pretendard Variable", "Pretendard", -apple-system, sans-serif;
@@ -90,4 +93,21 @@ html {
   opacity: 0.14;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.photo-placeholder-dark {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgb(245 242 236 / 0.04) 0px,
+      rgb(245 242 236 / 0.04) 1px,
+      transparent 1px,
+      transparent 14px
+    ),
+    linear-gradient(160deg, #2a2521, #1b1816);
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-accent);
 }

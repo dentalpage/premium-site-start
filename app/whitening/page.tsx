@@ -5,10 +5,12 @@ import { Reveal } from "@/components/ui/reveal";
 import { SectionLabel } from "@/components/ui/section-label";
 import { ProblemList } from "@/components/ui/problem-list";
 import { ProtocolList } from "@/components/ui/protocol-list";
-import { ProcessSteps, type Step } from "@/components/ui/process-steps";
-import { FAQ } from "@/components/ui/faq";
+import { FaqSection } from "@/components/ui/faq-section";
 import { VisitCta } from "@/components/home/visit-cta";
+import { DiscolorationTypes } from "@/components/whitening/discoloration-types";
+import { WhiteningTimeline } from "@/components/whitening/timeline";
 import { GumWhitening } from "@/components/whitening/gum-whitening";
+import { WHITENING_FAQ } from "@/lib/faq";
 
 export const metadata: Metadata = {
   title: "미백 | BLOOM 심미치과",
@@ -22,49 +24,8 @@ const PROBLEMS = [
 ];
 
 const PROTOCOL = [
-  {
-    role: "원장",
-    text: "미백에 앞서 변색의 원인과 현재 치아 상태를 먼저 확인합니다.",
-  },
-  {
-    role: "치과위생사",
-    text: "치료 전 준비와 치료 후 착색 및 민감도 관리 방법을 안내합니다.",
-  },
-];
-
-const STEPS: Step[] = [
-  { no: "01", title: "진단", desc: "변색 원인과 치아·잇몸 상태를 확인합니다." },
-  { no: "02", title: "준비", desc: "잇몸과 주변 조직을 보호하고 미백을 준비합니다." },
-  { no: "03", title: "미백", desc: "현재 치아 상태에 맞는 계획에 따라 진행합니다." },
-  { no: "04", title: "확인", desc: "밝기 변화와 치아·잇몸 상태를 확인합니다." },
-  { no: "05", title: "관리", desc: "착색과 민감도 관리 방법을 안내합니다." },
-];
-
-const FAQ_ITEMS = [
-  {
-    q: "미백으로 개선이 어려운 변색도 있나요?",
-    a: "신경 치료 이력이 있거나 특정 약물로 인한 착색 등은 일반 미백만으로 개선이 제한적일 수 있습니다. 상담 시 원인을 먼저 확인해 드립니다.",
-  },
-  {
-    q: "시린 증상이 있을 수 있나요?",
-    a: "치료 중이나 직후 일시적으로 시린 느낌이 있을 수 있습니다. 정도와 관리 방법은 사전에 안내해 드립니다.",
-  },
-  {
-    q: "유지 기간은 어느 정도인가요?",
-    a: "식습관과 개인차에 따라 다릅니다. 착색 관리 방법을 함께 안내해 드립니다.",
-  },
-  {
-    q: "재시술이 필요한가요?",
-    a: "시간이 지나며 밝기가 조금씩 변할 수 있어, 필요에 따라 재시술을 고려할 수 있습니다.",
-  },
-  {
-    q: "기존 보철물이나 레진도 밝아지나요?",
-    a: "미백은 자연치에만 작용하며 보철물과 레진의 색은 변하지 않습니다. 미백 후 색 차이가 생길 수 있어 상담 시 함께 확인합니다.",
-  },
-  {
-    q: "미백이 적합하지 않은 경우도 있나요?",
-    a: "임신 중이시거나 치아·잇몸에 다른 문제가 있는 경우에는 먼저 확인이 필요합니다. 상담 시 적합 여부를 안내해 드립니다.",
-  },
+  { role: "원장", text: "미백에 앞서 변색의 원인과 현재 치아 상태를 먼저 확인합니다." },
+  { role: "치과위생사", text: "치료 전 준비와 치료 후 착색 및 민감도 관리 방법을 안내합니다." },
 ];
 
 export default function WhiteningPage() {
@@ -76,7 +37,7 @@ export default function WhiteningPage() {
         subtitle="변색의 원인부터 확인하는 치아미백."
       />
 
-      <section id="teeth" className="scroll-mt-20 border-b border-line px-6 py-20 sm:px-10">
+      <section id="teeth" className="scroll-mt-20 px-6 py-24 sm:px-10">
         <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <Reveal>
             <SectionLabel>치아미백 · 이런 경우 찾아주십니다</SectionLabel>
@@ -107,36 +68,10 @@ export default function WhiteningPage() {
         </p>
       </SplitFeature>
 
-      <section className="border-b border-line px-6 py-24 sm:px-10">
-        <div className="mx-auto max-w-6xl">
-          <Reveal>
-            <SectionLabel>Simple / Clean / Controlled</SectionLabel>
-            <h2 className="mt-5 max-w-xl font-display text-3xl leading-tight text-ink sm:text-4xl">
-              치아미백 진행 과정
-            </h2>
-          </Reveal>
-          <div className="mt-14">
-            <ProcessSteps steps={STEPS} />
-          </div>
-        </div>
-      </section>
-
-      <section className="border-b border-line px-6 py-24 sm:px-10">
-        <div className="mx-auto max-w-3xl">
-          <Reveal>
-            <SectionLabel>FAQ</SectionLabel>
-            <h2 className="mt-5 font-display text-3xl text-ink sm:text-4xl">
-              치아미백 자주 묻는 질문
-            </h2>
-          </Reveal>
-          <div className="mt-10">
-            <FAQ items={FAQ_ITEMS} />
-          </div>
-        </div>
-      </section>
-
+      <DiscolorationTypes />
+      <WhiteningTimeline />
+      <FaqSection title="치아미백 자주 묻는 질문" items={WHITENING_FAQ} />
       <GumWhitening />
-
       <VisitCta />
     </>
   );
