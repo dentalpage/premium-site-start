@@ -158,6 +158,9 @@ function mountScrollWorld(container, config) {
       (s.eyebrow ? `<span class="sw-copy__eyebrow">${esc(s.eyebrow)}</span>` : '') +
       (s.title ? `<h2 class="sw-copy__title">${esc(s.title)}</h2>` : '') +
       (s.body ? `<p class="sw-copy__body">${esc(s.body)}</p>` : '') +
+      (s.list && s.list.items.length ? `<${s.list.ordered ? 'ol' : 'ul'} class="sw-copy__list${s.list.ordered ? ' is-ordered' : ''}">${
+        s.list.items.map(it => `<li><strong>${esc(it.t)}</strong>${it.d ? `<span>${esc(it.d)}</span>` : ''}</li>`).join('')
+      }</${s.list.ordered ? 'ol' : 'ul'}>` : '') +
       (s.tags && s.tags.length ? `<ul class="sw-copy__tags">${s.tags.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : '') +
       (s.cta ? `<div class="sw-copy__cta">${ctaBtns(s.cta)}</div>` : '');
     copylayer.appendChild(c); copies.push(c);
