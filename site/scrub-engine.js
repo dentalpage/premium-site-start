@@ -90,7 +90,7 @@ function mountScrollWorld(container, config) {
   const SEGMENTS = [];
   SECTIONS.forEach((s, i) => {
     const dive = { kind: 'dive', si: i, clip: s.clip, clipM: s.clipMobile, still: s.still, stillM: s.stillMobile,
-                   accent: s.accent, w: s.scroll || DIVE_W, linger: s.linger || 0 };
+                   frames: s.frames, accent: s.accent, w: s.scroll || DIVE_W, linger: s.linger || 0 };
     SEGMENTS.push(dive);
     s._seg = dive;
     // A connector is optional: if connectors[i] is falsy, the two dives simply
@@ -201,8 +201,9 @@ function mountScrollWorld(container, config) {
   function loadClip(s) {
     // Under prefers-reduced-motion we never load the clips at all — the stills stay up
     // and simply cross-dissolve as you scroll. No scrubbed video motion, no decode cost.
-    if (reduce || s.loading || !s.clip) return;
+    if (reduce || s.loading || !(s.clip || s.frames)) return;
     s.loading = true;
+    if (s.frames) return loadFrames(s);
     // Serve the lighter mobile encode on phones when one was provided.
     const base = (isMobile() && s.clipM) ? s.clipM : s.clip;
     // Chromium builds without H.264 (and some embedded webviews) need the VP9 sibling.
@@ -279,10 +280,47 @@ function mountScrollWorld(container, config) {
     ticking = false;
   }
 
+  // Frame-sequence mode: sprite sheets of `cols`×`cols` frames drawn to a canvas.
+  // Needs no <video>, so it scrubs wherever images load (sandboxed frames, webviews).
+  function loadFrames(s) {
+    const f = s.frames, cols = f.cols || 4, per = cols * cols;
+    const c = document.createElement('canvas');
+    c.className = 'sw-scene__video'; c.width = f.w || 1280; c.height = f.h || 720;
+    s.ctx = c.getContext('2d'); s.sheets = []; s.lastIdx = -1;
+    for (let k = 0; k * per < f.count; k++) {
+      const img = new Image(); img.decoding = 'async';
+      img.onload = () => { img.ok = true; if (k === 0) { s.ready = true; read(); } s.lastIdx = -1; };
+      img.src = `${f.base}-${k}.webp`; s.sheets.push(img);
+    }
+    s.el.appendChild(c); s.canvas = c; s.hasClip = true;
+  }
+
+  function drawFrame(s, idx) {
+    const f = s.frames, cols = f.cols || 4, per = cols * cols, w = s.canvas.width, h = s.canvas.height;
+    // Fall back to the nearest earlier frame whose sheet has arrived.
+    for (let j = idx; j >= 0; j--) {
+      const img = s.sheets[Math.floor(j / per)];
+      if (!img || !img.ok) { j -= j % per; continue; }
+      const k = j % per;
+      s.ctx.drawImage(img, (k % cols) * w, Math.floor(k / cols) * h, w, h, 0, 0, w, h);
+      if (!s.el.classList.contains('has-clip')) s.el.classList.add('has-clip');
+      return j === idx;
+    }
+    return false;
+  }
+
   function raf() {
     const eps = isMobile() ? 0.02 : 0.008;   // coarser seek step on phones = fewer decodes
     for (let i = 0; i < NSEG; i++) {
       const s = SEGMENTS[i];
+      if (s.canvas) {
+        if (!s.ready) continue;
+        if (!s.visible && Math.abs(s.cur - s.target) < 0.002 && s.lastIdx >= 0) continue;
+        s.cur += (s.target - s.cur) * (reduce ? 1 : 0.18);
+        const idx = Math.round(clamp(s.cur) * (s.frames.count - 1));
+        if (idx !== s.lastIdx && drawFrame(s, idx)) s.lastIdx = idx;
+        continue;
+      }
       if (!s.hasClip || !s.ready || !s.video) continue;
       // Never queue a seek while the decoder is still resolving the last one.
       // On phones a fast flick would otherwise pile up seeks and freeze the clip;
