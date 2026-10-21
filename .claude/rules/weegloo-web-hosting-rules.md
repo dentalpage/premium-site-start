@@ -1,0 +1,30 @@
+---
+id: weegloo-web-hosting-rules
+type: rule
+title: Weegloo WebHosting Rules
+description: >
+  WebHosting deployment constraints. Before any deploy to Weegloo WebHosting,
+  invoke the weegloo-web-hosting skill for the full workflow.
+---
+
+rules:
+  - section: Critical constraints (always apply)
+    items:
+      - **Static hosting only.** No SSR, no server runtime. Frameworks must build to static export.
+      - **Max 300 files** in the deployed ZIP — production limit; the code default is 100, so a build kept ≤ 100 is always safe. The cap counts archive **entries** (directories included), not files only. Prefer CDN web fonts over self-hosted.
+      - **`index.html` at ZIP root.** Nested structures not allowed.
+      - **MCP tools only** for deployment. No deploy scripts, no direct API calls.
+      - **Subdomain is auto-chosen by the LLM — never ask the user.** Pick a **distinctive** subdomain that fits the service (not a plain common noun, which collides); the user can change it anytime later. After deploy, inform the user of the chosen subdomain and that it is changeable.
+      - **`CheckSubdomain` before `CreateWebHosting`.** Always. On collision, auto-pick another distinctive variant and re-check — do not ask the user.
+      - **Navigation must not flicker.** A multi-page static site must not re-load the whole document on every internal link: intercept internal links, `history.pushState`, and swap **only the main content region** — render header/footer **once at boot**, not per navigation. Handle back/forward with `popstate`. Leave OAuth-callback and payment-return URLs as real document loads.
+
+  - section: Document metadata (`pageMetas`)
+    items:
+      - **The deployed pages' `<head>` tags are edited through `pageMetas` — one entry per document (`{ file, meta }`) on `cma_UpdateOneWebHosting` (PUT) or PATCH.** There is no site-wide `meta` field.
+      - **A slot has three states, not two:** omitted / `null` = the tag is left as it is · `""` = the tag is removed · a value = the tag is set (inserted if the page never had it). Slots are `title`, `description`, `canonical`, `image`, `siteName`, `favicon`, `themeColor`.
+      - **Omitting `pageMetas` changes nothing, and an entry you send is MERGED over the stored one** (documents you leave out keep theirs) — so a partial edit never wipes the rest, and `""` is the only way to clear a tag.
+      - **Only a WebHosting installed from a MarketApp is editable** — its documents are listed in `sys.originMetas`, `file` must be one of them, and replacing the files with a new `upload` disables editing (the two cannot be sent in one request). Applying is async — the resource returns to `PENDING` and refuses further updates until it completes. Detail: **`weegloo-web-hosting`** skill.
+
+  - section: Full workflow
+    items:
+      - For the complete deploy flow (build → verify → ZIP → Upload → CreateWebHosting → poll), redeploy via UpdateOneWebHosting, and static export configuration, invoke the **`weegloo-web-hosting`** skill. This rule is a safety-net summary, not a substitute.

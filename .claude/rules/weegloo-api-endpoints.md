@@ -1,0 +1,114 @@
+---
+id: weegloo-api-endpoints
+type: rule
+title: Weegloo API Base URLs (for development code)
+description: >
+  CMA, CDA, Upload, ACMA, ACDA, and Auth (auth.weegloo.com — ServiceLogin OAuth) base URLs,
+  API-Docs links, vendor JSON media type / Accept header rules, the two login models in Weegloo
+  (Weegloo User vs Service User) and the API surfaces each token authorizes, CDA published-only
+  semantics (create/update/unpublish/delete), ACMA auto-publish on create and implicit unpublish
+  on delete (no separate publish/unpublish vs CMA), Media list mimeGroup query filters,
+  ServiceLogin Bearer Token scope (ACMA/ACDA only), ACMA `GET /v1/me` for current ServiceUser
+  (not `/spaces/{spaceId}/me`), ACMA member scope via the role's `createdBy` filter, ACDA per-member read scope with
+  `ServiceUser.roleOverride`, service-type → API selection pointer, and MCP vs direct API
+  usage. Follow when calling Weegloo APIs from application code.
+---
+
+rules:
+  - section: Who these base URLs are for (mandatory)
+    items:
+      - **Everything below is for APPLICATION code** — frontend, backend, scripts. The **agent** reaches Weegloo through **MCP tools**, never by calling these URLs directly; the only exceptions are the two read-only GETs named in **`weegloo-global-rules`** (*MCP Tool Usage*).
+
+  - section: Two login models (read this before picking an API)
+    items:
+      - Weegloo has **two completely separate identity systems**, and the token's issuer decides which API a caller may use. **Weegloo User** = a Weegloo **platform account** (Space owner or **invited** member; PAT, or Console FE login popup token) → **CMA**, **Upload**, **CDA**. **Service User** = an end-user of the product, signed in via **ServiceLogin**, where **anyone may sign up** → **ACMA**, **ACDA**, **Upload**. Mechanics: **`weegloo-user-login`** / **`weegloo-service-login`**.
+      - **Tokens do not cross identity boundaries.** A Service User Bearer must never be sent to CMA / CDA; a Weegloo User Bearer is not the intended caller on ACMA / ACDA. **Upload** is the one shared surface — both Bearers are accepted, and the Media create that follows goes on the plane matching the identity that uploaded: **CMA** (Weegloo User) or **ACMA** (Service User).
+
+  - section: Base URL by API Type (never guess or infer)
+    items:
+      - **CMA** (management — Weegloo User CRUD): `https://cma.weegloo.com` · **CDA** (cache-based, read-only delivery of **published** resources): `https://cda.weegloo.com` · **Upload**: `https://upload.weegloo.com` · **Script** (execution): `https://script.weegloo.com` · **ACMA** (management for **Service Users**): `https://acma.weegloo.com` · **ACDA** (delivery for **Service Users**): `https://acda.weegloo.com` · **Auth** (ServiceLogin OAuth): `https://auth.weegloo.com`. Paths are `/v1/...`.
+      - **Never infer or guess a host** — use only the URLs above. Wrong pattern that appears in some tool descriptions: `https://cda-weegloo.com` (hyphen instead of dot).
+      - **Script runs on `script.weegloo.com` and nothing else** — **`POST /v1/spaces/{spaceId}/scripts/{scriptId}/execute`** (token-free **`…/execute/anonymous`** when allowed). A Script is **authored** on **CMA**; CMA is not where it runs.
+      - **Upload has two distinct paths — do not conflate them.** The raw REST endpoints are for **application code** (**`weegloo-upload-api`**); when the **agent** uploads a local file it uses the **`weegloo-upload` MCP**. Never wire a product to that MCP, and never call the REST endpoints "via MCP".
+      - **Native Android / iOS ServiceLogin:** the app's callback deep link (`myapp://login`, an App Link / Universal Link) must first be registered in **`ServiceLogin.allowedCallbackUrls`**, or the login entry rejects the request; the app flow then carries `redirect_uri` + PKCE. Paths and SDK: **`weegloo-service-login-client`**.
+      - **OpenAPI per API (canonical here — do not duplicate elsewhere):** `https://docs.weegloo.com/api-docs/{cma|cda|upload|script|acma|acda}` — the source for exact schemas, validations, `PATCH` paths and query parameters.
+      - **A query parameter is declared PER PATH — reading it on one endpoint never licenses sending it on another**, and a `required` on one path is a fact about that path alone. Build the URL from the path you are calling, never from a client-wide "this API takes X" helper that merges a default set into every request.
+      - **`locale` belongs to CONTENT and MEDIA reads only.** It is **optional** there — omitting it returns the **space default locale** — and it exists on **no other resource**: not `…/locales` (a `Locale` IS the language setting; it has no localized fields to select), not `…/content-types`, not Space, Webhook, Script, token or membership reads. **`GET …/v1/spaces/{spaceId}/locales?locale=ja-JP` is wrong** — and it is what a shared delivery helper produces, so the parameter arrives after the caller's own `limit`/`skip`. Scope is per resource kind, not per plane: "it is a CDA read" is not a reason to append `locale`.
+
+  - section: Accept header and JSON media type (mandatory for HTTP clients)
+    items:
+      - Weegloo responds with **`Content-Type: application/vnd.com.weegloo.v1+json;charset=UTF-8`**, not plain `application/json`. **Omit the `Accept` header** (if you must set one, send that same vendor type), and ensure shared wrappers do not force `Accept: application/json` on Weegloo hosts. That header does **not** 406, so this is a preference, not a failure to debug.
+
+  - section: SpaceRole & ServiceUserRole — permission filters (`createdBy`, `:self`)
+    items:
+      - **`SpaceRole`** and **`ServiceUserRole`** scope **`contentType`**, **`content`**, **`media`** and **`script`** actions with optional filters (**`contentType`**, **`createdBy`**, **`tag`**, **`self`**). An empty **`Allow: []`** = the action applies to **all** resources of that kind (no filter); an empty **`Deny: []`** is **NOT** its mirror — it **denies everything** of that kind. So `[]` does not universally mean "no filter."
+      - **`createdBy.sys.id`** takes a **fixed** id, or the reserved **`:self`**, which resolves to the **currently authenticated caller** (Weegloo **User** on CMA/CDA + `SpaceRole`; **`ServiceUser`** on ACMA/ACDA + `ServiceUserRole`) — "only what I created", not a directory id.
+      - **`self`** — a filter holding a direct entity `Refer` (e.g. one specific `Script`, the least-privilege way to expose a single endpoint) — is **not** the **`:self`** `createdBy` sentinel; confusing them saves a role that silently scopes something else. On the `script` map only `createdBy` and `self` apply.
+      - **A Script runs its inner Content/Media ops with its AUTHOR's authority, not the caller's**, never re-checked per statement — so the **author's** role must hold an unconditional `Allow` for each action the Script performs. Author Scripts as an admin; grant end users `script.Execute` only.
+      - **A `ServiceUserRole` takes only a SUBSET of the actions** (`contentType` is **`Read` only**; `Save` / `Publish` / `Unpublish` / `Archive` / `Unarchive` are refused on every map), while a **`SpaceRole`** keeps the full set. Do **not** confuse `ServiceUserRole` (Service Users → ACMA / ACDA) with `SpaceRole` (Weegloo Users / `DeliveryAccessToken` → CMA / CDA).
+      - **`settings` is SpaceRole-only — a flat array of `SETTING_*` action names (no `Allow`/`Deny`, no filters)** gating Space *configuration* on a separate axis: a role with full Content rights still cannot touch it, and a `403` there is **never** fixed by widening `content` / `media`.
+      - **The settings action alone is not enough — that axis is TOKEN-gated.** A `SpaceAccessToken`, a `DeliveryAccessToken`, a Space-scoped console token and a `ServiceUser` token are refused on **every** `SETTING_*` row regardless of their role; only a console login session or a Personal Access Token reaches it. Never try to unblock one by granting a settings action. Action names and recipes: **`weegloo-space-role`**.
+
+  - section: Weegloo documentation (general, agent-readable) — look here when unsure
+    items:
+      - **`docs.weegloo.com`** holds the general documentation (concepts, locale/search/filter behavior, error meanings) beyond the Swagger specs. **When not certain how something behaves, read it before acting**, and re-check after an unexpected error or empty result.
+      - **Discover the path, do not guess it.** Fetch the index **`https://docs.weegloo.com/llms.txt`** first, take an **exact** path from it (or from a link inside a Weegloo Markdown page you already fetched), then fetch that path with **`.md`** appended. **Never fetch a `.md` URL whose path you cannot trace to one of those two sources** — the site is a SPA, so a guessed path returns the app shell instead of a 404.
+      - **Wrong-path signal — re-derive, do not thrash.** HTML, a SPA shell (`<!doctype html>`, `<div id="root">`), a redirect, or **403 / 404** means the **path** is wrong, not the fetch tool: go back to `llms.txt`. Do **not** retry path variants and do **not** switch fetch tools on the same guessed path. (Indexed mirror: Context7 `/websites/weegloo`; the first-party `.md` wins.)
+
+  - section: CMA vs CDA selection (Weegloo User identity)
+    items:
+      - CDA is read-only delivery of **published** resources; CMA is management (full CRUD) for a Weegloo User session. Content managed in the console usually needs read only — use **CDA** with a least-privilege **`DeliveryAccessToken`**. A Weegloo User Bearer also authorizes CDA, but in a browser it **works perfectly while leaking management rights**.
+
+  - section: CDA — published snapshot only (vs CMA drafts)
+    items:
+      - **CDA serves only published resources, at their publish-time snapshot** — not the latest draft visible in CMA. A resource created or updated in CMA and not published is **absent or stale on CDA: an empty/old read, not an error.** Create → **Publish**; update → **Publish again**. **Unpublish** removes it from delivery but does **not** delete it from CMA (removal needs Delete). **ACDA** follows the same model. Narrative: **`weegloo-cda-publish`**.
+
+  - section: ACMA / ACDA vs CMA / CDA (Service User identity)
+    items:
+      - When the product runs its **own Service User directory** (open sign-up via **ServiceLogin**), use **ACMA instead of CMA** and **ACDA instead of CDA** for member-scoped features. Team staff editing the whole Space stays a **CMA** operation by a Weegloo console user.
+      - **ACMA publish / delete differ from CMA:** **Create automatically publishes** — do not add a separate **Publish** call — and **Delete automatically unpublishes** — do not call **Unpublish** first. (On CMA, delivery requires an explicit Publish after create/update.)
+      - **Caller identity — the boundary is one-directional, NOT symmetric.** The intended ACMA / ACDA caller is a **ServiceLogin Bearer**; a **`DeliveryAccessToken`** or **`SpaceAccessToken`** is **rejected** (no ACMA/ACDA bit in scope). But a Weegloo-User **PAT** (and a console-login token) **does** carry ACMA/ACDA scope, so such a token whose owner is a Space member *can* call them — whereas a `ServiceUser` token can **never** reach CMA / CDA. The genuinely ServiceUser-only surface is **`GET /v1/me`**.
+      - **Current `ServiceUser`: `GET https://acma.weegloo.com/v1/me`** with that Bearer. **`GET .../v1/spaces/{spaceId}/me` is not an ACMA endpoint** — the space-prefixed form belongs to `auth.weegloo.com` OAuth, which is what invites the mistake.
+
+  - section: ACMA — Content is addressed UNDER its ContentType (no flat /contents); ACDA has both
+    items:
+      - **Every ACMA Content operation is nested under the ContentType:** `/v1/spaces/{spaceId}/content-types/{contentTypeId}/contents` (list/create) and `…/contents/{contentId}` (get / PUT / PATCH / delete). The flat `/v1/spaces/{spaceId}/contents[/{contentId}]` does **not** exist on ACMA and **404s** — a 404 there means the path is wrong, not that the Content is missing. Holding only a `contentId`, resolve its `contentTypeId` from `sys.contentType`; never fall back to a flat path.
+      - **ACDA exposes BOTH forms** — the nested one, **and** a flat `GET /v1/spaces/{spaceId}/contents` (list) and `GET /v1/spaces/{spaceId}/contents/{contentId}` (one Content **by `contentId` alone**). **CMA / CDA** also expose both. The `contentTypeId` requirement is **ACMA-only**.
+
+  - section: ACMA — member CRUD scope comes from the role's `createdBy` filter
+    items:
+      - **⚠️ There is no platform-level "own resources only" default.** What a `ServiceUser` may touch on ACMA is decided **entirely** by the effective `ServiceUserRole` (`roleOverride` if set, else `ServiceLogin.sys.defaultRole`). ACMA does not compare the caller against `sys.createdBy` on its own.
+      - **`"createdBy": { "sys": { "id": ":self" } }` on the role's `content` / `media` map is the only thing that limits a member to their own rows.** Omit that filter and every member reaches **every** member's rows — read, edit **and** delete alike, for whatever actions the role grants, with no error anywhere. A role wired to `ServiceLogin.sys.defaultRole` therefore **must** carry `:self`.
+      - **Moderators are a role WITHOUT the `createdBy` filter, attached per person via `ServiceUser.roleOverride`** — never as the Space default. Narrow it by action (e.g. `Read` + `Delete` only); it is not limited to delete.
+
+  - section: ACDA — per-member read scope and role overrides
+    items:
+      - ACDA returns **only** published resources **assigned to the calling `ServiceUser`**. Unlike CDA (one shared, public, token-scoped read set), ACDA's result set is **per member**.
+      - **Effective role:** `ServiceUser.roleOverride` (if set) wins over `ServiceLogin.sys.defaultRole`, and that one role decides **both** the ACDA read set and the ACMA write scope — nothing is layered on top of it.
+
+  - section: Weegloo User login — token scope
+    items:
+      - **Do not ship a Personal Access Token to a browser** — it works, which is the problem: too privileged and too long-lived. Browser admin UIs use the Console FE login popup; public delivery uses a least-privilege **`DeliveryAccessToken`**.
+      - Effective rights on a Space come from the user's `SpaceRole` via Space membership. Gate "is this user actually a member of *this* Space?" with **`GET /v1/me/space-memberships`** (response-shape trap: **`weegloo-global-rules`**).
+
+  - section: ServiceLogin (Service User) — Bearer Token scope
+    items:
+      - **`ServiceLogin`** is the per-Space configuration for the product's own end-user directory and holds `sys.defaultRole`; **`ServiceUserRole`** is its permission rule set, **`ServiceUser`** one row per end-user (optional `roleOverride`). Mechanics: **`weegloo-service-login`**.
+
+  - section: Service type → API selection (decision pointer)
+    items:
+      - Choosing the API + login + role set per service type (public site, public site + admin UI, a **`SpaceAccessToken`** for scoped writes into ONE Space, members-only read, members read + write, composite) is the **`weegloo-service-architecture`** skill's job — invoke it before proposing an architecture.
+
+  - section: CDA requirements (Delivery Access Token)
+    items:
+      - CDA requires a **`DeliveryAccessToken`**. When creating one (`cma_CreateDeliveryAccessToken`), follow **`weegloo-delivery-access-token`**: **never** bind **Administrator** and never the first role in the list — prefer a read-only role scoped to the required `ContentType`s, or ask the user to pick after listing `SpaceRole`s.
+      - **Weegloo WebHosting (static export) has no server-side `.env` at request time** — a server-only env read is silently `undefined` in the browser. CDA settings must reach the client through the **build** (e.g. `NEXT_PUBLIC_*` inlined at build time); local Next.js dev uses `.env.local` with `NEXT_PUBLIC_WEEGLOO_DELIVERY_ACCESS_TOKEN`.
+
+  - section: CMA / ACMA document updates (PATCH, PUT)
+    items:
+      - **On CMA**, **ContentType**, **Content** and **Media** support partial updates via **`PATCH`** with **RFC 6902 JSON Patch**; **on ACMA only Content does** — ACMA **Media** is create/read/delete with **no update endpoint**, and **ContentType** is not an ACMA resource at all. Those `PATCH` requests **must** send **`Content-Type: application/json-patch+json`**, not plain `application/json`. **`PUT` is ALWAYS a FULL REPLACEMENT** — every CMA / ACMA update operation states *"Partial updates are not supported"*, so a key you leave out is wiped on a **200**, including keys Swagger omits from `required` (`metadata` on `UpdateContentDto`, `displayField` on `UpdateContentTypeDto`). Partial edits go through `PATCH`.
+
+  - section: CMA Media list — filter by `mimeGroups` (logical asset type)
+    items:
+      - On **`GET /v1/spaces/{spaceId}/medias`** (CMA), filter to one logical asset category server-side with **`fields.file.{locale}.mimeGroups={MimeGroup}`** rather than listing all Media and filtering client-side. The **`{locale}`** segment must match that space's `fields.file` locale key (e.g. `fields.file.en-US.mimeGroups=Image`).
+      - **Allowed `MimeGroup` values** (exact identifiers): `Attachment`, `Plaintext`, `Image`, `Audio`, `Video`, `RichText`, `Presentation`, `Spreadsheet`, `PdfDocument`, `Archive`, `Code`, `Markup`. Send the filter on the **first** request, then follow `links.next` so it applies on every page.

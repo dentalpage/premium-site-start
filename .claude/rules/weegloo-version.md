@@ -1,0 +1,25 @@
+---
+id: weegloo-version
+type: rule
+title: Weegloo Plugin Version Check
+description: >
+  On the first Weegloo request of each session (and again every few hours in a long-running
+  session) checks whether the installed Weegloo skills/rules are outdated by comparing a
+  locally-stored version against the live version endpoint. Stays silent unless an update is
+  available.
+---
+
+rules:
+  - section: Weegloo plugin update check (runs each session; silent unless an update is available)
+    items:
+      - **When to run.** Only on a Weegloo-related request (a Space, ContentType, Content, Media, WebHosting, or token) — never on non-Weegloo work. Run it on the **FIRST** such request of the session, then again only once **4 hours** have elapsed since `last_check`. **There is intentionally NO cross-session throttle: every new session checks once, however recent `last_check` looks** — a new session must not skip on a fresh-looking stamp.
+      - **This check is SILENT.** Do not announce it, and say **nothing** when the plugin is up to date — speak only when an update is actually available.
+      - **Step A — read the stamp** `.weegloo/claude/version-check.json` (a relative path resolves against the project root): `version` (the **installed** version) and `last_check` (an ISO-8601 **LOCAL** timestamp, `YYYY-MM-DDTHH:mm:ss`). Already checked this session and the interval has not elapsed → stop silently: say nothing, fetch nothing. **Stamp missing/unreadable, or any field absent → do NOT error: treat it as unknown and run the check.**
+      - **Step B — fetch** `GET https://ai.weegloo.com/v1/version?branch=latest` — public, **no auth** (the branch is already in the URL) — a sanctioned MCP-only exception — then read its top-level `version` string. **Unreachable, any error response, or no `version` field → skip SILENTLY and proceed; never read an error as "update available."**
+      - **Step B — then rewrite the stamp, updating `last_check` ONLY** to the current local timestamp, **every other field kept EXACTLY as it was**. **Never overwrite `version` with the value you just fetched** — the stamp's `version` is the INSTALLED version, so replacing it makes the next check wrongly report "up to date" while the files are still old. **Never drop `ref`** — the update flow reads it to know which branch this agent installed from.
+      - **Compare** the stamp's `version` (installed) against the fetched one. **Both present and EQUAL → SAY NOTHING**, just continue. **DIFFERENT — or the stamp has NO `version` (an older install predating version tracking, which counts as an update available, not as a skip) →** show:
+          - *"📦 A Weegloo update is available (installed `<stamp version, or "unknown">` → latest `<fetched version>`). To update, run the command below."*
+          - **Update command:** `npx weegloo@latest --agent claude --location project --update`
+          - **Do NOT auto-run it** — it rewrites the installed files, so let the user approve. It keeps the user's selection and needs no token.
+          - After a successful update, tell the user the new skills/rules take effect only in a **NEW** session — the current one keeps what it loaded at startup.
+          - **Declined or "later" → drop it** and continue with the request; `last_check` is already updated, so it will not reappear for 4 hours (a new session checks again).
