@@ -26,7 +26,8 @@
     .sw-copy__eyebrow { letter-spacing: .04em; }
     .sw-copy:first-child { width: min(52vw, 640px); }
     .sw-copy:first-child .sw-copy__title { font-size: clamp(2.5rem, 5.6vw, 4.75rem); line-height: 1.08; text-wrap: balance; }
-    @media (max-width: 860px) { .sw-copy:first-child { width: auto; } }
+    .sw-copy:last-child { width: min(50vw, 620px); }
+    @media (max-width: 860px) { .sw-copy:first-child, .sw-copy:last-child { width: auto; } }
     .sw-btn--primary { background: var(--sw-accent); }
     .sw-topcta { background: var(--sw-accent); }
     .sw-nav__link { text-decoration: none; border-left: 1px solid var(--line); border-radius: 0 999px 999px 0; margin-left: 2px; }
@@ -45,15 +46,62 @@
     body.at-reserve .sw-hint { opacity: 0; pointer-events: none; transition: opacity .3s; }
 
     .reserve {
-      position: relative; z-index: 70;
+      position: relative; z-index: 70; padding-top: clamp(64px, 10vh, 112px);
       background: var(--sw-bg);
-      padding-block: clamp(72px, 12vh, 140px) clamp(64px, 10vh, 120px);
+      padding-bottom: clamp(64px, 10vh, 120px);
       padding-left: max(16px, env(safe-area-inset-left, 0px));
       padding-right: max(16px, env(safe-area-inset-right, 0px));
-      border-top-left-radius: 32px; border-top-right-radius: 32px;
-      box-shadow: 0 -24px 60px rgba(22, 60, 69, .08);
     }
     .reserve__inner { max-width: 560px; margin: 0 auto; }
+
+    /* Post-flight content: one cream sheet that slides over the last scene. */
+    .band {
+      position: relative; z-index: 70; background: var(--sw-bg);
+      padding-block: clamp(64px, 10vh, 112px) 0;
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+    }
+    .band--first { border-top-left-radius: 32px; border-top-right-radius: 32px; box-shadow: 0 -24px 60px rgba(22, 60, 69, .08); padding-top: clamp(72px, 12vh, 140px); }
+    .band__inner { max-width: 1040px; margin: 0 auto; }
+    .band__eyebrow { color: var(--sw-accent); font-weight: 700; font-size: .85rem; letter-spacing: .04em; }
+    .band h2 { font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.2; letter-spacing: -0.03em; margin: 12px 0 0; text-wrap: balance; }
+    .band__lead { color: var(--sw-ink-soft); font-size: 1.05rem; line-height: 1.6; margin: 14px 0 0; max-width: 52ch; }
+
+    .steps { list-style: none; padding: 0; margin: 40px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: step; }
+    .steps li { counter-increment: step; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px 22px 26px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+    .steps li::before { content: counter(step); width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: .9rem; color: #fff; background: var(--sw-accent); }
+    .steps h3 { margin: 4px 0 0; font-size: 1.1rem; letter-spacing: -0.02em; }
+    .steps p { margin: 0; color: var(--sw-ink-soft); font-size: .95rem; line-height: 1.6; }
+
+    .care { list-style: none; padding: 0; margin: 36px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 32px; }
+    .care li { border-top: 1px solid var(--line); padding: 20px 0 24px; display: grid; gap: 6px; min-width: 0; }
+    .care strong { font-size: 1.05rem; }
+    .care span { color: var(--sw-ink-soft); font-size: .95rem; line-height: 1.55; }
+
+    .faq { margin: 32px 0 0; max-width: 760px; display: grid; }
+    .faq details { border-top: 1px solid var(--line); }
+    .faq details:last-child { border-bottom: 1px solid var(--line); }
+    .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 4px; font-weight: 700; font-size: 1.05rem; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--sw-accent) 12%, var(--sw-bg)); color: var(--sw-accent); font-size: 1.2rem; transition: transform .2s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq summary:focus-visible { outline: 2px solid var(--sw-accent); outline-offset: 2px; border-radius: 8px; }
+    .faq p { margin: 0; padding: 0 4px 22px; color: var(--sw-ink-soft); line-height: 1.65; max-width: 62ch; }
+
+    @media (max-width: 960px) { .steps { grid-template-columns: repeat(2, 1fr); } .care { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .steps, .care { grid-template-columns: 1fr; } }
+
+    /* Doctor profile dialog opened from the last scene. */
+    .profile { border: 0; border-radius: 24px; padding: 0; width: min(520px, calc(100vw - 32px)); background: var(--surface); color: var(--sw-ink); box-shadow: 0 30px 80px rgba(22, 60, 69, .25); }
+    .profile::backdrop { background: rgba(22, 60, 69, .4); }
+    .profile__body { padding: 28px clamp(20px, 5vw, 32px) 24px; display: grid; gap: 18px; }
+    .profile__head { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
+    .profile h2 { margin: 6px 0 0; font-size: 1.5rem; letter-spacing: -0.02em; }
+    .profile__role { color: var(--sw-accent); font-weight: 700; font-size: .85rem; }
+    .profile__close { font: inherit; font-size: 1.4rem; line-height: 1; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--sw-bg); color: var(--sw-ink); cursor: pointer; flex: none; }
+    .profile h3 { margin: 0 0 8px; font-size: .85rem; color: var(--sw-ink-soft); letter-spacing: .04em; }
+    .profile ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; line-height: 1.55; }
+    .profile__note { margin: 0; color: var(--sw-ink-soft); font-size: .8rem; }
     .reserve__eyebrow { color: var(--sw-accent); font-weight: 700; font-size: .85rem; letter-spacing: .04em; }
     .reserve h2 { text-wrap: balance; font-size: clamp(1.9rem, 4.6vw, 3rem); line-height: 1.15; letter-spacing: -0.03em; margin: 12px 0 0; }
     .reserve__lead { color: var(--sw-ink-soft); font-size: 1.05rem; line-height: 1.6; margin: 16px 0 0; }
@@ -117,6 +165,48 @@
 <body>
   <div id="top"></div>
   <div id="world"></div>
+
+  <section class="band band--first" id="process" aria-labelledby="process-title">
+    <div class="band__inner">
+      <span class="band__eyebrow">치과랑 친해지는 날</span>
+      <h2 id="process-title">첫 방문은 이렇게 진행돼요</h2>
+      <p class="band__lead">무엇을 할지 미리 알면 아이도 부모님도 덜 긴장돼요. 첫날에는 치료하지 않아요.</p>
+      <ol class="steps">
+        <li><h3>인사하고 둘러보기</h3><p>선생님과 인사하고, 아이 전용 진료실을 함께 구경해요.</p></li>
+        <li><h3>의자랑 친해지기</h3><p>고래 의자에 앉아 보고, 거울로 이를 세어 보며 도구를 만져 봐요.</p></li>
+        <li><h3>입안 살펴보기</h3><p>아이가 괜찮다고 할 때만 가볍게 살펴봐요. 어려우면 다음에 해도 돼요.</p></li>
+        <li><h3>보호자 상담</h3><p>원장님이 아이 치아 상태와 앞으로의 계획을 보호자에게 설명해요.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="care" aria-labelledby="care-title">
+    <div class="band__inner">
+      <span class="band__eyebrow">아이 진료 항목</span>
+      <h2 id="care-title">유치부터 영구치까지, 아이 치아만 봐요</h2>
+      <ul class="care">
+        <li><strong>정기 검진</strong><span>3~6개월마다 충치와 잇몸 상태를 확인해요.</span></li>
+        <li><strong>충치 치료</strong><span>아이가 준비된 만큼, 설명하고 나서 치료해요.</span></li>
+        <li><strong>불소 도포</strong><span>치아 표면을 단단하게 해 충치를 예방해요.</span></li>
+        <li><strong>실란트 (홈 메우기)</strong><span>어금니의 깊은 홈을 메워 음식물이 끼지 않게 해요.</span></li>
+        <li><strong>유치 관리</strong><span>흔들리는 유치와 영구치가 나는 순서를 살펴요.</span></li>
+        <li><strong>성장기 교정 상담</strong><span>턱과 치열의 성장을 보고 필요한 시기를 알려드려요.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" id="faq" aria-labelledby="faq-title">
+    <div class="band__inner">
+      <span class="band__eyebrow">자주 묻는 질문</span>
+      <h2 id="faq-title">예약 전에 많이 물어보세요</h2>
+      <div class="faq">
+        <details><summary>몇 살부터 치과에 오면 좋을까요?</summary><p>첫 이가 나고 돌 무렵에 첫 검진을 받는 것을 권해요. 이미 지났어도 괜찮아요. 지금 오시면 돼요.</p></details>
+        <details><summary>아이가 울면 어떻게 하나요?</summary><p>억지로 붙잡고 진행하지 않아요. 오늘 어렵다면 진료실 구경만 하고, 다음에 다시 친해지면 돼요.</p></details>
+        <details><summary>보호자가 진료실에 같이 있어도 되나요?</summary><p>네. 보호자가 진료실에 함께 들어가 아이 손이 닿는 곳에 있을 수 있어요.</p></details>
+        <details><summary>첫 방문 비용은 얼마인가요?</summary><p>첫 방문에는 치료하지 않아요. 검진 비용은 예약 상담 때 미리 안내해 드려요.</p></details>
+      </div>
+    </div>
+  </section>
 
   <section class="reserve" id="reserve" aria-labelledby="reserve-title">
     <div class="reserve__inner">
@@ -217,6 +307,35 @@
     </div>
   </footer>
 
+  <dialog class="profile" id="doctor-profile" aria-labelledby="profile-title">
+    <div class="profile__body">
+      <div class="profile__head">
+        <div>
+          <span class="profile__role">대표원장 · 소아치과 전문의</span>
+          <h2 id="profile-title">○○○ 원장</h2>
+        </div>
+        <button class="profile__close" type="button" aria-label="닫기">×</button>
+      </div>
+      <div>
+        <h3>학력 · 수련</h3>
+        <ul>
+          <li>○○대학교 치과대학 졸업</li>
+          <li>○○대학교 치과병원 소아치과 수련</li>
+          <li>보건복지부 인증 소아치과 전문의</li>
+        </ul>
+      </div>
+      <div>
+        <h3>경력</h3>
+        <ul>
+          <li>소아치과 진료 10년</li>
+          <li>前 ○○ 어린이치과 원장</li>
+          <li>대한소아치과학회 정회원</li>
+        </ul>
+      </div>
+      <p class="profile__note">※ 이름·학교·경력은 예시 정보예요.</p>
+    </div>
+  </dialog>
+
   <script src="scrub-engine.js"></script>
   <script>
     mountScrollWorld(document.getElementById('world'), {
@@ -235,7 +354,8 @@
         { id: 'kidroom', label: '전용 진료실', still: 'assets/kidroom.webp', frames: { base: 'assets/frames/kidroom', count: 97 },
           scroll: 1.9, copyIn: 0.55, copyOut: 0.86,
           eyebrow: '아이 전용 진료실', title: '어른 치과 의자가 아니에요',
-          body: '아이 눈높이에 맞춘 아이 전용 진료실에서 만나요.', tags: ['아이 전용 진료실'] },
+          body: '아이 눈높이에 맞춘 아이 전용 진료실에서, 이 세 가지를 약속해요.',
+          tags: ['억지로 붙잡지 않아요', '치료 전에 먼저 설명해요', '비용은 미리 안내해요'] },
         { id: 'firstvisit', label: '첫 방문', still: 'assets/firstvisit.webp', frames: { base: 'assets/frames/firstvisit', count: 97 },
           scroll: 1.7, linger: 0.2, copyIn: 0.3, copyOut: 0.84,
           eyebrow: '첫 방문', title: '첫날은 치료하지 않아요',
@@ -247,15 +367,23 @@
         { id: 'doctor', label: '전문의', still: 'assets/doctor.webp', frames: { base: 'assets/frames/doctor', count: 97 },
           scroll: 1.6, linger: 0.4,
           eyebrow: '소아치과 전문의', title: '아이 치아는 소아치과 전문의에게',
-          body: '10년차 소아치과 전문의가 우리 아이의 첫 치과를 함께해요.',
-          cta: { primary: { label: '치과랑 친해지는 날 예약하기', href: '#reserve' } } },
+          body: '10년차 소아치과 전문의 ○○○ 원장이 우리 아이의 첫 치과를 함께해요.',
+          cta: { primary: { label: '치과랑 친해지는 날 예약하기', href: '#reserve' },
+                 secondary: { label: '원장 약력 보기', href: '#doctor-profile' } } },
       ],
       connectors: [],
     });
 
-    const reserve = document.getElementById('reserve');
-    new IntersectionObserver(([e]) => document.body.classList.toggle('at-reserve', e.isIntersecting), { threshold: 0.15 })
-      .observe(reserve);
+    // Engine chrome hides from the first post-flight section onward.
+    new IntersectionObserver(([e]) => document.body.classList.toggle('at-reserve', e.isIntersecting || e.boundingClientRect.top < 0), { threshold: 0.1 })
+      .observe(document.getElementById('process'));
+
+    const profile = document.getElementById('doctor-profile');
+    document.addEventListener('click', (ev) => {
+      if (ev.target.closest('a[href="#doctor-profile"]')) { ev.preventDefault(); profile.showModal(); }
+    });
+    profile.querySelector('.profile__close').addEventListener('click', () => profile.close());
+    profile.addEventListener('click', (ev) => { if (ev.target === profile) profile.close(); });
 
     const form = document.getElementById('reserve-form');
     const err = document.getElementById('f-error');
