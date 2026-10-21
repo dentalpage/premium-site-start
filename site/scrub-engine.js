@@ -166,8 +166,8 @@ function mountScrollWorld(container, config) {
     dot.innerHTML = `<span class="sw-route__label">${esc(s.label || '')}</span><i></i>`;
     dot.addEventListener('click', () => jumpTo(i)); route.appendChild(dot); dots.push(dot);
 
-    if (config.nav !== false) {
-      const b = el('button', 'sw-nav__item'); b.textContent = s.label || '';
+    if (config.nav !== false && s.nav !== false) {
+      const b = el('button', 'sw-nav__item'); b.textContent = s.label || ''; b.dataset.si = i;
       b.addEventListener('click', () => jumpTo(i)); nav.appendChild(b);
     }
   });
@@ -262,7 +262,11 @@ function mountScrollWorld(container, config) {
       let cop;
       if (i === 0) cop = after ? 0 : smooth(1 - pr / 0.62);            // greets on landing
       else if (i === N - 1) cop = before ? 0 : smooth(pr / 0.4);       // holds CTA at the end
-      else cop = (before || after) ? 0 : smooth(1 - Math.abs(pr - 0.5) / 0.5);
+      else {
+        // Optional per-section window: copy is fully shown between copyIn and copyOut.
+        const s = SECTIONS[i], a = s.copyIn != null ? s.copyIn : 0.3, z = s.copyOut != null ? s.copyOut : 0.7, F = 0.14;
+        cop = (before || after) ? 0 : pr < a ? smooth((pr - (a - F)) / F) : pr > z ? smooth(1 - (pr - z) / F) : 1;
+      }
       const c = copies[i];
       c.style.opacity = cop;
       c.style.transform = reduce ? 'none' : `translateY(${(0.5 - pr) * 4}vh)`;
@@ -275,7 +279,7 @@ function mountScrollWorld(container, config) {
     if (near !== activeIndex) {
       activeIndex = near;
       dots.forEach((d, k) => d.classList.toggle('is-active', k === near));
-      nav.querySelectorAll('.sw-nav__item').forEach((n, k) => n.classList.toggle('is-active', k === near));
+      nav.querySelectorAll('.sw-nav__item[data-si]').forEach(n => n.classList.toggle('is-active', +n.dataset.si === near));
       container.style.setProperty('--sw-accent', SECTIONS[near].accent || '');
     }
     scrollbarFill.style.transform = `scaleX(${clamp(y / (totalW * vh))})`;
