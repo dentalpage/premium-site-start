@@ -171,6 +171,10 @@ function mountScrollWorld(container, config) {
       b.addEventListener('click', () => jumpTo(i)); nav.appendChild(b);
     }
   });
+  // Extra nav entries that point outside the flight (e.g. a location section below it).
+  if (config.nav !== false) (config.navLinks || []).forEach(l => {
+    const a = el('a', 'sw-nav__item sw-nav__link'); a.href = l.href; a.textContent = l.label; nav.appendChild(a);
+  });
 
   // ---- math ----
   const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));

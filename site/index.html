@@ -29,6 +29,14 @@
     @media (max-width: 860px) { .sw-copy:first-child { width: auto; } }
     .sw-btn--primary { background: var(--sw-accent); }
     .sw-topcta { background: var(--sw-accent); }
+    .sw-nav__link { text-decoration: none; border-left: 1px solid var(--line); border-radius: 0 999px 999px 0; margin-left: 2px; }
+    .sw-nav__item:focus-visible, .sw-topcta:focus-visible { outline: 2px solid var(--sw-accent); outline-offset: 2px; }
+    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+    @media (max-width: 860px) {
+      .sw-nav { display: flex; margin-left: auto; }
+      .sw-nav__item:not(.sw-nav__link) { display: none; }
+      .sw-nav__link { border-left: 0; border-radius: 999px; margin-left: 0; }
+    }
 
     /* Fixed engine chrome steps aside once the booking form takes over. */
     body.at-reserve .sw-topbar,
@@ -81,7 +89,27 @@
     .done p { color: var(--sw-ink-soft); margin: 10px 0 0; line-height: 1.6; }
     form.is-done > :not(.done) { display: none; }
     form.is-done .done { display: block; }
-    footer { position: relative; z-index: 70; background: var(--sw-bg); text-align: center; color: var(--sw-ink-soft); font-size: .82rem; padding: 0 16px 40px; }
+    .site-footer {
+      position: relative; z-index: 70;
+      --f-bg: #163C45; --f-ink: #F6F4EE; --f-soft: #A9C2C4; --f-line: rgba(246, 244, 238, .14);
+      background: var(--f-bg); color: var(--f-ink);
+      padding-block: clamp(56px, 9vh, 96px) 32px;
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+    }
+    .site-footer__inner { max-width: 1040px; margin: 0 auto; display: grid; gap: 40px; }
+    .site-footer__brand { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-bottom: 28px; border-bottom: 1px solid var(--f-line); }
+    .site-footer__brand strong { font-size: 1.6rem; letter-spacing: -0.02em; }
+    .site-footer__brand span { color: var(--f-soft); font-size: .95rem; }
+    .site-footer__cols { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 32px; }
+    .site-footer h3 { font-size: .8rem; letter-spacing: .08em; color: #8FD3C1; margin: 0 0 14px; }
+    .site-footer dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: .95rem; line-height: 1.55; }
+    .site-footer dt { color: var(--f-soft); white-space: nowrap; }
+    .site-footer dd { margin: 0; min-width: 0; }
+    .hours dd { font-variant-numeric: tabular-nums; }
+    .site-footer__addr { font-size: 1.05rem; font-weight: 700; line-height: 1.5; margin: 0 0 14px; }
+    .site-footer__note { color: var(--f-soft); font-size: .8rem; line-height: 1.6; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--f-line); padding-top: 20px; }
+    @media (max-width: 860px) { .site-footer__cols { grid-template-columns: 1fr; } }
     @media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
     @media (prefers-reduced-motion: reduce) { .submit, input, select, textarea { transition: none; } }
   </style>
@@ -148,7 +176,46 @@
       </form>
     </div>
   </section>
-  <footer>© 모두의치과</footer>
+  <footer class="site-footer" id="location" aria-labelledby="location-title">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <strong>모두의치과</strong>
+        <span>아이 첫 치과, 친해지는 날부터</span>
+      </div>
+      <div class="site-footer__cols">
+        <section>
+          <h3 id="location-title">오시는 길</h3>
+          <p class="site-footer__addr">서울시 ○○구 ○○로 123<br />○○빌딩 2층</p>
+          <dl>
+            <dt>지하철</dt><dd>○○역 2번 출구에서 걸어서 3분</dd>
+            <dt>버스</dt><dd>○○초등학교 정류장 하차</dd>
+            <dt>주차</dt><dd>건물 지하 주차장 (진료 시 2시간 무료)</dd>
+          </dl>
+        </section>
+        <section>
+          <h3>진료 시간</h3>
+          <dl class="hours">
+            <dt>평일</dt><dd>09:30 – 18:30</dd>
+            <dt>토요일</dt><dd>09:30 – 14:00</dd>
+            <dt>점심시간</dt><dd>13:00 – 14:00</dd>
+            <dt>휴진</dt><dd>일요일 · 공휴일</dd>
+          </dl>
+        </section>
+        <section>
+          <h3>병원 정보</h3>
+          <dl>
+            <dt>대표원장</dt><dd>○○○ (소아치과 전문의)</dd>
+            <dt>전화</dt><dd>02-000-0000</dd>
+            <dt>사업자번호</dt><dd>000-00-00000</dd>
+          </dl>
+        </section>
+      </div>
+      <div class="site-footer__note">
+        <span>※ 주소·전화·진료시간은 예시 정보예요. 실제 정보로 바꿔 주세요.</span>
+        <span>© 모두의치과</span>
+      </div>
+    </div>
+  </footer>
 
   <script src="scrub-engine.js"></script>
   <script>
@@ -156,15 +223,16 @@
       brand: { name: '모두의치과', href: '#top' },
       cta: { label: '예약하기', href: '#reserve' },
       hint: '스크롤해서 둘러보기',
-      nav: false,
+      nav: true,
+      navLinks: [{ label: '오시는 길', href: '#location' }],
       diveScroll: 1.4,
       crossfade: 0.08,
       sections: [
-        { id: 'street', label: '동네 치과', still: 'assets/street.webp', frames: { base: 'assets/frames/street', count: 97 },
+        { id: 'street', label: '우리 치과', still: 'assets/street.webp', frames: { base: 'assets/frames/street', count: 97 },
           scroll: 1.6, linger: 0.4,
           eyebrow: '우리 아이 첫 치과', title: '첫 치과가 평생 치과 공포가 되지 않도록',
           body: '붙잡고 울리는 치료 대신, 아이가 괜찮아질 때까지 기다리는 동네 치과예요.' },
-        { id: 'kidroom', label: '아이 전용 진료실', still: 'assets/kidroom.webp', frames: { base: 'assets/frames/kidroom', count: 97 },
+        { id: 'kidroom', label: '전용 진료실', still: 'assets/kidroom.webp', frames: { base: 'assets/frames/kidroom', count: 97 },
           linger: 0.35,
           eyebrow: '아이 전용 진료실', title: '어른 치과 의자가 아니에요',
           body: '아이 눈높이에 맞춘 아이 전용 진료실에서 만나요.', tags: ['아이 전용 진료실'] },
@@ -176,7 +244,7 @@
           linger: 0.35,
           eyebrow: '보호자 동행', title: '엄마 아빠는 바로 옆에',
           body: '보호자가 진료실에 함께 들어가, 아이 손이 닿는 곳에 있어요.', tags: ['보호자 진료실 동행'] },
-        { id: 'doctor', label: '소아치과 전문의', still: 'assets/doctor.webp', frames: { base: 'assets/frames/doctor', count: 97 },
+        { id: 'doctor', label: '전문의', still: 'assets/doctor.webp', frames: { base: 'assets/frames/doctor', count: 97 },
           scroll: 1.6, linger: 0.4,
           eyebrow: '소아치과 전문의', title: '아이 치아는 소아치과 전문의에게',
           body: '10년차 소아치과 전문의가 우리 아이의 첫 치과를 함께해요.',
