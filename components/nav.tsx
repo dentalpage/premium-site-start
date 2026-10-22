@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 // Pages whose first section is a dark CinematicHero; nav sits transparent on top of it.
-const DARK_HERO = new Set(["/", "/about", "/laminate", "/resin", "/whitening", "/general-care", "/visit"]);
+const DARK_HERO = new Set(["/", "/about", "/laminate", "/resin", "/general-care", "/visit"]);
 
 const GNB = [
   {
