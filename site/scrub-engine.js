@@ -166,9 +166,12 @@ function mountScrollWorld(container, config) {
       (s.cta ? `<div class="sw-copy__cta">${ctaBtns(s.cta)}</div>` : '');
     copylayer.appendChild(c); copies.push(c);
 
-    const dot = el('button', 'sw-route__dot'); dot.style.setProperty('--sw-accent', s.accent || '');
-    dot.innerHTML = `<span class="sw-route__label">${esc(s.label || '')}</span><i></i>`;
-    dot.addEventListener('click', () => jumpTo(i)); route.appendChild(dot); dots.push(dot);
+    // `nav: false` keeps a section out of both the top nav and the side rail.
+    if (s.nav !== false) {
+      const dot = el('button', 'sw-route__dot'); dot.style.setProperty('--sw-accent', s.accent || ''); dot.dataset.si = i;
+      dot.innerHTML = `<span class="sw-route__label">${esc(s.label || '')}</span><i></i>`;
+      dot.addEventListener('click', () => jumpTo(i)); route.appendChild(dot); dots.push(dot);
+    }
 
     if (config.nav !== false && s.nav !== false) {
       const b = el('button', 'sw-nav__item'); b.textContent = s.label || ''; b.dataset.si = i;
@@ -202,8 +205,10 @@ function mountScrollWorld(container, config) {
   }
 
   function jumpTo(i) {
-    const seg = SECTIONS[i]._seg;
-    window.scrollTo({ top: seg.start + (seg.end - seg.start) * 0.5, behavior: reduce ? 'auto' : 'smooth' });
+    // Land where the scene reads best: `jumpAt`, else the middle of its copy window.
+    const s = SECTIONS[i], seg = s._seg;
+    const at = s.jumpAt != null ? s.jumpAt : (s.copyIn != null && s.copyOut != null ? (s.copyIn + s.copyOut) / 2 : 0.5);
+    window.scrollTo({ top: seg.start + (seg.end - seg.start) * at, behavior: reduce ? 'auto' : 'smooth' });
   }
 
   function loadClip(s) {
@@ -286,8 +291,10 @@ function mountScrollWorld(container, config) {
       : (((y - cur.start) / (cur.end - cur.start)) > 0.5 ? cur.si + 1 : cur.si), 0, N - 1);
     if (near !== activeIndex) {
       activeIndex = near;
-      dots.forEach((d, k) => d.classList.toggle('is-active', k === near));
-      nav.querySelectorAll('.sw-nav__item[data-si]').forEach(n => n.classList.toggle('is-active', +n.dataset.si === near));
+      // A section left out of the nav lights up the listed section before it.
+      let lit = -1; dots.forEach(d => { if (+d.dataset.si <= near) lit = +d.dataset.si; });
+      dots.forEach(d => d.classList.toggle('is-active', +d.dataset.si === lit));
+      nav.querySelectorAll('.sw-nav__item[data-si]').forEach(n => n.classList.toggle('is-active', +n.dataset.si === lit));
       container.style.setProperty('--sw-accent', SECTIONS[near].accent || '');
     }
     scrollbarFill.style.transform = `scaleX(${clamp(y / (totalW * vh))})`;
