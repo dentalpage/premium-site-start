@@ -132,6 +132,9 @@
     .profile__close, .gallery .profile__close { font: inherit; font-size: 1.4rem; line-height: 1; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--sw-bg); color: var(--sw-ink); cursor: pointer; flex: none; }
     .profile h3 { margin: 0 0 8px; font-size: .85rem; color: var(--sw-ink-soft); letter-spacing: .04em; }
     .profile ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; line-height: 1.55; }
+    .profile__photo { display: block; width: min(180px, 46vw); height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 20%; border-radius: 18px; margin: 0 auto; background: var(--sw-bg); }
+    #doctor-profile .profile__body { position: relative; }
+    #doctor-profile .profile__close { position: absolute; top: 16px; right: 16px; }
     .profile__note { margin: 0; color: var(--sw-ink-soft); font-size: .8rem; }
     .reserve__eyebrow { color: var(--sw-accent); font-weight: 700; font-size: .85rem; letter-spacing: .04em; }
     .reserve h2 { text-wrap: balance; font-size: clamp(1.9rem, 4.6vw, 3rem); line-height: 1.15; letter-spacing: -0.03em; margin: 12px 0 0; }
@@ -424,16 +427,17 @@
         <button class="profile__close" type="button" aria-label="닫기">×</button>
       </div>
       <div class="gallery__grid">
-        <figure><img src="/assets/gallery/kidroom.webp" alt="고래 모양 아이 의자가 있는 진료실" loading="lazy" /><figcaption>고래 모양 아이 의자</figcaption></figure>
+        <figure><img src="/assets/gallery/room-photo.webp" alt="고래 모양 아이 의자와 보호자 의자, 천장 화면이 있는 실제 아이 진료실" loading="lazy" /><figcaption>실제 아이 진료실</figcaption></figure>
         <figure><img src="/assets/gallery/firstvisit.webp" alt="곰인형과 칫솔, 거울이 놓인 아이 의자" loading="lazy" /><figcaption>첫 방문 준비물</figcaption></figure>
         <figure><img src="/assets/gallery/together.webp" alt="아이 의자 옆 보호자 의자" loading="lazy" /><figcaption>보호자 전용 의자</figcaption></figure>
       </div>
-      <p class="profile__note">※ 지금은 예시 일러스트예요. 실제 진료실 사진으로 바꿔 주세요.</p>
+      <p class="profile__note">※ 두 번째·세 번째 그림은 예시 일러스트예요.</p>
     </div>
   </dialog>
 
   <dialog class="profile" id="doctor-profile" aria-labelledby="profile-title">
     <div class="profile__body">
+      <img class="profile__photo" src="/assets/gallery/doctor.webp" alt="대표원장 증명사진" width="480" height="640" loading="lazy" />
       <div class="profile__head">
         <div>
           <span class="profile__role">대표원장 · 소아치과 전문의</span>
