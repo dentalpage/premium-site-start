@@ -90,7 +90,8 @@ function mountScrollWorld(container, config) {
   const SEGMENTS = [];
   SECTIONS.forEach((s, i) => {
     const dive = { kind: 'dive', si: i, clip: s.clip, clipM: s.clipMobile, still: s.still, stillM: s.stillMobile,
-                   frames: s.frames, accent: s.accent, w: s.scroll || DIVE_W, linger: s.linger || 0 };
+                   frames: s.frames, accent: s.accent, w: s.scroll || DIVE_W, linger: s.linger || 0,
+                   fadeIn: s.crossfade != null ? s.crossfade : CROSSFADE };
     SEGMENTS.push(dive);
     s._seg = dive;
     // A connector is optional: if connectors[i] is falsy, the two dives simply
@@ -248,7 +249,9 @@ function mountScrollWorld(container, config) {
       const local = clamp((y - s.start) / (s.end - s.start), 0, 1);
       s.target = s.linger ? lingerEase(local, s.linger) : local;
       let outside = 0;
-      if (y < s.start) outside = s.start - y; else if (y > s.end) outside = y - s.end;
+      // A section's `crossfade` widens the dissolve on both sides of the seam leading into it.
+      const fIn = (s.fadeIn || CROSSFADE) * vh, next = SEGMENTS[i + 1], fOut = next ? (next.fadeIn || CROSSFADE) * vh : fade;
+      if (y < s.start) outside = (s.start - y) * fade / fIn; else if (y > s.end) outside = (y - s.end) * fade / fOut;
       const op = smooth(1 - outside / fade);
       s.el.style.opacity = op; s.visible = op > 0.001;
       s.el.style.zIndex = (i === ci) ? '120' : String(100 + Math.round(op * 10));
