@@ -525,6 +525,25 @@
       const a = ev.target.closest('a[href="#doctor-profile"], a[href="#room-gallery"]');
       if (a) { ev.preventDefault(); document.getElementById(a.getAttribute('href').slice(1)).showModal(); }
     });
+    // A long smooth scroll can end off-target if anything above reflows mid-flight; re-aim once it settles.
+    document.addEventListener('click', (ev) => {
+      const a = ev.target.closest('a[href="#reserve"]');
+      if (!a) return;
+      ev.preventDefault();
+      const el = document.getElementById('reserve');
+      const top = () => el.getBoundingClientRect().top + window.scrollY;
+      const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: top(), behavior: smooth ? 'smooth' : 'auto' });
+      history.replaceState(null, '', '#reserve');
+      let last = -1, still = 0;
+      const settle = () => {
+        if (Math.abs(window.scrollY - last) < 1) still++; else still = 0;
+        last = window.scrollY;
+        if (still < 12) return requestAnimationFrame(settle);
+        if (Math.abs(el.getBoundingClientRect().top) > 4) window.scrollTo({ top: top(), behavior: 'auto' });
+      };
+      requestAnimationFrame(settle);
+    });
     document.querySelectorAll('dialog').forEach(d => {
       d.querySelector('.profile__close').addEventListener('click', () => d.close());
       d.addEventListener('click', (ev) => { if (ev.target === d) d.close(); });
