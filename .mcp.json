@@ -11,7 +11,8 @@
         "weegloo-upload@latest"
       ],
       "env": {
-        "UPLOAD_API_URL": "https://upload.weegloo.com/v1"
+        "UPLOAD_API_URL": "https://upload.weegloo.com/v1",
+        "NODE_USE_ENV_PROXY": "1"
       }
     }
   }
