@@ -181,15 +181,29 @@
     .site-footer__brand { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-bottom: 28px; border-bottom: 1px solid var(--f-line); }
     .site-footer__brand strong { font-size: 1.6rem; letter-spacing: -0.02em; }
     .site-footer__brand span { color: var(--f-soft); font-size: .95rem; }
-    .site-footer__cols { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 32px; }
+    .site-footer__cols { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; }
     .site-footer h3 { font-size: .8rem; letter-spacing: .08em; color: #8FD3C1; margin: 0 0 14px; }
     .site-footer dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; font-size: .95rem; line-height: 1.55; }
     .site-footer dt { color: var(--f-soft); white-space: nowrap; }
     .site-footer dd { margin: 0; min-width: 0; }
+    .site-footer dl > div { display: contents; }
+    .site-footer .nw { white-space: nowrap; }
     .hours dd { font-variant-numeric: tabular-nums; }
     .site-footer__addr { font-size: 1.05rem; font-weight: 700; line-height: 1.5; margin: 0 0 14px; }
     .site-footer__note { color: var(--f-soft); font-size: .8rem; line-height: 1.6; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--f-line); padding-top: 20px; }
-    @media (max-width: 860px) { .site-footer__cols { grid-template-columns: 1fr; } }
+    .site-footer__tel { display: inline-flex; align-items: center; margin: 0 0 18px; padding: 10px 18px; border-radius: 999px; background: #8FD3C1; color: #163C45; font-weight: 800; font-size: 1.05rem; text-decoration: none; font-variant-numeric: tabular-nums; line-height: 1; }
+    @media (max-width: 860px) { .site-footer__cols { grid-template-columns: 1fr; gap: 32px; } }
+    @media (max-width: 560px) {
+      .site-footer__inner { gap: 28px; }
+      .site-footer__brand { padding-bottom: 20px; }
+      .site-footer__addr { font-size: 1.15rem; margin-bottom: 12px; }
+      .site-footer__tel { display: flex; justify-content: center; padding: 14px 18px; font-size: 1.15rem; }
+      /* Secondary info laid out as label-over-value tiles, side by side. */
+      .site-footer dl.site-footer__ways, .site-footer dl.hours { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; font-size: .9rem; line-height: 1.4; }
+      .site-footer dl > div { display: grid; gap: 2px; align-content: start; }
+      .site-footer__ways dt, .site-footer .hours dt { font-size: .75rem; }
+      .site-footer__note { font-size: .75rem; }
+    }
     @media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
     @media (prefers-reduced-motion: reduce) { .submit, input, select, textarea { transition: none; } }
 
@@ -376,32 +390,25 @@
         <section>
           <h3 id="location-title">오시는 길</h3>
           <p class="site-footer__addr">서울시 ○○구 ○○로 123<br />○○빌딩 2층</p>
-          <dl>
-            <dt>지하철</dt><dd>○○역 2번 출구에서 걸어서 3분</dd>
-            <dt>버스</dt><dd>○○초등학교 정류장 하차</dd>
-            <dt>주차</dt><dd>건물 지하 주차장 (진료 시 2시간 무료)</dd>
+          <a class="site-footer__tel" href="tel:020000000">☎ 02-000-0000</a>
+          <dl class="site-footer__ways">
+            <div><dt>지하철</dt><dd>○○역 2번 출구 도보 3분</dd></div>
+            <div><dt>버스</dt><dd>○○초등학교 정류장</dd></div>
+            <div><dt>주차</dt><dd>지하 주차장 2시간 무료</dd></div>
           </dl>
         </section>
         <section>
           <h3>진료 시간</h3>
           <dl class="hours">
-            <dt>평일</dt><dd>09:30 – 18:30</dd>
-            <dt>토요일</dt><dd>09:30 – 14:00</dd>
-            <dt>점심시간</dt><dd>13:00 – 14:00</dd>
-            <dt>휴진</dt><dd>일요일 · 공휴일</dd>
-          </dl>
-        </section>
-        <section>
-          <h3>병원 정보</h3>
-          <dl>
-            <dt>대표원장</dt><dd>○○○ (소아치과 전문의)</dd>
-            <dt>전화</dt><dd>02-000-0000</dd>
-            <dt>사업자번호</dt><dd>000-00-00000</dd>
+            <div><dt>평일</dt><dd>09:30 – 18:30</dd></div>
+            <div><dt>토요일</dt><dd>09:30 – 14:00</dd></div>
+            <div><dt>점심</dt><dd>13:00 – 14:00</dd></div>
+            <div><dt>휴진</dt><dd>일요일 · 공휴일</dd></div>
           </dl>
         </section>
       </div>
       <div class="site-footer__note">
-        <span>※ 주소·전화·진료시간은 예시 정보예요. 실제 정보로 바꿔 주세요.</span>
+        <span><span class="nw">대표원장 ○○○ (소아치과 전문의)</span> · <span class="nw">사업자번호 000-00-00000</span></span>
         <span>© 모두의치과</span>
       </div>
     </div>
