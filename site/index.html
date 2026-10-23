@@ -115,6 +115,9 @@
     .gallery { border: 0; border-radius: 24px; padding: 0; width: min(960px, calc(100vw - 32px)); background: var(--surface); color: var(--sw-ink); box-shadow: 0 30px 80px rgba(22, 60, 69, .25); }
     .gallery::backdrop { background: rgba(22, 60, 69, .45); }
     .gallery__body { padding: 24px clamp(16px, 4vw, 28px) 24px; display: grid; gap: 16px; }
+    .gallery__photo { margin: 0; display: grid; gap: 12px; }
+    .gallery__photo img { display: block; width: 100%; height: auto; border-radius: 16px; background: var(--sw-bg); }
+    .gallery__photo figcaption { color: var(--sw-ink-soft); font-size: .95rem; line-height: 1.5; }
     .gallery__grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto auto; gap: 12px; }
     .gallery__grid figure { margin: 0; position: relative; border-radius: 16px; overflow: hidden; background: var(--sw-bg); min-width: 0; }
     .gallery__grid figure:first-child { grid-row: span 2; }
@@ -426,12 +429,10 @@
         </div>
         <button class="profile__close" type="button" aria-label="닫기">×</button>
       </div>
-      <div class="gallery__grid">
-        <figure><img src="/assets/gallery/room-photo.webp" alt="고래 모양 아이 의자와 보호자 의자, 천장 화면이 있는 실제 아이 진료실" loading="lazy" /><figcaption>실제 아이 진료실</figcaption></figure>
-        <figure><img src="/assets/gallery/firstvisit.webp" alt="곰인형과 칫솔, 거울이 놓인 아이 의자" loading="lazy" /><figcaption>첫 방문 준비물</figcaption></figure>
-        <figure><img src="/assets/gallery/together.webp" alt="아이 의자 옆 보호자 의자" loading="lazy" /><figcaption>보호자 전용 의자</figcaption></figure>
-      </div>
-      <p class="profile__note">※ 두 번째·세 번째 그림은 예시 일러스트예요.</p>
+      <figure class="gallery__photo">
+        <img src="/assets/gallery/room-photo.webp" alt="고래 모양 아이 의자와 보호자 의자, 천장 화면이 있는 실제 아이 진료실" width="1280" height="720" loading="lazy" />
+        <figcaption>고래 모양 아이 의자 · 바로 옆 보호자 의자 · 누워서 보는 천장 화면</figcaption>
+      </figure>
     </div>
   </dialog>
 
