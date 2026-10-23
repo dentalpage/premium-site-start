@@ -90,7 +90,7 @@ function mountScrollWorld(container, config) {
   const SEGMENTS = [];
   SECTIONS.forEach((s, i) => {
     const dive = { kind: 'dive', si: i, clip: s.clip, clipM: s.clipMobile, still: s.still, stillM: s.stillMobile,
-                   frames: s.frames, accent: s.accent, w: s.scroll || DIVE_W, linger: s.linger || 0,
+                   frames: s.frames, focusM: s.mobileFocus, accent: s.accent, w: s.scroll || DIVE_W, linger: s.linger || 0,
                    fadeIn: s.crossfade != null ? s.crossfade : CROSSFADE };
     SEGMENTS.push(dive);
     s._seg = dive;
@@ -246,6 +246,8 @@ function mountScrollWorld(container, config) {
     for (let i = 0; i < NSEG; i++) {
       const s = SEGMENTS[i];
       if (y > s.start - 1.6 * vh && y < s.end + 1.6 * vh) loadClip(s);
+      // Free far-away frame sheets so decoded images don't pile up (phones run out of memory).
+      else if (s.canvas && (y < s.start - 3 * vh || y > s.end + 3 * vh)) unloadFrames(s);
       const local = clamp((y - s.start) / (s.end - s.start), 0, 1);
       s.target = s.linger ? lingerEase(local, s.linger) : local;
       let outside = 0;
@@ -297,9 +299,12 @@ function mountScrollWorld(container, config) {
   // Frame-sequence mode: sprite sheets of `cols`×`cols` frames drawn to a canvas.
   // Needs no <video>, so it scrubs wherever images load (sandboxed frames, webviews).
   function loadFrames(s) {
-    const f = s.frames, cols = f.cols || 4, per = cols * cols;
+    // Phones get the lighter `frames.mobile` set (smaller frames, fewer of them) when provided.
+    const f = s.fr = (isMobile() && s.frames.mobile) ? Object.assign({}, s.frames, s.frames.mobile) : s.frames;
+    const cols = f.cols || 4, per = cols * cols;
     const c = document.createElement('canvas');
     c.className = 'sw-scene__video'; c.width = f.w || 1280; c.height = f.h || 720;
+    if (s.focusM && isMobile()) { c.style.objectPosition = s.focusM; s.img.style.objectPosition = s.focusM; }
     s.ctx = c.getContext('2d'); s.sheets = []; s.lastIdx = -1;
     for (let k = 0; k * per < f.count; k++) {
       const img = new Image(); img.decoding = 'async';
@@ -309,8 +314,16 @@ function mountScrollWorld(container, config) {
     s.el.appendChild(c); s.canvas = c; s.hasClip = true;
   }
 
+  function unloadFrames(s) {
+    s.sheets.forEach(img => { img.onload = null; img.src = ''; });
+    s.canvas.remove();
+    s.sheets = []; s.canvas = s.ctx = null; s.lastIdx = -1;
+    s.ready = s.hasClip = s.loading = false;
+    s.el.classList.remove('has-clip');
+  }
+
   function drawFrame(s, idx) {
-    const f = s.frames, cols = f.cols || 4, per = cols * cols, w = s.canvas.width, h = s.canvas.height;
+    const f = s.fr, cols = f.cols || 4, per = cols * cols, w = s.canvas.width, h = s.canvas.height;
     // Fall back to the nearest earlier frame whose sheet has arrived.
     for (let j = idx; j >= 0; j--) {
       const img = s.sheets[Math.floor(j / per)];
@@ -331,7 +344,7 @@ function mountScrollWorld(container, config) {
         if (!s.ready) continue;
         if (!s.visible && Math.abs(s.cur - s.target) < 0.002 && s.lastIdx >= 0) continue;
         s.cur += (s.target - s.cur) * (reduce ? 1 : 0.18);
-        const idx = Math.round(clamp(s.cur) * (s.frames.count - 1));
+        const idx = Math.round(clamp(s.cur) * (s.fr.count - 1));
         if (idx !== s.lastIdx && drawFrame(s, idx)) s.lastIdx = idx;
         continue;
       }
