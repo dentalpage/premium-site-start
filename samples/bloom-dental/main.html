@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BLOOM 심미치과 | 라미네이트·심미레진·미백</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --paper:#f6f5f1;
+    --ink:#13120e;
+    --muted:#706f6b;
+    --line:#d9d8d4;
+    --dark:#0f0e0a;
+    --max:1440px;
+    --pad:clamp(40px,6vw,96px);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans KR",sans-serif;line-height:1.55}
+  h1,h2,h3,p{margin:0}
+  a{color:inherit;text-decoration:none}
+  .serif{font-family:"Times New Roman","Noto Serif KR",serif;font-weight:400}
+  .wrap{width:min(var(--max),calc(100% - 2*var(--pad)));margin:0 auto}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .hairline{border-top:1px solid var(--line)}
+
+  /* HEADER */
+  header{position:fixed;inset:0 0 auto 0;height:76px;z-index:50;color:#fff;transition:.25s;background:linear-gradient(to bottom,rgba(0,0,0,.35),rgba(0,0,0,0))}
+  header.scrolled{background:rgba(255,255,255,.96);color:#13120e;border-bottom:1px solid #e9e8e4;backdrop-filter:blur(10px)}
+  .nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:40px}
+  .brand{font-family:"Times New Roman",serif;letter-spacing:.08em;font-size:22px}
+  .menu{display:flex;align-items:center;gap:30px;font-size:12px;letter-spacing:.08em}
+  .reserve{border:1px solid currentColor;padding:10px 16px}
+
+  /* HERO */
+  .hero{min-height:100vh;background:#13120e;color:#fff;position:relative;display:grid;align-items:end;overflow:hidden}
+  .hero-media{position:absolute;inset:0;background:
+      radial-gradient(circle at 68% 44%,rgba(255,255,255,.11),transparent 15%),
+      radial-gradient(circle at 72% 52%,rgba(255,255,255,.08),transparent 9%),
+      linear-gradient(90deg,rgba(0,0,0,.80) 0%,rgba(0,0,0,.34) 38%,rgba(0,0,0,.10) 65%,rgba(0,0,0,.58) 100%),
+      #2a2925;
+  }
+  .hero-media:before{content:"원장이 현미경/확대장비로 보철물을 만드는 실제 작업 이미지\A · 손이 명확히 보이는 장면\A · 사진이 화면의 90%를 차지";white-space:pre-line;position:absolute;right:9%;top:39%;width:34%;padding:28px;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.72);font-size:14px;line-height:1.9;text-align:center}
+  .hero-content{position:relative;z-index:2;padding:0 0 10vh}
+  .hero-copy{width:min(560px,60%)}
+  .hero h1{font-size:clamp(44px,5vw,76px);line-height:1.12;letter-spacing:-.03em;margin-bottom:32px}
+  .hero p{font-size:17px;color:rgba(255,255,255,.82);max-width:430px}
+  .scrollmark{margin-top:70px;font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,.7)}
+
+  /* BRAND INTRO */
+  .intro{min-height:60vh;background:var(--paper);display:flex;align-items:center;text-align:center}
+  .intro-inner{width:min(980px,80%);margin:0 auto;padding:14vh 0}
+  .intro h2{font-size:clamp(34px,3.2vw,54px);line-height:1.35;letter-spacing:-.025em}
+  .intro p{margin-top:44px;font-size:17px;line-height:1.9;color:#464541}
+
+  /* TREATMENTS HORIZONTAL */
+  .treatments{height:300vh;position:relative;background:#fff}
+  .treat-sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+  .treat-track{height:100%;display:flex;width:300%;will-change:transform}
+  .treat-panel{width:100vw;height:100%;display:grid;grid-template-columns:60% 40%;background:#fff}
+  .treat-image{height:100%;position:relative;background:#eae9e5;overflow:hidden}
+  .treat-image:after{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#686763;font-size:14px;letter-spacing:.04em;padding:24px}
+  .lam .treat-image:after{content:"LAMINATE IMAGE\A보철·세라믹·기공 디테일 / 오브제성이 강한 장면";white-space:pre-line}
+  .resin .treat-image:after{content:"RESIN IMAGE\A원장의 손·적층·다듬는 과정 / 체어사이드 디테일";white-space:pre-line}
+  .white .treat-image:after{content:"WHITENING IMAGE\A밝고 단순한 임상 장면 / 앞의 두 시술보다 절제된 존재감";white-space:pre-line}
+  .treat-text{display:flex;flex-direction:column;justify-content:center;padding:10vh 8vw 10vh 7vw}
+  .treat-index{font-size:12px;letter-spacing:.16em;color:#9b9a96;margin-bottom:36px}
+  .treat-text h2{font-size:clamp(42px,4.2vw,66px);line-height:1.2;margin-bottom:32px}
+  .treat-text p{font-size:17px;color:#575652;max-width:420px;line-height:1.9}
+  .cta{margin-top:52px;font-size:13px;letter-spacing:.06em}
+  .treat-nav{position:absolute;right:4vw;bottom:4vh;z-index:4;font-size:12px;color:#8a8985;letter-spacing:.12em}
+
+  /* WHY BLOOM — sequential editorial rhythm */
+  .why{min-height:150vh;background:#fff;padding:18vh 0 20vh}
+  .why-head{max-width:760px;margin-bottom:13vh}
+  .why-head h2{font-size:clamp(42px,4.2vw,68px);line-height:1.18;letter-spacing:-.03em;margin-top:18px}
+  .editorial-flow{display:flex;flex-direction:column;gap:14vh}
+  .story{position:relative}
+  .story .ph{background:#efeeea;display:grid;place-items:center;color:#797874;text-align:center;padding:24px;font-size:14px}
+  .story-copy{max-width:560px}
+  .story-copy .num{font-size:11px;letter-spacing:.15em;color:#9b9a96;margin-bottom:14px}
+  .story-copy h3{font-size:30px;line-height:1.35;margin-bottom:16px}
+  .story-copy p{font-size:15px;color:#686763;line-height:1.85}
+
+  .story-a{display:grid;grid-template-columns:minmax(360px,.95fr) minmax(320px,.72fr);gap:7vw;align-items:start;width:82%}
+  .story-a .ph{aspect-ratio:4/5}
+  .story-a .story-copy{padding-top:4vh}
+
+  .story-b{display:grid;grid-template-columns:minmax(320px,.72fr) minmax(420px,1.1fr);gap:7vw;align-items:end;width:86%;margin-left:auto}
+  .story-b .story-copy{order:1;padding-bottom:4vh}
+  .story-b .ph{order:2;aspect-ratio:16/9}
+
+  .story-c{display:grid;grid-template-columns:minmax(390px,.9fr) minmax(300px,.65fr);gap:7vw;align-items:center;width:74%;margin-left:10vw}
+  .story-c .ph{aspect-ratio:4/3}
+
+  /* REMAKE */
+  .remake{min-height:112vh;background:var(--dark);color:#fff;display:grid;grid-template-columns:60% 40%}
+  .remake-image{background:#1f1e1a;display:grid;place-items:center;color:#8a8985;text-align:center;padding:30px;font-size:14px;line-height:1.8}
+  .remake-copy{display:flex;flex-direction:column;justify-content:center;padding:12vh 7vw}
+  .remake h2{font-size:clamp(46px,4.5vw,72px);line-height:1.18;letter-spacing:-.03em;margin:18px 0 80px}
+  .remake-points{display:grid;gap:34px}
+  .point{display:grid;grid-template-columns:44px 1fr;gap:18px;padding-top:24px;border-top:1px solid rgba(255,255,255,.2)}
+  .point b{font-size:12px;letter-spacing:.12em;font-weight:400;color:#bdbcb8}
+  .point h3{font-size:21px;margin-bottom:8px;font-weight:500}
+  .point p{font-size:14px;color:#bfbeba}
+
+  /* JOURNAL */
+  .journal{min-height:100vh;background:#fff;padding:16vh 0 18vh}
+  .journal-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:9vh}
+  .journal-head h2{font-family:"Times New Roman",serif;font-size:34px;font-weight:400;letter-spacing:.04em}
+  .journal-grid{display:grid;grid-template-columns:1.35fr .9fr .72fr;gap:6vw;align-items:start}
+  .journal-card .ph{background:#f1f0ec;display:grid;place-items:center;text-align:center;color:#797874;padding:20px;font-size:13px}
+  .read .ph{aspect-ratio:4/3}
+  .watch{margin-top:9vh}
+  .watch .ph{aspect-ratio:16/10}
+  .follow{margin-top:18vh}
+  .insta-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .insta-grid .ph{aspect-ratio:1/1}
+  .journal-card .label{margin-top:24px;font-size:11px;letter-spacing:.14em;color:#8a8985}
+  .journal-card h3{font-size:24px;line-height:1.45;margin-top:12px;font-weight:500}
+
+  /* VISIT */
+  .visit{min-height:100vh;background:#fff;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+  .visit-image{background:#ebeae6;display:grid;place-items:center;color:#797874;text-align:center;padding:30px;font-size:14px}
+  .visit-info{display:flex;flex-direction:column;justify-content:center;padding:12vh 7vw}
+  .visit-info h2{font-size:clamp(42px,4vw,64px);line-height:1.25;letter-spacing:-.03em;margin:18px 0 70px}
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 46px;border-top:1px solid var(--line)}
+  .info-item{padding:26px 0 30px;border-bottom:1px solid var(--line)}
+  .info-item .k{font-size:13px;margin-bottom:10px}
+  .info-item .v{font-size:14px;color:#686763;line-height:1.7}
+
+  /* FOOTER */
+  footer{min-height:22vh;background:#100f0b;color:#fff;display:flex;align-items:center}
+  .foot{display:flex;justify-content:space-between;gap:50px;align-items:flex-end;width:100%}
+  .foot small{color:#acaba7;line-height:1.8;max-width:620px}.foot{box-sizing:border-box;padding:0 86px}@media(max-width:800px){.foot{padding:0 24px;flex-direction:column;align-items:flex-start;gap:24px}}
+
+  @media (max-width:900px){
+    .menu{display:none}
+    .hero-copy{width:85%}
+    .treat-panel{grid-template-columns:1fr}
+    .treat-image{height:58vh}.treat-text{height:42vh;padding:6vh 7vw}
+    .story-a,.story-b,.story-c,.remake,.visit{grid-template-columns:1fr}
+    .story-a,.story-b,.story-c{width:100%;margin-left:0}.story-b .story-copy,.story-b .ph{order:initial}
+    .journal-grid{grid-template-columns:1fr}.watch,.follow{margin-top:0}
+    .remake-image{min-height:58vh}.visit-image{min-height:60vh}
+    .info-grid{grid-template-columns:1fr}
+  }
+
+/* IMAGE INSERTIONS ONLY — original layout, text, sizing and interactions preserved */
+.hero-media{background-image:linear-gradient(90deg,rgba(0,0,0,.45),rgba(0,0,0,.08)),url('img/f7fd02b9e6.webp')!important;background-size:cover!important;background-position:center!important}
+.hero-media:before{display:none!important}
+.lam .treat-image{background:url('img/479193f4b1.webp') center/cover no-repeat!important}
+.resin .treat-image{background:url('img/37c530d6bd.webp') center/cover no-repeat!important}
+.white .treat-image{background:url('img/a0ba5f03f4.webp') center/cover no-repeat!important}
+.treat-image:after{display:none!important}
+.story-a .ph{background:url('img/403f8dbe08.webp') center/cover no-repeat!important;font-size:0!important}
+.story-b .ph{background:url('img/9330ebb618.webp') center/cover no-repeat!important;font-size:0!important}
+.story-c .ph{background:url('img/aa32dce774.webp') center/cover no-repeat!important;font-size:0!important}
+.remake-image{background:url('img/a17071c7bd.webp') center/cover no-repeat!important;font-size:0!important}
+.journal-card.read .ph{background:url('img/fcb2d826dd.webp') center/cover no-repeat!important;font-size:0!important}
+.journal-card.watch .ph{background:url('img/d1b5d8fcd7.webp') center/cover no-repeat!important;font-size:0!important}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style id="bloom-tokens">
+/* ===== BLOOM shared tokens (colors are tinted warm in the CSS above; fonts unified here) ===== */
+:root{
+  --bloom-sans:"Pretendard Variable",Pretendard,"Noto Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif;
+  --bloom-serif:"Cormorant Garamond","Times New Roman",serif;
+  --bloom-bg:#F6F5F2; --bloom-ink:#1A1A18; --bloom-muted:#6B6A65; --bloom-line:#DAD8D2; --bloom-dark:#232321; --bloom-accent:#B8A18C;
+}
+html body{word-break:keep-all}
+nav a{color:inherit;text-decoration:none}
+/* Korean + body = Pretendard */
+html body, html body *{font-family:var(--bloom-sans)!important}
+/* English labels / numerals / large display words = serif */
+html body .eyebrow,html body .kicker,html body .brand,html body .logo,html body .hero-word,
+html body .care-num,html body .num,html body .role,html body .label,html body .point b,
+html body .single-ba-head,html body .case-top,html body .journal-head h2,
+html body .keywords,html body .keywords *,html body .tags,html body .tags *{
+  font-family:var(--bloom-serif)!important;font-weight:600;
+}
+html body .eyebrow,html body .kicker{font-size:13.5px;letter-spacing:.14em}
+html body .brand,html body .logo{font-size:19px;font-weight:600;letter-spacing:.16em}
+html body .hero-word{font-weight:500}
+html body h1,html body h2,html body h3{font-weight:500;letter-spacing:-.04em}
+html body .serif{font-weight:500}
+/* accent: small numerals only */
+html body .care-num,html body .point b,html body .remake-item .num,html body .step .num{color:var(--bloom-accent)}
+/* shared remake teaser (main / about) */
+.remake-line{font-size:17px;line-height:1.8;margin:0 0 26px;color:inherit;opacity:.82}
+.remake-link{display:inline-block;font-size:13px;letter-spacing:.04em;border-bottom:1px solid currentColor;padding-bottom:4px;color:inherit;text-decoration:none;opacity:.9}
+html body .remake h2{font-size:clamp(34px,3.3vw,52px);line-height:1.25;margin-bottom:28px}
+html body .hero h1{font-size:clamp(38px,4.1vw,62px);line-height:1.2;letter-spacing:-.04em}
+.visit-image{position:relative;overflow:hidden;padding:0!important;display:block!important;background:#ebeae6}
+.visit-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.info-item .v{line-height:1.7}
+</style>
+<style>.logo-link{display:inline-flex;align-items:center;line-height:0;text-decoration:none}.logo-link img{display:block;height:36px;width:auto}.logo-link .lg-dark{display:none}header.scrolled .logo-link .lg-dark{display:block}header.scrolled .logo-link .lg-light{display:none}</style><style>
+.vs{min-height:640px;background:#fff;color:#13120e;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #e3e2de;font-family:"Pretendard","Noto Sans KR",-apple-system,sans-serif;text-align:left;box-sizing:border-box}
+.vs *{box-sizing:border-box}.vs{scroll-margin-top:76px}
+.vs-image{position:relative;overflow:hidden;background:#ebeae6;min-height:420px}
+.vs-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vs-info{display:flex;flex-direction:column;justify-content:center;padding:96px 7vw}
+.vs-eyebrow{font-family:"Cormorant Garamond","Times New Roman",serif;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#8a8984}
+.vs-info h2{font-family:"Times New Roman","Noto Serif KR",serif;font-weight:400;font-size:clamp(34px,3.6vw,56px);line-height:1.25;letter-spacing:-.03em;margin:18px 0 56px;color:#13120e}
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 46px;border-top:1px solid #e3e2de}
+.vs-item{padding:24px 0 26px;border-bottom:1px solid #e3e2de}
+.vs-item .k{font-size:13px;margin-bottom:8px;font-weight:500;color:#13120e}
+.vs-item .v{font-size:14px;color:#686763;line-height:1.7}
+@media(max-width:900px){.vs{grid-template-columns:1fr}.vs-image{min-height:56vh}.vs-info{padding:64px 24px}.vs-grid{grid-template-columns:1fr}}
+</style><meta name="description" content="필요한 만큼만 다듬는 심미치과. 라미네이트, 라미네이트 재치료, 심미레진, 치아 미백을 원장·기공사·위생사가 함께 진료합니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BLOOM 심미치과 | 라미네이트·심미레진·미백">
+<meta property="og:description" content="필요한 만큼만 다듬는 심미치과. 라미네이트, 라미네이트 재치료, 심미레진, 치아 미백을 원장·기공사·위생사가 함께 진료합니다.">
+<meta name="theme-color" content="#1A1A18">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="stylesheet" href="assets/bloom.css">
+<script src="assets/bloom.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dentist","name":"BLOOM 심미치과","telephone":"+82-2-000-0000","address":{"@type":"PostalAddress","streetAddress":"테헤란로 000, 3층","addressLocality":"강남구","addressRegion":"서울특별시","addressCountry":"KR"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"10:00","closes":"19:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"10:00","closes":"15:00"}],"medicalSpecialty":"Dentistry"}</script>
+<script>document.documentElement.classList.add('bl-anim')</script>
+</head>
+<body data-page="main">
+<div class="bl-header" id="header" role="banner" data-hero="dark" data-bar="light">
+  <div class="bl-header-inner">
+    <a class="bl-brand" href="main.html" aria-label="BLOOM 심미치과 메인으로"><img class="bl-logo-light" src="img/0658aa8874.webp" alt="BLOOM Esthetic Dentistry"><img class="bl-logo-dark" src="img/56ddc96e80.webp" alt=""></a>
+    <div class="bl-nav" role="navigation" aria-label="주 메뉴"><a href="about.html">ABOUT</a><a href="laminate.html">LAMINATE</a><a href="resin.html">RESIN</a><a href="whitening.html">WHITENING</a><a href="general.html">GENERAL</a><a class="bl-reserve" href="#consult">예약하기</a></div>
+    <button class="bl-burger" type="button" aria-label="메뉴 열기" aria-controls="bl-drawer" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</div>
+
+
+<main>
+<section class="hero">
+  <div class="bl-hero-meta" aria-hidden="true"><span>Seoul, Gangnam</span><span>Laminate · Resin · Whitening</span></div>
+  <div class="hero-media"></div>
+  <div class="wrap hero-content">
+    <div class="hero-copy">
+      
+      <h1 class="serif">편하게 웃는 날이<br>많아지도록.</h1>
+      <p>치아를 새로 만드는 것이 아니라,<br>본래의 인상에 더 자연스럽게 맞추는 일.</p>
+      <div class="scrollmark">SCROLL ↓</div>
+    </div>
+  </div>
+</section>
+
+<section class="intro" id="about">
+  <div class="intro-inner">
+    <h2 class="serif">한 번 깎인 치아는 되돌릴 수 없기에,<br>BLOOM은 원칙에서 시작합니다.</h2>
+    <p>삭제는 꼭 필요한 만큼만.<br>한 사람을 위해, 여러 사람이 함께 움직입니다.</p>
+  </div>
+</section>
+
+<section class="treatments" id="treatments">
+  <div class="treat-sticky">
+    <div class="treat-track" id="treatTrack">
+      <article class="treat-panel lam">
+        <div class="treat-image"></div>
+        <div class="treat-text"><div class="treat-index">01 / 03 · LAMINATE</div><h2 class="serif">깎지 않고<br>다듬습니다.</h2><p>형태와 색을 함께 조정해<br>더 자연스러운 인상을 만듭니다.</p><a class="cta" href="laminate.html">자세히 보기 →</a></div>
+      </article>
+      <article class="treat-panel resin">
+        <div class="treat-image"></div>
+        <div class="treat-text"><div class="treat-index">02 / 03 · RESIN</div><h2 class="serif">작은 차이를<br>섬세하게 다듬습니다.</h2><p>필요한 부분만 정교하게 보완해<br>자연치와 어우러지게 만듭니다.</p><a class="cta" href="resin.html">자세히 보기 →</a></div>
+      </article>
+      <article class="treat-panel white">
+        <div class="treat-image"></div>
+        <div class="treat-text"><div class="treat-index">03 / 03 · WHITENING</div><h2 class="serif">본연의 가장 밝은 색을<br>되찾습니다.</h2><p>색을 더하는 대신,<br>치아 본래의 밝기를 깨끗하게 회복합니다.</p><a class="cta" href="whitening.html">자세히 보기 →</a></div>
+      </article>
+    </div>
+    <div class="treat-nav">SCROLL →</div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="why-head"><div class="eyebrow">WHY BLOOM</div><h2 class="serif">자연스러운 결과에는<br>분명한 이유가 있습니다.</h2></div>
+    <div class="editorial-flow">
+      <article class="story story-a">
+        <div class="ph">원칙 이미지<br>원장이 치아를 관찰하고 판단하는 장면</div>
+        <div class="story-copy"><div class="num">01 · PRINCIPLE</div><h3 class="serif">많이 하기보다,<br>어디까지 하지 않아도 되는지를 먼저 봅니다.</h3><p>치아는 한 번 삭제하면 되돌릴 수 없습니다.<br>그래서 필요한 범위를 먼저 신중하게 판단합니다.</p></div>
+      </article>
+      <article class="story story-b">
+        <div class="story-copy"><div class="num">02 · HARMONY</div><h3 class="serif">한 치아보다,<br>전체 인상과의 조화를 봅니다.</h3><p>색뿐 아니라 형태와 비율,<br>주변 치아와의 연결까지 함께 맞춥니다.</p></div>
+        <div class="ph">주변 치아와의 조화 이미지<br>색·형태·비율·연결감이 함께 보이는 디테일</div>
+      </article>
+      <article class="story story-c">
+        <div class="ph">팀 체제 이미지<br>원장·기공사·위생사가 함께 보는 협업 장면</div>
+        <div class="story-copy"><div class="num">03 · TEAM</div><h3 class="serif">한 사람을 위해<br>여러 사람이 함께 움직입니다.</h3><p>원장은 방향을 판단하고, 기공사는 색과 형태를 구현하며,<br>위생사는 준비와 유지관리를 함께합니다.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="remake">
+  <div class="remake-image">REMAKE HERO IMAGE<br><br>보철물을 다루는 손 / 제거된 기존 보철 / 세라믹 디테일<br>사진이 섹션의 약 60%를 차지</div>
+  <div class="remake-copy">
+    <div class="eyebrow" style="color:#999">REMAKE</div>
+    <h2 class="serif" style="margin-bottom:28px">재치료하는 사람들이<br>찾는 이유가 있습니다.</h2>
+    <p class="remake-line">이미 깎인 치아가 얼마나 남아 있는지부터 봅니다.</p>
+    <div><a class="remake-link" href="laminate.html#remake">라미네이트 재치료 보기 →</a></div>
+  </div>
+</section>
+
+<section class="journal">
+  <div class="wrap">
+    <div class="journal-head"><div><div class="eyebrow">EDITORIAL</div><h2>BLOOM JOURNAL</h2></div><div class="eyebrow">READ · WATCH · FOLLOW</div></div>
+    <div class="journal-grid">
+      <article class="journal-card read"><a href="laminate.html#remake"><div class="ph">READ 대표 이미지</div><div class="label">READ</div><h3>다시 하는 라미네이트,<br>무엇부터 확인해야 할까요?</h3></a></article>
+      <article class="journal-card watch"><a href="laminate.html#ceramist"><div class="ph">WATCH / INTERVIEW 대표 이미지</div><div class="label">WATCH</div><h3>기공사는 치아의 색과 형태를<br>어떻게 맞출까요?</h3></a></article>
+      <article class="journal-card follow"><a class="insta-grid" href="https://instagram.com/bloom_dental" target="_blank" rel="noopener" aria-label="BLOOM 인스타그램"><div class="ph ig1"></div><div class="ph ig2"></div><div class="ph ig3"></div><div class="ph ig4"></div></a><div class="label">FOLLOW</div><h3>BLOOM Instagram</h3></article>
+    </div>
+  </div>
+</section>
+
+<section class="vs" id="visit">
+  <div class="vs-image"><img loading="lazy" decoding="async" src="img/71236079c6.webp" alt="BLOOM 심미치과 리셉션 데스크와 복도"></div>
+  <div class="vs-info">
+    <div class="vs-eyebrow">VISIT BLOOM</div>
+    <h2>상담 한 번이면,<br>달라질 부분이 보입니다.</h2>
+    <div class="vs-grid">
+      <div class="vs-item"><div class="k">상담 예약</div><div class="v"><a href="tel:0200000000">02-000-0000</a><br><a href="https://pf.kakao.com/_bloomdental" target="_blank" rel="noopener">카카오톡 @bloom_dental</a></div></div>
+      <div class="vs-item"><div class="k">진료시간</div><div class="v">평일 10:00 – 19:00 (점심 13:00 – 14:00)<br>토요일 10:00 – 15:00 · 일·공휴일 휴진</div></div>
+      <div class="vs-item"><div class="k">주소</div><div class="v">서울특별시 강남구 테헤란로 000, 3층<br>2호선 강남역 5번 출구 도보 3분</div></div>
+      <div class="vs-item"><div class="k">지도</div><div class="v"><a href="https://map.naver.com/p/search/BLOOM%20%EC%8B%AC%EB%AF%B8%EC%B9%98%EA%B3%BC" target="_blank" rel="noopener">네이버지도에서 크게 보기 →</a></div></div>
+      <div class="vs-item"><div class="k">주차 안내</div><div class="v">건물 지하주차장 이용 (진료 시 2시간 무료)</div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="bl-footer bl-footer--compact" role="contentinfo">
+  <div class="bl-footer-top">
+    <a class="bl-footer-brand" href="main.html" aria-label="BLOOM 심미치과 메인으로"><img src="img/0658aa8874.webp" alt="BLOOM Esthetic Dentistry" loading="lazy"></a>
+  </div>
+  <div class="bl-footer-bottom">
+    <div class="bl-footer-legal">
+      <p>BLOOM 심미치과 · 대표원장 이도윤 · 사업자등록번호 000-00-00000 · © BLOOM AESTHETIC DENTAL CLINIC</p>
+      <p>모든 치료는 개인의 구강 상태에 따라 결과와 기간이 다를 수 있으며, 시린 증상·잇몸 염증·보철물 탈락이나 파절 등의 부작용이 생길 수 있습니다.</p>
+    </div>
+    <div class="bl-footer-links"><a href="info.html#fees">비급여 진료비용</a><a href="info.html#privacy">개인정보처리방침</a><a href="info.html#notice">의료광고 안내</a></div>
+  </div>
+</div>
+
+
+<script>
+  const header = document.getElementById('header');
+  const treatments = document.querySelector('.treatments');
+  const track = document.getElementById('treatTrack');
+  function onScroll(){
+    header.classList.toggle('scrolled', window.scrollY > window.innerHeight * .85);
+    const rect = treatments.getBoundingClientRect();
+    const max = treatments.offsetHeight - window.innerHeight;
+    const passed = Math.min(Math.max(-rect.top,0),max);
+    const progress = max ? passed/max : 0;
+    track.style.transform = `translateX(${-progress * (window.innerWidth*2)}px)`;
+  }
+  addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('resize', onScroll);
+  onScroll();
+</script>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>치아 미백·잇몸 미백 | BLOOM 심미치과</title>
+<style>
+:root{
+  --bg:#f7f6f2;
+  --white:#fff;
+  --ink:#171612;
+  --muted:#6f6f6b;
+  --line:#dcdcd7;
+  --soft:#ecece8;
+  --pink:#EFEAE4;
+  --pad:72px;
+  --max:1440px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Arial,"Pretendard","Noto Sans KR",sans-serif;
+  word-break:keep-all;
+  overflow-wrap:break-word;
+}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(var(--max),calc(100% - var(--pad)*2));margin:0 auto}
+.eyebrow{
+  font-size:12px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:#7c7c78;
+  margin-bottom:16px;
+}
+h1,h2,h3,p{margin:0}
+h1{
+  font-size:34px;
+  line-height:1.18;
+  font-weight:500;
+  letter-spacing:-.05em;
+}
+h2{
+  font-size:28px;
+  line-height:1.24;
+  font-weight:500;
+  letter-spacing:-.045em;
+}
+h3{
+  font-size:19px;
+  line-height:1.4;
+  font-weight:500;
+  letter-spacing:-.035em;
+}
+.body{
+  font-size:15px;
+  line-height:1.75;
+  color:#656560;
+}
+.ph{
+  background:linear-gradient(135deg,#e7e7e2,#f6f6f2 58%,#dddeda);
+  position:relative;
+  overflow:hidden;
+}
+.ph::after{
+  content:attr(data-label);
+  position:absolute;
+  left:16px;
+  right:16px;
+  bottom:14px;
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#6f6f6b;
+}
+header{
+  position:absolute;
+  top:0;left:0;right:0;
+  height:74px;
+  z-index:20;
+}
+.nav{
+  width:min(var(--max),calc(100% - var(--pad)*2));
+  height:100%;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.brand{font-size:16px;font-weight:600;letter-spacing:.12em}
+.gnb{display:flex;gap:28px;align-items:center;font-size:12px;letter-spacing:.06em}
+.reserve{border:1px solid #24231f;padding:11px 18px;border-radius:999px}
+
+/* HERO */
+.hero{
+  min-height:86vh;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  background:#ededE9;
+}
+.hero-media{position:absolute;inset:0}
+.hero-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top,rgba(246,246,243,.93) 0%,rgba(246,246,243,.3) 38%,rgba(246,246,243,.02) 70%);
+}
+.hero-copy{
+  position:relative;
+  z-index:2;
+  width:min(760px,calc(100% - 40px));
+  margin:0 auto 60px;
+  text-align:center;
+}
+.hero-copy .sub{
+  margin-top:22px;
+  font-size:15px;
+  line-height:1.7;
+  color:#50504c;
+}
+
+/* INTRO */
+.intro{
+  background:#fff;
+  padding:76px 0 72px;
+}
+.intro-inner{
+  max-width:720px;
+  margin-left:7vw;
+}
+.intro .body{
+  margin-top:22px;
+  max-width:560px;
+}
+
+/* TREATMENT SPLIT */
+.treatments{
+  padding:88px 0 96px;
+  background:#f8f7f3;
+}
+.treatments-head{
+  max-width:640px;
+  margin-bottom:40px;
+}
+.treat-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.treat-card{
+  background:#fff;
+  border-top:1px solid var(--line);
+}
+.treat-img{aspect-ratio:4/3}
+.treat-copy{
+  padding:24px 22px 28px;
+}
+.treat-copy .body{
+  margin-top:14px;
+  max-width:480px;
+}
+
+/* TONE */
+.tone{
+  padding:86px 0 90px;
+  background:#fff;
+}
+.tone-grid{
+  display:grid;
+  grid-template-columns:.82fr 1.18fr;
+  gap:60px;
+  align-items:center;
+}
+.tone-copy{max-width:480px}
+.tone-copy .body{margin-top:22px}
+.tone-image{aspect-ratio:16/9}
+
+/* BA */
+.ba{
+  padding:94px 0 100px;
+  background:#f8f7f3;
+}
+.ba-head{
+  max-width:620px;
+  margin-bottom:42px;
+}
+.case-grid{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:24px;
+}
+.case{
+  border-top:1px solid var(--line);
+  padding-top:14px;
+}
+.pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.case-img{aspect-ratio:4/3}
+.case-meta{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  margin-top:10px;
+  font-size:11px;
+  color:#797975;
+  letter-spacing:.04em;
+}
+.case-stack{
+  display:grid;
+  gap:22px;
+}
+
+/* FAQ + CTA */
+.end{
+  background:#fff;
+  padding:90px 0 96px;
+}
+.end-grid{
+  display:grid;
+  grid-template-columns:.85fr 1.15fr;
+  gap:72px;
+}
+.faq-list{border-top:1px solid var(--line)}
+.faq-row{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding:21px 0;
+  border-bottom:1px solid var(--line);
+  font-size:15px;
+}
+.plus{color:#8a8985;font-size:18px}
+.cta-box{
+  margin-top:54px;
+  padding-top:38px;
+  border-top:1px solid var(--line);
+}
+.cta-btn{
+  display:inline-block;
+  margin-top:28px;
+  border:1px solid #24231f;
+  padding:13px 22px;
+  border-radius:999px;
+  font-size:12px;
+  letter-spacing:.07em;
+}
+footer{
+  padding:28px var(--pad);
+  background:#fff;
+  border-top:1px solid #e2e2de;
+  font-size:11px;
+  color:#8a8985;
+  display:flex;
+  justify-content:space-between;
+}
+
+@media(max-width:980px){
+  :root{--pad:34px}
+  .gnb{display:none}
+  .treat-grid,.tone-grid,.case-grid,.end-grid{grid-template-columns:1fr}
+  .intro-inner{margin-left:0}
+}
+@media(max-width:620px){
+  :root{--pad:22px}
+  h1{font-size:27px}
+  h2{font-size:24px}
+  .hero{min-height:80vh}
+  .hero-copy{margin-bottom:42px}
+  .intro,.treatments,.tone,.ba,.end{padding:68px 0}
+  .treat-grid{gap:14px}
+  .pair{grid-template-columns:1fr}
+  footer{padding:22px;display:block}
+  footer div+div{margin-top:7px}
+}
+</style>
+
+<style>
+.tooth-whitening{
+  padding:94px 0 102px;
+  background:#f8f7f3;
+}
+.tooth-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:64px;
+  align-items:center;
+}
+.tooth-copy{max-width:520px}
+.tooth-copy>.body{margin-top:22px}
+.tooth-image{aspect-ratio:4/3}
+.nonvital{
+  margin-top:44px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+}
+.nonvital .body{margin-top:14px}
+.single-ba{
+  margin-top:54px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+}
+.single-ba-head{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:14px;
+  font-size:11px;
+  color:#777773;
+  letter-spacing:.07em;
+}
+.single-ba .pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.single-ba .case-img{aspect-ratio:16/10}
+.gum-whitening{
+  padding:94px 0 102px;
+  background:#EFEAE4;
+}
+.gum-grid{
+  display:grid;
+  grid-template-columns:1.12fr .88fr;
+  gap:64px;
+  align-items:center;
+}
+.gum-image{aspect-ratio:16/10}
+.gum-copy{max-width:490px}
+.gum-copy .body{margin-top:22px}
+.gum-ba{margin-top:50px}
+.tone{padding:80px 0 84px}
+@media(max-width:980px){
+  .tooth-grid,.gum-grid{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .tooth-whitening,.gum-whitening{padding:68px 0}
+  .single-ba .pair{grid-template-columns:1fr}
+  .single-ba-head{display:block}
+  .single-ba-head span{display:block}
+  .single-ba-head span+span{margin-top:6px}
+}
+</style>
+
+
+
+<style>
+/* v6 editorial zigzag layout for tooth whitening */
+.tooth-whitening{
+  padding:94px 0 106px;
+  background:#f8f7f3;
+}
+.tooth-head{
+  max-width:720px;
+  margin-bottom:48px;
+}
+.editorial-case{
+  display:grid;
+  grid-template-columns:.68fr 1.32fr;
+  gap:42px;
+  align-items:end;
+}
+.editorial-case + .editorial-case{
+  margin-top:42px;
+}
+.case-b{
+  grid-template-columns:1.32fr .68fr;
+  align-items:start;
+}
+.editorial-text{
+  padding-top:10px;
+}
+.editorial-text .body{
+  margin-top:14px;
+  max-width:340px;
+}
+.case-b .editorial-text{
+  justify-self:end;
+  text-align:left;
+}
+.editorial-ba{
+  border-top:1px solid var(--line);
+  padding-top:16px;
+}
+.single-ba-head{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:14px;
+  font-size:11px;
+  color:#777773;
+  letter-spacing:.07em;
+}
+.editorial-ba .pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.editorial-ba .case-img{
+  aspect-ratio:16/9;
+}
+@media(max-width:980px){
+  .editorial-case,
+  .case-b{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+  .case-b .editorial-text{
+    justify-self:start;
+  }
+}
+@media(max-width:620px){
+  .tooth-whitening{padding:68px 0 74px;}
+  .editorial-case + .editorial-case{margin-top:30px;}
+  .editorial-ba .pair{grid-template-columns:1fr;}
+  .single-ba-head{display:block;}
+  .single-ba-head span{display:block;}
+  .single-ba-head span+span{margin-top:6px;}
+}
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style id="bloom-tokens">
+/* ===== BLOOM shared tokens (colors are tinted warm in the CSS above; fonts unified here) ===== */
+:root{
+  --bloom-sans:"Pretendard Variable",Pretendard,"Noto Sans KR",-apple-system,"Apple SD Gothic Neo",sans-serif;
+  --bloom-serif:"Cormorant Garamond","Times New Roman",serif;
+  --bloom-bg:#F6F5F2; --bloom-ink:#1A1A18; --bloom-muted:#6B6A65; --bloom-line:#DAD8D2; --bloom-dark:#232321; --bloom-accent:#B8A18C;
+}
+html body{word-break:keep-all}
+nav a{color:inherit;text-decoration:none}
+/* Korean + body = Pretendard */
+html body, html body *{font-family:var(--bloom-sans)!important}
+/* English labels / numerals / large display words = serif */
+html body .eyebrow,html body .kicker,html body .brand,html body .logo,html body .hero-word,
+html body .care-num,html body .num,html body .role,html body .label,html body .point b,
+html body .single-ba-head,html body .case-top,html body .journal-head h2,
+html body .keywords,html body .keywords *,html body .tags,html body .tags *{
+  font-family:var(--bloom-serif)!important;font-weight:600;
+}
+html body .eyebrow,html body .kicker{font-size:13.5px;letter-spacing:.14em}
+html body .brand,html body .logo{font-size:19px;font-weight:600;letter-spacing:.16em}
+html body .hero-word{font-weight:500}
+html body h1,html body h2,html body h3{font-weight:500;letter-spacing:-.04em}
+html body .serif{font-weight:500}
+/* accent: small numerals only */
+html body .care-num,html body .point b,html body .remake-item .num,html body .step .num{color:var(--bloom-accent)}
+/* shared remake teaser (main / about) */
+.remake-line{font-size:17px;line-height:1.8;margin:0 0 26px;color:inherit;opacity:.82}
+.remake-link{display:inline-block;font-size:13px;letter-spacing:.04em;border-bottom:1px solid currentColor;padding-bottom:4px;color:inherit;text-decoration:none;opacity:.9}
+/* ===== unified intro section (laminate / resin / whitening) ===== */
+html body .signature-intro,html body .master-intro,html body .intro{
+  box-sizing:border-box;min-height:336px;padding:72px 0!important;display:flex!important;align-items:center;
+}
+html body .signature-intro>.wrap,html body .master-intro>.wrap,html body .intro>.wrap{width:min(1440px,calc(100% - 144px));margin:0 auto}
+html body .signature-intro .inner,html body .master-intro-copy,html body .intro-inner{max-width:760px!important;width:100%;margin:0!important;padding:0!important}
+html body .signature-intro h2,html body .master-intro-copy h2,html body .intro h2{font-size:30px!important;line-height:1.28;margin:18px 0 0!important}
+html body .signature-index,html body .chapter-index{margin-top:30px;padding-top:24px;border-top:1px solid var(--line,#dcdcd7);font-size:12px;letter-spacing:.14em}
+html body .intro .body{margin-top:30px;padding-top:24px;border-top:1px solid var(--line,#dcdcd7);max-width:none}
+@media(max-width:620px){html body .signature-intro,html body .master-intro,html body .intro{min-height:0;padding:56px 0!important}
+html body .signature-intro>.wrap,html body .master-intro>.wrap,html body .intro>.wrap{width:calc(100% - 44px)}
+html body .signature-intro h2,html body .master-intro-copy h2,html body .intro h2{font-size:24px!important}}
+</style>
+
+<style>
+/* team principles in intro (comparison copy) */
+.team-principle{display:grid;grid-template-columns:1fr 1fr;width:100%;margin-top:56px;border-top:1px solid var(--tp-line);text-align:center}
+.team-principle .tp{padding:34px 40px 0}
+.team-principle .tp+.tp{border-left:1px solid var(--tp-line)}
+html body .team-principle .tp-role{font-family:var(--bloom-serif)!important;font-size:12px;letter-spacing:.16em;color:var(--bloom-accent);margin-bottom:8px}
+html body .team-principle h3{font-size:18px;margin:0 0 12px}
+html body .team-principle p{font-size:14px;line-height:1.8;margin:0 auto;color:var(--tp-text);max-width:420px}
+.team-principle.on-light{--tp-line:#dcdcd7;--tp-text:#656560}
+.team-principle.on-dark{--tp-line:rgba(255,255,255,.22);--tp-text:#cfcdc7}
+@media(max-width:620px){.team-principle{grid-template-columns:1fr;margin-top:40px}.team-principle .tp,.team-principle .tp+.tp{padding:24px 0 0;border-left:0}.team-principle .tp+.tp{border-top:1px solid var(--tp-line);margin-top:24px}}
+</style>
+<style>
+/* WHITENING HERO — single background image with centered copy */
+.hero{
+  min-height:86vh;
+  display:flex!important;
+  justify-content:center;
+  align-items:center!important;
+  background-color:#faf9f7!important;
+  background-image:var(--whitening-hero-image);
+  background-repeat:no-repeat;
+  background-position:center bottom;
+  background-size:100% auto;
+  overflow:hidden;
+}
+.hero-media{display:none!important}
+.hero-copy{
+  position:relative!important;
+  z-index:2;
+  width:min(760px,calc(100% - 44px))!important;
+  margin:0 auto!important;
+  padding:74px 24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:transparent;
+}
+@media(max-width:900px){
+  .hero{
+    min-height:78svh;
+  }
+  .hero-copy{
+    padding:70px 20px;
+  }
+}
+@media(max-width:560px){
+  .hero{min-height:74svh}
+  .hero-copy{padding:60px 8px}
+}
+
+
+</style>
+<style>
+/* before/after photos (from v7) */
+.case-a .pair .case-img:nth-child(1){
+  background:url('img/60f3f06bff.webp') center/cover no-repeat!important;
+  color:transparent!important;
+}
+.case-a .pair .case-img:nth-child(2){
+  background:url('img/4e777d23ec.webp') center/cover no-repeat!important;
+  color:transparent!important;
+}
+.case-b .pair .case-img:nth-child(1){
+  background:url('img/d02a6cecaa.webp') center/cover no-repeat!important;
+  color:transparent!important;
+}
+.case-b .pair .case-img:nth-child(2){
+  background:url('img/126f841227.webp') center/cover no-repeat!important;
+  color:transparent!important;
+}
+.gum-ba .pair .case-img:nth-child(1){
+  background:url('img/2c0ec3d90e.webp') center/cover no-repeat!important;
+  color:transparent!important;
+}
+.gum-ba .pair .case-img:nth-child(2){
+  background:url('img/0ac21733af.webp') center/cover no-repeat!important;
+  color:transparent!important;
+}
+.case-img{color:transparent!important}
+.case-img::after{display:none!important}
+.gum-grid{display:block!important}
+.gum-copy{max-width:760px!important}
+.gum-ba{margin-top:42px}
+/* hero: tighter height, colour matched to photo */
+.hero{background-color:#fdfdfb!important}
+@media(min-width:561px){
+  .hero{min-height:86vh!important;align-items:flex-start!important;padding-top:304px;padding-bottom:0;}
+  .hero-copy{padding:0 24px!important}
+}
+</style>
+<style>
+.gum-steps{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.gum-steps li{padding:26px 28px 0 0;min-width:0}
+.gum-steps li+li{padding-left:28px;border-left:1px solid var(--line)}
+html body .gum-steps .num{display:block;font-size:13px;letter-spacing:.14em;color:var(--bloom-accent);margin-bottom:10px}
+.gum-steps h3{font-size:17px;margin:0 0 8px}
+.gum-steps p{font-size:14px;line-height:1.7;color:#6b6760;margin:0}
+@media(max-width:980px){.gum-steps{grid-template-columns:1fr 1fr}.gum-steps li:nth-child(odd){padding-left:0;border-left:0}.gum-steps li:nth-child(n+3){margin-top:26px;border-top:1px solid var(--line)}}
+@media(max-width:560px){.gum-steps{grid-template-columns:1fr}.gum-steps li,.gum-steps li+li{padding:20px 0 0;border-left:0}.gum-steps li+li{margin-top:20px;border-top:1px solid var(--line)}}
+</style>
+<style>.logo-link{display:inline-flex;align-items:center;line-height:0;text-decoration:none}.logo-link img{display:block;height:36px;width:auto}.logo-link .lg-dark{display:none}</style><style>
+.vs{min-height:640px;background:#fff;color:#13120e;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #e3e2de;font-family:"Pretendard","Noto Sans KR",-apple-system,sans-serif;text-align:left;box-sizing:border-box}
+.vs *{box-sizing:border-box}.vs{scroll-margin-top:76px}
+.vs-image{position:relative;overflow:hidden;background:#ebeae6;min-height:420px}
+.vs-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vs-info{display:flex;flex-direction:column;justify-content:center;padding:96px 7vw}
+.vs-eyebrow{font-family:"Cormorant Garamond","Times New Roman",serif;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#8a8984}
+.vs-info h2{font-family:"Times New Roman","Noto Serif KR",serif;font-weight:400;font-size:clamp(34px,3.6vw,56px);line-height:1.25;letter-spacing:-.03em;margin:18px 0 56px;color:#13120e}
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 46px;border-top:1px solid #e3e2de}
+.vs-item{padding:24px 0 26px;border-bottom:1px solid #e3e2de}
+.vs-item .k{font-size:13px;margin-bottom:8px;font-weight:500;color:#13120e}
+.vs-item .v{font-size:14px;color:#686763;line-height:1.7}
+@media(max-width:900px){.vs{grid-template-columns:1fr}.vs-image{min-height:56vh}.vs-info{padding:64px 24px}.vs-grid{grid-template-columns:1fr}}
+</style><meta name="description" content="치아 본래의 밝기를 되찾는 전문가 미백, 실활치 미백, 잇몸 미백. 시린 증상과 유지 기간까지 미리 안내합니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="치아 미백·잇몸 미백 | BLOOM 심미치과">
+<meta property="og:description" content="치아 본래의 밝기를 되찾는 전문가 미백, 실활치 미백, 잇몸 미백. 시린 증상과 유지 기간까지 미리 안내합니다.">
+<meta name="theme-color" content="#1A1A18">
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="stylesheet" href="assets/bloom.css">
+<script src="assets/bloom.js" defer></script>
+</head>
+<body data-page="whitening">
+
+<div class="bl-header" id="header" role="banner" data-hero="light" data-bar="light">
+  <div class="bl-header-inner">
+    <a class="bl-brand" href="main.html" aria-label="BLOOM 심미치과 메인으로"><img class="bl-logo-light" src="img/0658aa8874.webp" alt="BLOOM Esthetic Dentistry"><img class="bl-logo-dark" src="img/56ddc96e80.webp" alt=""></a>
+    <div class="bl-nav" role="navigation" aria-label="주 메뉴"><a href="about.html">ABOUT</a><a href="laminate.html">LAMINATE</a><a href="resin.html">RESIN</a><a href="whitening.html" aria-current="page">WHITENING</a><a href="general.html">GENERAL</a><a class="bl-reserve" href="#consult">예약하기</a></div>
+    <button class="bl-burger" type="button" aria-label="메뉴 열기" aria-controls="bl-drawer" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</div>
+
+
+<section class="hero" style="--whitening-hero-image:url('img/51bc70f933.webp')">
+  <div class="hero-copy">
+    <div class="eyebrow">WHITENING</div>
+    <h1>본연의 가장 밝은 색을<br>되찾습니다.</h1>
+    <div class="sub">색을 덮는 대신,<br>치아 본래의 밝기를 깨끗하게 회복합니다.</div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap">
+    <div class="intro-inner">
+      <div class="eyebrow">BLOOM WHITENING</div>
+      <h2>하얗게 만드는 것보다,<br>자연스럽게 밝아지는 게 중요합니다.</h2>
+      
+
+  </div>
+<div class="team-principle on-light">
+  <div class="tp"><div class="tp-role">DIRECTOR</div><h3>원장의 원칙</h3><p>시작 전 진단부터 시린 정도 확인, 마지막 톤 확인까지. 판단이 필요한 지점은 직접 봅니다.</p></div>
+  <div class="tp"><div class="tp-role">HYGIENIST</div><h3>위생사의 원칙</h3><p>시술 전 주의사항을 미리 안내하고, 원장의 지도 아래 시술한 뒤 시술 후 관리법을 알려드립니다.</p></div>
+</div>
+    </div>
+</section>
+
+
+
+
+<section class="tooth-whitening">
+  <div class="wrap">
+    <div class="tooth-head">
+      <div class="eyebrow">01 · TOOTH WHITENING</div>
+      <h2>치아 상태에 맞게,<br>미백의 방향을 나눠 봅니다.</h2>
+    </div>
+
+    <div class="editorial-case case-a">
+      <div class="editorial-text">
+        <div class="eyebrow">PROFESSIONAL WHITENING</div>
+        <h3>밝기는 올리고,<br>인상은 자연스럽게 남깁니다.</h3>
+        <p class="body">치아 상태를 확인한 뒤 전문 미백제를 사용해 밝기를 단계적으로 조절합니다. 현재 색과 반응 정도를 보면서 자연스러운 범위 안에서 변화를 계획합니다.</p>
+      </div>
+      <div class="editorial-ba">
+        <div class="single-ba-head">
+          <span>BEFORE & AFTER</span>
+          <span>PROFESSIONAL WHITENING</span>
+        </div>
+        <div class="pair">
+          <div class="case-img ph" data-label="TOOTH WHITENING — BEFORE"></div>
+          <div class="case-img ph" data-label="TOOTH WHITENING — AFTER"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="editorial-case case-b">
+      <div class="editorial-ba">
+        <div class="single-ba-head">
+          <span>BEFORE & AFTER</span>
+          <span>NON-VITAL WHITENING</span>
+        </div>
+        <div class="pair">
+          <div class="case-img ph" data-label="NON-VITAL WHITENING — BEFORE"></div>
+          <div class="case-img ph" data-label="NON-VITAL WHITENING — AFTER"></div>
+        </div>
+      </div>
+      <div class="editorial-text">
+        <div class="eyebrow">NON-VITAL WHITENING</div>
+        <h3>신경치료 후 어두워진 치아도<br>상태에 따라 미백을 고려합니다.</h3>
+        <p class="body">신경치료를 받은 뒤 한 치아만 어둡게 보이는 경우에는 치아 상태와 기존 치료 내용을 확인한 뒤 실활치 미백 가능 여부를 판단합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="gum-whitening">
+  <div class="wrap">
+    <div class="gum-grid">
+      
+      <div class="gum-copy">
+        <div class="eyebrow">02 · GUM WHITENING</div>
+        <h2>치아만 밝아져도<br>인상이 완성되지는 않습니다.</h2>
+        <p class="body">잇몸 색이 짙어 보이는 경우에는 잇몸 상태와 원인을 먼저 확인하고, 치료가 적합한 경우 잇몸 미백을 고려합니다.</p>
+      </div>
+    </div>
+
+    <div class="single-ba gum-ba">
+      <div class="single-ba-head">
+        <span>BEFORE & AFTER</span>
+        <span>GUM WHITENING</span>
+      </div>
+      <div class="pair">
+        <div class="case-img ph" data-label="GUM WHITENING — BEFORE"></div>
+        <div class="case-img ph" data-label="GUM WHITENING — AFTER"></div>
+      </div>
+    </div>
+    <ol class="gum-steps">
+      <li><span class="num">01</span><h3>국소마취</h3><p>시술 부위만 마취합니다.</p></li>
+      <li><span class="num">02</span><h3>색소 제거</h3><p>착색된 잇몸 표층을 제거합니다.</p></li>
+      <li><span class="num">03</span><h3>잇몸 보호</h3><p>치주팩으로 시술 부위를 덮어 보호합니다.</p></li>
+      <li><span class="num">04</span><h3>경과 확인</h3><p>약 1주 뒤 회복 상태를 확인합니다.</p></li>
+    </ol>
+  </div>
+<p class="bl-ba-notice">※ 실제 치료 사례이며 동의를 받아 게재했습니다. 치료 결과는 개인에 따라 다를 수 있고, 시린 증상·잇몸 염증 등의 부작용이 생길 수 있습니다.</p>
+</section>
+
+
+
+<section class="end">
+  <div class="wrap end-grid">
+    <div>
+      <div class="eyebrow">FAQ</div>
+      <h2>미백 전,<br>많이 묻는 질문.</h2>
+
+      <div class="cta-box">
+        <div class="eyebrow">WHITENING CONSULTATION</div>
+        <h3>조금 더 밝은 인상을 원한다면,<br>먼저 현재 색부터 확인해보세요.</h3>
+        <a class="cta-btn" href="#consult">WHITENING CONSULTATION</a>
+      </div>
+    </div>
+
+    <div class="faq-list">
+      <details class="bl-faq"><summary class="faq-row"><span>미백은 누구나 가능한가요?</span><span class="plus">+</span></summary><div class="bl-faq-a">대부분 가능하지만 충치나 잇몸 질환이 있다면 먼저 치료합니다. 임신·수유 중이거나 시린 증상이 심한 경우에는 시기를 조정하며, 보철물과 레진은 미백되지 않는다는 점을 고려해 계획합니다.</div></details>
+      <details class="bl-faq"><summary class="faq-row"><span>얼마나 밝아질 수 있나요?</span><span class="plus">+</span></summary><div class="bl-faq-a">치아 본래의 색과 변색 원인에 따라 차이가 큽니다. 치료 전 셰이드 가이드로 현재 색을 기록하고, 기대할 수 있는 범위를 먼저 말씀드립니다.</div></details>
+      <details class="bl-faq"><summary class="faq-row"><span>미백하면 치아가 많이 시린가요?</span><span class="plus">+</span></summary><div class="bl-faq-a">일시적으로 시린 증상이 나타날 수 있으며 대개 수일 안에 줄어듭니다. 증상이 있으면 약제 농도와 적용 시간을 조절하거나 시린이 완화제를 사용합니다.</div></details>
+      <details class="bl-faq"><summary class="faq-row"><span>미백 효과는 얼마나 유지되나요?</span><span class="plus">+</span></summary><div class="bl-faq-a">식습관과 관리에 따라 다르며, 시간이 지나면 조금씩 색이 돌아올 수 있습니다. 자가 미백이나 주기적인 보완 미백으로 유지할 수 있습니다.</div></details>
+    </div>
+  </div>
+</section>
+
+<div class="bl-footer" role="contentinfo">
+  <div class="bl-footer-top">
+    <a class="bl-footer-brand" href="main.html" aria-label="BLOOM 심미치과 메인으로"><img src="img/0658aa8874.webp" alt="BLOOM Esthetic Dentistry" loading="lazy"></a>
+    <div class="bl-footer-col"><div class="bl-footer-k">상담·예약</div><p><a href="tel:0200000000">02-000-0000</a><br><a href="https://talk.naver.com/" target="_blank" rel="noopener">네이버톡톡</a> · <a href="https://pf.kakao.com/_bloomdental" target="_blank" rel="noopener">카카오톡</a></p></div>
+    <div class="bl-footer-col"><div class="bl-footer-k">진료시간</div><p>평일 10:00 – 19:00 · 토 10:00 – 15:00<br>일·공휴일 휴진</p></div>
+    <div class="bl-footer-col"><div class="bl-footer-k">오시는 길</div><p>서울특별시 강남구 테헤란로 000, 3층<br>2호선 강남역 5번 출구 도보 3분</p></div>
+  </div>
+  <div class="bl-footer-bottom">
+    <div class="bl-footer-legal">
+      <p>BLOOM 심미치과 · 대표원장 이도윤 · 사업자등록번호 000-00-00000 · © BLOOM AESTHETIC DENTAL CLINIC</p>
+      <p>모든 치료는 개인의 구강 상태에 따라 결과와 기간이 다를 수 있으며, 시린 증상·잇몸 염증·보철물 탈락이나 파절 등의 부작용이 생길 수 있습니다.</p>
+    </div>
+    <div class="bl-footer-links"><a href="info.html#fees">비급여 진료비용</a><a href="info.html#privacy">개인정보처리방침</a><a href="info.html#notice">의료광고 안내</a></div>
+  </div>
+</div>
+
+
+</body>
+</html>
