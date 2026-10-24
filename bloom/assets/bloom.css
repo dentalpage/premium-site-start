@@ -70,7 +70,9 @@ html body .vs-item .v a{border-bottom:1px solid currentColor;padding-bottom:1px}
 
 /* Heroes that used to sit below a static header now clear the overlay header */
 html body[data-page=about] .hero{height:100vh;padding-top:calc(var(--bl-header) + 5vh)}
-html body[data-page=laminate] .hero{padding-top:calc(var(--bl-header) + 40px)}
+html body[data-page=laminate] .hero{padding-top:calc(var(--bl-header) + 140px)}
+@media(max-width:900px){html body[data-page=laminate] .hero{padding-top:calc(var(--bl-header) + 112px)}}
+html body[data-page=laminate] .hero-overlay-version .hero-bg{top:var(--bl-header)!important}
 html body[data-page=laminate] .hero-copy-wrap{width:100%;max-width:1000px}
 html body[data-page] .hero h1{text-wrap:balance}
 
