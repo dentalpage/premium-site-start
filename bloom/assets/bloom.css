@@ -92,6 +92,10 @@ html body[data-page=main] section.hero .hero-copy{position:static!important}
 html body[data-page=main] .hero .eyebrow{color:rgba(241,239,234,.7)!important}
 html body[data-page=main] .hero h1{color:#F1EFEA}
 html body[data-page=main] .hero p{color:rgba(241,239,234,.72)}
+/* the logo as a large, faint watermark centred behind the copy */
+html body[data-page=main] section.hero::before{content:"";position:absolute;left:50%;top:calc(50% + var(--bl-header) / 2);transform:translate(-50%,-50%);z-index:0;pointer-events:none;
+  width:min(84%,1180px);aspect-ratio:1068/287;background:url('../img/logo-mark-light.webp') center/contain no-repeat;opacity:.07}
+@media(max-width:900px){html body[data-page=main] section.hero::before{width:92%;top:calc(var(--bl-header) + 30svh + 104px)}}
 html body[data-page=main] .hero .scrollmark{position:absolute;left:50%;bottom:36px;transform:translateX(-50%);margin:0;color:rgba(241,239,234,.5)}
 
 /* Treatment heroes: copy dead centre of the area under the header, images kept clear of it */
