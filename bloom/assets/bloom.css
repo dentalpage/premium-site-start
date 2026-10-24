@@ -68,6 +68,16 @@ html body[data-page] :is(.remake-intro,.remake-line),html body[data-page] .remak
 html body[data-page] :is(.member,.tp,.care-text,.remake-item,.step,.mat-note,.journal-card) p,html body[data-page] .vs-item .v{font-size:var(--bl-small);line-height:1.75}
 html body .vs-item .v a{border-bottom:1px solid currentColor;padding-bottom:1px}
 
+/* Leftovers from the original pages that sat outside the scale */
+html body[data-page] :is(.signature-intro,.master-intro-copy,.intro) h2{font-size:var(--bl-h2)!important;line-height:1.32}
+html body[data-page] .hero .sub{font-size:var(--bl-lead);line-height:1.75}
+@media(min-width:561px){html body[data-page=whitening] .hero,html body[data-page=general] .hero{padding-top:clamp(120px,22vh,256px)}}
+html body[data-page] .repair-statement{font-size:var(--bl-h3);line-height:1.4}
+html body[data-page] .gum-whitening li p{font-size:var(--bl-small);line-height:1.75}
+/* small labels and numbers: 12px everywhere */
+html body[data-page] :is(.keyline,.layering-caption,.polishing-tags,.repair-point,.case-meta,.case-top,.single-ba-head,.signature-index,.care-flow,.keyword)>span,
+html body[data-page] :is(.care-num,.tp-role,.ceramist-tags>div,.step>.num,.remake-item>.num,.gum-whitening span.num){font-size:12px}
+
 /* Heroes that used to sit below a static header now clear the overlay header */
 html body[data-page=about] .hero{height:100vh;padding-top:calc(var(--bl-header) + 5vh)}
 html body[data-page=laminate] .hero{padding-top:calc(var(--bl-header) + 140px)}
