@@ -2,13 +2,20 @@
 (function () {
   var TEL = 'tel:0200000000';
   var KAKAO = 'https://pf.kakao.com/_bloomdental';
-  var NAVER = 'https://booking.naver.com/';
+  var TALKTALK = 'https://talk.naver.com/';
   var ENDPOINT = ''; // booking receiver URL; empty = demo confirmation only
   var LABELS = { 'about.html': '소개', 'laminate.html': '라미네이트', 'resin.html': '심미레진', 'whitening.html': '미백', 'general.html': '일반진료' };
   var INTEREST = { 'laminate.html': '라미네이트', 'resin.html': '심미레진', 'whitening.html': '치아 미백', 'general.html': '일반진료' };
   var OPTIONS = ['라미네이트', '라미네이트 재치료', '심미레진', '치아 미백', '잇몸 미백', '일반진료', '기타 / 잘 모르겠어요'];
   var here = location.pathname.split('/').pop() || 'main.html';
   var lastFocus = null;
+
+  // Every page opens at its hero (hosts that keep the previous scroll position included); in-page anchors still work
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (!location.hash) {
+    window.scrollTo(0, 0);
+    try { document.documentElement.scrollIntoView({ block: 'start' }); } catch (e) {}
+  }
 
   function trapTab(box, e) {
     if (e.key !== 'Tab') return;
@@ -45,7 +52,7 @@
         '<button type="submit" class="bl-full">예약 신청하기</button>' +
         '<p class="bl-form-msg bl-full" role="status" aria-live="polite"></p>' +
       '</form>' +
-      '<div class="bl-modal-alt"><a href="' + NAVER + '" target="_blank" rel="noopener">네이버 예약</a><a href="' + KAKAO + '" target="_blank" rel="noopener">카카오톡</a><a href="' + TEL + '">02-000-0000</a></div>' +
+      '<div class="bl-modal-alt"><a href="' + TALKTALK + '" target="_blank" rel="noopener">네이버톡톡</a><a href="' + KAKAO + '" target="_blank" rel="noopener">카카오톡</a><a href="' + TEL + '">02-000-0000</a></div>' +
     '</div>';
   document.body.appendChild(modal);
   var panel = modal.querySelector('.bl-modal-panel');
@@ -76,8 +83,8 @@
   if (location.hash === '#consult') openBooking();
 
   // ---- mobile menu: built from each page's existing nav so headers stay as designed
-  var header = document.querySelector('header');
-  var nav = header && header.querySelector('nav');
+  var header = document.querySelector('.bl-header');
+  var nav = header && header.querySelector('.bl-nav');
   var closeMenu = function () {};
   if (nav) {
     var drawer = document.createElement('div');
@@ -100,14 +107,7 @@
       '<div class="bl-drawer-foot"><a href="' + TEL + '">전화 상담 02-000-0000</a><a class="primary" href="#consult">예약하기</a></div>';
     document.body.appendChild(drawer);
 
-    var burger = document.createElement('button');
-    burger.className = 'bl-burger';
-    burger.type = 'button';
-    burger.setAttribute('aria-label', '메뉴 열기');
-    burger.setAttribute('aria-controls', 'bl-drawer');
-    burger.setAttribute('aria-expanded', 'false');
-    burger.innerHTML = '<span></span><span></span><span></span>';
-    nav.parentNode.appendChild(burger);
+    var burger = header.querySelector('.bl-burger');
 
     var setOpen = function (open) {
       drawer.classList.toggle('open', open);
@@ -126,19 +126,22 @@
   // ---- quick contact: one bar on phones, one button (revealing two more on hover) on desktop
   var quick = document.createElement('div');
   quick.className = 'bl-quick';
-  quick.setAttribute('aria-label', '빠른 예약');
+  quick.setAttribute('aria-label', '빠른 상담');
   quick.innerHTML =
-    '<a class="naver" href="' + NAVER + '" target="_blank" rel="noopener">네이버 예약</a>' +
+    '<a class="naver" href="' + TALKTALK + '" target="_blank" rel="noopener">네이버톡톡</a>' +
     '<a class="kakao" href="' + KAKAO + '" target="_blank" rel="noopener">카카오톡</a>' +
-    '<a class="primary" href="#consult">예약하기</a>';
+    '<a class="primary" href="#consult">상담하기</a>';
   document.body.appendChild(quick);
   var visit = document.getElementById('visit');
   var visitInView = false;
   if (visit && 'IntersectionObserver' in window) {
     new IntersectionObserver(function (en) { visitInView = en[0].isIntersecting; update(); }, { threshold: 0.2 }).observe(visit);
   }
+  var hero = document.querySelector('section.hero');
   function update() {
-    quick.classList.toggle('show', window.scrollY > window.innerHeight * 0.6 && !visitInView);
+    var y = window.scrollY;
+    if (header) header.classList.toggle('is-solid', y > (hero ? Math.max(hero.offsetHeight - header.offsetHeight - 1, 40) : 40));
+    quick.classList.toggle('show', y > window.innerHeight * 0.6 && !visitInView);
   }
   addEventListener('scroll', update, { passive: true });
   update();

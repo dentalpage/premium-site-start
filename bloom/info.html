@@ -18,7 +18,7 @@ header img{height:36px;display:block}
 header nav{display:flex;gap:28px;font-size:12px;letter-spacing:.08em}
 header nav a{text-decoration:none}
 @media(max-width:900px){header nav{display:none}}
-main{width:min(960px,calc(100% - 48px));margin:0 auto;padding:88px 0 120px}
+main{width:min(960px,calc(100% - 48px));margin:0 auto;padding:160px 0 120px}
 .eyebrow{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:13.5px;letter-spacing:.16em;color:#8C7560}
 h1{font-size:clamp(32px,4vw,48px);font-weight:500;letter-spacing:-.04em;line-height:1.25;margin:16px 0 16px}
 .lead{color:#6B6A65;margin:0 0 64px}
@@ -39,11 +39,15 @@ p{font-size:15.5px}
 <link rel="stylesheet" href="assets/bloom.css">
 <script src="assets/bloom.js" defer></script>
 </head>
-<body>
-<header>
-  <a href="main.html" aria-label="BLOOM 심미치과 메인으로"><img src="img/56ddc96e80.webp" alt="BLOOM Esthetic Dentistry"></a>
-  <nav><a href="about.html">ABOUT</a><a href="laminate.html">LAMINATE</a><a href="resin.html">RESIN</a><a href="whitening.html">WHITENING</a><a href="general.html">GENERAL</a></nav>
-</header>
+<body data-page="info">
+<div class="bl-header" id="header" role="banner" data-hero="light" data-bar="light">
+  <div class="bl-header-inner">
+    <a class="bl-brand" href="main.html" aria-label="BLOOM 심미치과 메인으로"><img class="bl-logo-light" src="img/0658aa8874.webp" alt="BLOOM Esthetic Dentistry"><img class="bl-logo-dark" src="img/56ddc96e80.webp" alt=""></a>
+    <div class="bl-nav" role="navigation" aria-label="주 메뉴"><a href="about.html">ABOUT</a><a href="laminate.html">LAMINATE</a><a href="resin.html">RESIN</a><a href="whitening.html">WHITENING</a><a href="general.html">GENERAL</a><a class="bl-reserve" href="#consult">예약하기</a></div>
+    <button class="bl-burger" type="button" aria-label="메뉴 열기" aria-controls="bl-drawer" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</div>
+
 <main>
   <div class="eyebrow">INFORMATION</div>
   <h1>진료비용과<br>개인정보 안내</h1>
@@ -89,9 +93,19 @@ p{font-size:15.5px}
     <p class="note">※ 샘플 사이트이며 실제 병원이 아닙니다.</p>
   </section>
 </main>
-<div class="bl-legal">
-  <p>BLOOM 심미치과 · 서울특별시 강남구 테헤란로 000, 3층 · T 02-000-0000 · 대표자 홍길동 · 사업자등록번호 000-00-00000 · 샘플 정보이며 실제 병원이 아닙니다.</p>
-  <nav aria-label="법적 고지"><a href="#fees">비급여 진료비용</a><a href="#privacy">개인정보처리방침</a><a href="#notice">의료광고 안내</a></nav>
+<div class="bl-footer" role="contentinfo">
+  <div class="bl-footer-top">
+    <div class="bl-footer-brand"><img src="img/0658aa8874.webp" alt="BLOOM Esthetic Dentistry" loading="lazy"><p>필요한 만큼만 다듬는 심미치과</p></div>
+    <div class="bl-footer-col"><div class="bl-footer-k">상담·예약</div><p><a href="tel:0200000000">02-000-0000</a><br><a href="https://talk.naver.com/" target="_blank" rel="noopener">네이버톡톡</a> · <a href="https://pf.kakao.com/_bloomdental" target="_blank" rel="noopener">카카오톡</a></p></div>
+    <div class="bl-footer-col"><div class="bl-footer-k">진료시간</div><p>평일 10:00 – 19:00<br>토요일 10:00 – 15:00<br>일·공휴일 휴진</p></div>
+    <div class="bl-footer-col"><div class="bl-footer-k">오시는 길</div><p>서울특별시 강남구 테헤란로 000, 3층<br>2호선 강남역 5번 출구 도보 3분</p></div>
+  </div>
+  <p class="bl-footer-notice">모든 치료는 개인의 구강 상태에 따라 결과와 치료 기간이 다를 수 있으며, 시린 증상·잇몸 염증·보철물 탈락이나 파절 등의 부작용이 발생할 수 있습니다. 치료 전 의료진과 충분히 상담하시기 바랍니다.</p>
+  <div class="bl-footer-bottom">
+    <p>BLOOM 심미치과 · 대표자 홍길동 · 사업자등록번호 000-00-00000 · © BLOOM AESTHETIC DENTAL CLINIC · 샘플 정보이며 실제 병원이 아닙니다.</p>
+    <div class="bl-footer-links"><a href="info.html#fees">비급여 진료비용</a><a href="info.html#privacy">개인정보처리방침</a><a href="info.html#notice">의료광고 안내</a></div>
+  </div>
 </div>
+
 </body>
 </html>
