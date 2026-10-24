@@ -83,6 +83,17 @@ html body[data-page=about] .hero{height:100vh;padding-top:calc(var(--bl-header) 
 html body[data-page] section.hero{height:100vh!important;height:100svh!important;min-height:560px!important}
 html body[data-page] .hero h1{text-wrap:balance}
 
+/* Main hero: a bright everyday photo, so dark copy over a soft cream wash on the left */
+html body[data-page=main] .hero{background:#EDE7DF;color:var(--bl-ink)}
+html body[data-page=main] .hero-media{background-image:linear-gradient(90deg,rgba(246,243,238,.94) 0%,rgba(246,243,238,.78) 26%,rgba(246,243,238,0) 52%),url('../img/hero-main.webp')!important;background-size:cover!important;background-position:60% center!important}
+html body[data-page=main] .hero .eyebrow{color:#8C7560!important}
+html body[data-page=main] .hero h1{color:var(--bl-ink)}
+html body[data-page=main] .hero p{color:#4A4944}
+html body[data-page=main] .hero .scrollmark{color:var(--bl-muted)}
+@media(max-width:900px){
+  html body[data-page=main] .hero-media{background-image:linear-gradient(to top,rgba(246,243,238,.97) 0%,rgba(246,243,238,.88) 40%,rgba(246,243,238,0) 66%),url('../img/hero-main.webp')!important;background-position:66% center!important}
+}
+
 /* Treatment heroes: copy dead centre of the area under the header, images kept clear of it */
 html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) section.hero{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;padding:var(--bl-header) 24px 0!important;text-align:center}
 html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) .hero :is(.hero-copy,.hero-copy-wrap){position:relative!important;inset:auto!important;transform:none!important;width:min(760px,100%)!important;max-width:none;margin:0!important;padding:0!important;z-index:2}
