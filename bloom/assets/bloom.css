@@ -88,7 +88,7 @@ html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-
 html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) .hero :is(.hero-copy,.hero-copy-wrap){position:relative!important;inset:auto!important;transform:none!important;width:min(760px,100%)!important;max-width:none;margin:0!important;padding:0!important;z-index:2}
 html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) .hero .eyebrow{margin:0 0 20px!important;line-height:20px!important}
 html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) .hero h1{margin:0 0 24px!important}
-html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) .hero :is(.hero-copy,.hero-copy-wrap)>:is(p,.sub){margin:0!important}
+html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) .hero :is(.hero-copy,.hero-copy-wrap)>:is(p,.sub){margin:0 auto!important}
 /* laminate: the veneer row sits between the header and the copy (copy block is ~265px tall) */
 html body[data-page=laminate] .hero-overlay-version .hero-bg{inset:auto!important;top:auto!important;left:50%!important;bottom:calc(50% - var(--bl-header) / 2 + 160px)!important;
   width:min(calc(100% - 32px),calc((50vh - var(--bl-header) / 2 - 192px) * 2.86))!important;max-width:none!important;height:auto!important;aspect-ratio:2.86;
