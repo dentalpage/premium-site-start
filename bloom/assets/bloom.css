@@ -84,7 +84,7 @@ html body[data-page] section.hero{height:100vh!important;height:100svh!important
 html body[data-page] .hero h1{text-wrap:balance}
 
 /* Main hero: type only on a dark ground, laid out exactly like the treatment heroes */
-html body[data-page=main] .hero{background:#13120E;color:#F1EFEA}
+html body[data-page=main] .hero{background:radial-gradient(ellipse 62% 52% at 50% calc(50% + 40px),rgba(184,161,140,.15),rgba(184,161,140,0) 72%),#13120E;color:#F1EFEA}
 html body[data-page=main] .hero-media{display:none!important}
 html body[data-page=main] .hero-content{position:static;width:100%;padding:0}
 html body[data-page=main] section.hero .hero-copy{text-align:center;margin:0 auto!important}
@@ -99,6 +99,27 @@ html body[data-page=main] section.hero::before{content:"";position:absolute;left
   width:min(96%,1500px);aspect-ratio:1068/287;background:url('../img/logo-mark-light.webp') center/contain no-repeat;opacity:.07}
 @media(max-width:900px){html body[data-page=main] section.hero::before{width:150%;top:calc(var(--bl-header) + 30svh + 124px)}}
 html body[data-page=main] .hero .scrollmark{position:absolute;left:50%;bottom:36px;transform:translateX(-50%);margin:0;color:rgba(241,239,234,.5)}
+
+/* fine film grain over the main hero */
+html body[data-page=main] section.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.07;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* magazine-cover details along the bottom edge */
+.bl-hero-meta{position:absolute;left:0;right:0;bottom:36px;z-index:2;width:var(--bl-container);margin:0 auto;display:flex;justify-content:space-between;gap:16px;pointer-events:none}
+html body .bl-hero-meta span{font-family:var(--bloom-serif,"Cormorant Garamond",serif)!important;font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(241,239,234,.5)}
+@media(max-width:900px){html body[data-page=main] .hero .scrollmark{display:none}html body .bl-hero-meta span{font-size:11px;letter-spacing:.12em}}
+/* entrance: logo settles, headline rises word by word, then subtitle and details; plays once */
+@keyframes bl-logo-in{from{opacity:0;transform:translate(-50%,-50%) scale(1.06)}to{opacity:.07;transform:translate(-50%,-50%) scale(1)}}
+@keyframes bl-up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes bl-fade{from{opacity:0}to{opacity:1}}
+html.bl-anim body[data-page=main] section.hero::before{animation:bl-logo-in 1.8s cubic-bezier(.2,.7,.2,1) both}
+html.bl-anim body[data-page=main] .hero h1:not(.is-split){opacity:0;animation:bl-fade .01s 1.2s both}
+html.bl-anim body[data-page=main] .hero .bl-word{display:inline-block;animation:bl-up .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(.45s + var(--i) * .1s)}
+html.bl-anim body[data-page=main] .hero p{animation:bl-fade 1s ease-out 1.1s both}
+html.bl-anim body[data-page=main] .hero :is(.scrollmark,.bl-hero-meta){animation:bl-fade 1s ease-out 1.5s both}
+@media(prefers-reduced-motion:reduce){
+  html.bl-anim body[data-page=main] section.hero::before,html.bl-anim body[data-page=main] .hero :is(h1,.bl-word,p,.scrollmark,.bl-hero-meta){animation:none!important;opacity:1}
+  html.bl-anim body[data-page=main] section.hero::before{opacity:.07}
+}
 
 /* Treatment heroes: copy dead centre of the area under the header, images kept clear of it */
 html body:is([data-page=main],[data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) section.hero{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;padding:var(--bl-header) 24px 0!important;text-align:center}

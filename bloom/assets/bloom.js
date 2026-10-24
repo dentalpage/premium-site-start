@@ -17,6 +17,27 @@
     try { document.documentElement.scrollIntoView({ block: 'start' }); } catch (e) {}
   }
 
+  // main hero headline: wrap each word so the CSS can raise them one after another
+  var headline = document.querySelector('body[data-page=main] section.hero h1');
+  if (headline) {
+    var i = 0;
+    Array.prototype.slice.call(headline.childNodes).forEach(function (node) {
+      if (node.nodeType !== 3) return;
+      var frag = document.createDocumentFragment();
+      node.textContent.split(/(\s+)/).forEach(function (part) {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+        var w = document.createElement('span');
+        w.className = 'bl-word';
+        w.style.setProperty('--i', i++);
+        w.textContent = part;
+        frag.appendChild(w);
+      });
+      headline.replaceChild(frag, node);
+    });
+    headline.classList.add('is-split');
+  }
+
   function trapTab(box, e) {
     if (e.key !== 'Tab') return;
     var f = box.querySelectorAll('a[href],button:not([disabled]),input,select,textarea');
