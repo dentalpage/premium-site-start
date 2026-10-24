@@ -80,8 +80,10 @@ html body[data-page] :is(.care-num,.tp-role,.ceramist-tags>div,.step>.num,.remak
 
 /* Heroes that used to sit below a static header now clear the overlay header */
 html body[data-page=about] .hero{height:100vh;padding-top:calc(var(--bl-header) + 5vh)}
-html body[data-page=laminate] .hero{padding-top:calc(var(--bl-header) + 140px)}
-@media(max-width:900px){html body[data-page=laminate] .hero{padding-top:calc(var(--bl-header) + 112px)}}
+/* every hero fills one screen, like main */
+html body[data-page] section.hero{height:100vh!important;height:100svh!important;min-height:560px!important}
+html body[data-page=laminate] .hero{padding:var(--bl-header) 0 clamp(56px,11vh,120px)!important}
+html body[data-page=laminate] .hero.hero-overlay-version{flex-direction:column;justify-content:flex-end;align-items:center}
 html body[data-page=laminate] .hero-overlay-version .hero-bg{top:var(--bl-header)!important}
 html body[data-page=laminate] .hero-copy-wrap{width:100%;max-width:1000px}
 html body[data-page] .hero h1{text-wrap:balance}
