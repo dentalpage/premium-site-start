@@ -132,16 +132,21 @@
     '<a class="kakao" href="' + KAKAO + '" target="_blank" rel="noopener">카카오톡</a>' +
     '<a class="primary" href="#consult">상담하기</a>';
   document.body.appendChild(quick);
-  var visit = document.getElementById('visit');
-  var visitInView = false;
-  if (visit && 'IntersectionObserver' in window) {
-    new IntersectionObserver(function (en) { visitInView = en[0].isIntersecting; update(); }, { threshold: 0.2 }).observe(visit);
+  // steps aside while the visit block or the footer is on screen
+  var covering = {};
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { covering[en.target.className] = en.isIntersecting; });
+      update();
+    }, { threshold: 0.05 });
+    document.querySelectorAll('#visit, .bl-footer').forEach(function (el) { io.observe(el); });
   }
+  function isCovered() { for (var k in covering) if (covering[k]) return true; return false; }
   var hero = document.querySelector('section.hero');
   function update() {
     var y = window.scrollY;
     if (header) header.classList.toggle('is-solid', y > (hero ? Math.max(hero.offsetHeight - header.offsetHeight - 1, 40) : 40));
-    quick.classList.toggle('show', y > window.innerHeight * 0.6 && !visitInView);
+    quick.classList.toggle('show', y > window.innerHeight * 0.6 && !isCovered());
   }
   addEventListener('scroll', update, { passive: true });
   update();
