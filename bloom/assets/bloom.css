@@ -71,7 +71,6 @@ html body .vs-item .v a{border-bottom:1px solid currentColor;padding-bottom:1px}
 /* Leftovers from the original pages that sat outside the scale */
 html body[data-page] :is(.signature-intro,.master-intro-copy,.intro) h2{font-size:var(--bl-h2)!important;line-height:1.32}
 html body[data-page] .hero .sub{font-size:var(--bl-lead);line-height:1.75}
-@media(min-width:561px){html body[data-page=whitening] .hero,html body[data-page=general] .hero{padding-top:clamp(120px,22vh,256px)}}
 html body[data-page] .repair-statement{font-size:var(--bl-h3);line-height:1.4}
 html body[data-page] .gum-whitening li p{font-size:var(--bl-small);line-height:1.75}
 /* small labels and numbers: 12px everywhere */
@@ -82,11 +81,37 @@ html body[data-page] :is(.care-num,.tp-role,.ceramist-tags>div,.step>.num,.remak
 html body[data-page=about] .hero{height:100vh;padding-top:calc(var(--bl-header) + 5vh)}
 /* every hero fills one screen, like main */
 html body[data-page] section.hero{height:100vh!important;height:100svh!important;min-height:560px!important}
-html body[data-page=laminate] .hero{padding:var(--bl-header) 0 clamp(56px,11vh,120px)!important}
-html body[data-page=laminate] .hero.hero-overlay-version{flex-direction:column;justify-content:flex-end;align-items:center}
-html body[data-page=laminate] .hero-overlay-version .hero-bg{top:var(--bl-header)!important}
-html body[data-page=laminate] .hero-copy-wrap{width:100%;max-width:1000px}
 html body[data-page] .hero h1{text-wrap:balance}
+
+/* Treatment heroes: copy dead centre of the area under the header, images kept clear of it */
+html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) section.hero{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;padding:var(--bl-header) 24px 0!important;text-align:center}
+html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) .hero :is(.hero-copy,.hero-copy-wrap){position:relative!important;inset:auto!important;transform:none!important;width:min(760px,100%)!important;max-width:none;margin:0!important;padding:0!important;z-index:2}
+html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) .hero .eyebrow{margin:0 0 20px!important;line-height:20px!important}
+html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) .hero h1{margin:0 0 24px!important}
+html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) .hero :is(.hero-copy,.hero-copy-wrap)>:is(p,.sub){margin:0!important}
+/* laminate: the veneer row sits between the header and the copy (copy block is ~265px tall) */
+html body[data-page=laminate] .hero-overlay-version .hero-bg{inset:auto!important;top:auto!important;left:50%!important;bottom:calc(50% - var(--bl-header) / 2 + 160px)!important;
+  width:min(calc(100% - 32px),calc((50vh - var(--bl-header) / 2 - 192px) * 2.86))!important;max-width:none!important;height:auto!important;aspect-ratio:2.86;
+  transform:translateX(-50%)!important;background-size:108.5% auto!important;background-position:center 21%!important;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%)}
+@media(max-width:900px){
+  /* phones wrap headlines differently, so pin the top of the copy instead of its centre */
+  html body:is([data-page=laminate],[data-page=resin],[data-page=whitening],[data-page=general]) section.hero{justify-content:flex-start!important;padding-top:calc(var(--bl-header) + 30svh)!important}
+  html body[data-page=laminate] .hero-overlay-version .hero-bg{bottom:calc(100% - var(--bl-header) - 30svh + 24px)!important;width:calc(100% - 16px)!important}
+  html body[data-page=resin] .hero .hero-bg{height:calc((70svh - var(--bl-header) - 234px) / .54)!important}
+}
+/* resin: the portrait sits below the copy (head starts 46% down the photo), edges fade into the dark */
+html body[data-page=resin] .hero .hero-bg{inset:auto auto 0 50%!important;height:calc((50% - var(--bl-header) / 2 - 156px) / .54)!important;aspect-ratio:16/9;width:auto!important;max-width:none!important;transform:translateX(-50%);
+  background-size:auto 100%!important;background-position:center bottom!important;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 18%,#000 82%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 30%);-webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent 0,#000 18%,#000 82%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 30%);mask-composite:intersect}
+/* whitening and general: the product shot never rises into the copy */
+html body[data-page=general] section.hero{background-size:min(100%,calc((50vh - var(--bl-header) / 2 - 165px) * 5.2)) auto!important;background-position:center bottom!important}
+html body[data-page=whitening] section.hero{position:relative;background-image:none!important}
+html body[data-page=whitening] section.hero::before{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:0;pointer-events:none;
+  width:min(100%,calc((50vh - var(--bl-header) / 2 - 165px) * 5.2));aspect-ratio:1672/941;background:url('../img/51bc70f933.webp') center bottom/100% auto no-repeat;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 35%);-webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 35%);mask-composite:intersect}
 
 /* Section rhythm: 120px top and bottom (80px on phones) for every text section */
 html body[data-page] section:is(.why,.journal,.standard,.team,.career,.signature-intro,.director,.material,.ceramist,.care,.process,.ba,.faq,.cta,.master-intro,.master,.layering,.polishing,.repair,.tooth-whitening,.gum-whitening,.end,.general-index),
