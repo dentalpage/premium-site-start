@@ -97,7 +97,7 @@ html body[data-page=main] .hero p{color:rgba(241,239,234,.72)}
 html body[data-page=main] section.hero .hero-copy{padding-top:40px!important}
 html body[data-page=main] section.hero::before{content:"";position:absolute;left:50%;top:calc(50% + var(--bl-header) / 2 + 20px);transform:translate(-50%,-50%);z-index:0;pointer-events:none;
   width:min(96%,1500px);aspect-ratio:1068/287;background:url('../img/logo-mark-light.webp') center/contain no-repeat;opacity:.07}
-@media(max-width:900px){html body[data-page=main] section.hero::before{width:150%;top:calc(var(--bl-header) + 30svh + 124px)}}
+@media(max-width:900px){html body[data-page=main] section.hero::before{width:calc(100% - 2 * var(--bl-gutter));top:calc(var(--bl-header) + 30svh + 70px)}}
 html body[data-page=main] .hero .scrollmark{position:absolute;left:50%;bottom:36px;transform:translateX(-50%);margin:0;color:rgba(241,239,234,.5)}
 
 /* fine film grain over the main hero */
@@ -413,10 +413,13 @@ html.bl-reveal-on .bl-reveal.is-in{opacity:1;transform:none}
   html body[data-page=laminate] .step h4{margin:10px 0 8px!important;font-size:13px!important}
   html body[data-page=laminate] .step p{font-size:13px!important;line-height:1.65!important}
   html body[data-page=laminate] .remake-image{aspect-ratio:16/10!important;height:auto!important;min-height:0!important}
-  html body[data-page=laminate] .remake-list{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0 16px!important}
+  html body[data-page=laminate] .remake-list{display:grid!important;grid-template-columns:1fr!important;gap:0!important}
   html body[data-page=laminate] .remake-item{padding:16px 0!important;border-left:0!important}
   html body[data-page=laminate] .remake-item h4{font-size:15px!important;margin:6px 0 0!important}
-  html body[data-page=laminate] .remake-item p{display:none}
+  html body[data-page=laminate] .remake-item{display:grid!important;grid-template-columns:28px 1fr;column-gap:8px;align-items:baseline}
+  html body[data-page=laminate] .remake-item .num{grid-row:1/3}
+  html body[data-page=laminate] .remake-item h4{margin:0 0 6px!important}
+  html body[data-page=laminate] .remake-item p{grid-column:2;font-size:13.5px!important;line-height:1.65!important;margin:0}
   /* cases: swipe, before | after side by side */
   html body[data-page=laminate] .ba .case{flex:0 0 86%!important;width:auto!important;margin:0!important;padding:16px!important;scroll-snap-align:start}
   html body[data-page=laminate] .ba .case-grid{grid-template-columns:1fr 1fr!important;gap:6px!important}
@@ -436,7 +439,9 @@ html.bl-reveal-on .bl-reveal.is-in{opacity:1;transform:none}
   html body[data-page=resin] :is(.master-copy,.polishing-copy,.care-copy,.repair-copy) p+p{display:none}
   html body[data-page=resin] :is(.keylines,.repair-points){display:grid!important;grid-template-columns:1fr 1fr;column-gap:20px}
   html body[data-page=resin] :is(.keyline,.repair-point){font-size:11px;padding:12px 0!important}
-  html body[data-page=resin] .layering-stage{display:grid!important;grid-template-columns:1fr 1.7fr!important;gap:8px!important;align-items:center}
+  html body[data-page=resin] .layering-stage{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin-inline:calc(-1 * var(--bl-m-gutter) + 8px)}
+  html body[data-page=resin] .layering-side{display:block!important}
+  html body[data-page=resin] :is(.tooth-map,.layering-main){max-width:none!important;width:100%!important}
   html body[data-page=resin] .layering-caption{display:grid!important;grid-template-columns:1fr 1fr;column-gap:20px}
   html body[data-page=resin] .layering-caption span{padding-left:0!important;margin:0!important}
   html body[data-page=resin] .polishing-subs{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:6px!important}
@@ -448,7 +453,7 @@ html.bl-reveal-on .bl-reveal.is-in{opacity:1;transform:none}
   html body[data-page=resin] .repair-image img{width:100%;height:100%;object-fit:cover}
   html body[data-page=resin] .repair-statement{font-size:19px!important;margin-top:28px!important}
   html body[data-page=resin] .ba-head>.eyebrow{display:none}
-  html body[data-page=resin] .ba .case{flex:0 0 86%!important;width:auto!important;margin:0!important;scroll-snap-align:start}
+  html body[data-page=resin] .ba .case{flex:0 0 86%!important;width:auto!important;margin:0!important;scroll-snap-align:start;padding:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}
   html body[data-page=resin] .case-images{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important}
   html body[data-page=resin] .case-images .case-img{aspect-ratio:1/1;overflow:hidden;margin:0!important}
   html body[data-page=resin] .case-images .case-img img{width:100%;height:100%;object-fit:cover}
@@ -479,6 +484,18 @@ html.bl-reveal-on .bl-reveal.is-in{opacity:1;transform:none}
   html body[data-page=general] .care-flow{grid-template-columns:1fr 1fr!important;gap:0 16px!important}
   html body[data-page=general] .care-item{align-content:start;grid-template-columns:1fr!important;gap:4px!important;padding:16px 0!important;min-height:0!important}
   html body[data-page=general] .care-num{padding:0}
-  html body[data-page=general] .care-text h3{font-size:15px!important;margin:0}
+  html body[data-page=general] .care-text h3{font-size:13px!important;letter-spacing:.06em!important;margin:0;color:var(--bl-muted)}
+  html body[data-page=general] .care-text h3 .ko{font-size:17px;letter-spacing:-.02em;color:var(--bl-ink);margin-top:6px}
+  html body[data-page=general] .care-item{padding:20px 0!important}
   html body[data-page=general] .care-text p{display:none}
 }
+
+/* Laminate process: English step, Korean name underneath */
+html body[data-page=laminate] .step{min-height:0!important;padding-bottom:28px}
+html body[data-page=laminate] .step h4{margin:8px 0 10px!important}
+html body[data-page=laminate] .step-ko{font-size:16px;color:#F1EFEA;letter-spacing:-.02em}
+html body[data-page=laminate] .step-ko .num{margin-right:10px;font-size:12px;letter-spacing:.1em}
+/* Resin cases: numbered header on every card */
+html body[data-page=resin] .case-top{display:flex;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.14);font-size:12px;letter-spacing:.14em;color:#d8d5ce}
+/* General: Korean name on its own line */
+html body[data-page=general] .care-text h3 .ko{display:block;margin-top:4px}

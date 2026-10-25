@@ -12,10 +12,19 @@
 
   // Every page opens at its hero (hosts that keep the previous scroll position included); in-page anchors still work
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  if (!location.hash) {
-    window.scrollTo(0, 0);
-    try { document.documentElement.scrollIntoView({ block: 'start' }); } catch (e) {}
+  // embedded viewers can keep the outer scroll at the old page's bottom, so pull to the top again once the page settles
+  function toTop() {
+    if (location.hash) return;
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    var first = document.querySelector('section.hero, main, section');
+    if (first) try { first.scrollIntoView({ block: 'start', behavior: 'instant' }); } catch (e) {}
   }
+  toTop();
+  addEventListener('load', function () {
+    if (window.scrollY < 40) toTop();
+    setTimeout(function () { if (window.scrollY < 40) toTop(); }, 150);
+  });
+  addEventListener('pageshow', function (e) { if (e.persisted) toTop(); });
 
   // main hero headline: wrap each word so the CSS can raise them one after another
   var headline = document.querySelector('body[data-page=main] section.hero h1');
