@@ -298,3 +298,187 @@ html.bl-reveal-on .bl-reveal.is-in{opacity:1;transform:none}
 
 /* Booking: date field */
 .bl-form input[type=date]{min-height:48px}
+
+/* ===== Phones: compact layout — swipe rows, 2–3 column grids, side-by-side before/after ===== */
+@media(max-width:767px){
+  :root{--bl-section:64px;--bl-h2:26px;--bl-h3:19px;--bl-m-gutter:max(24px,4.5vw)}
+  html body[data-page] section:not(.hero) h2{line-height:1.3}
+
+  /* shared swipe row: edge-to-edge, snaps per card, next card peeks in */
+  html body .bl-m-swipe,
+  html body[data-page=main] .treat-track,
+  html body[data-page=main] .journal-grid,
+  html body[data-page=about] .standard-grid,
+  html body[data-page=resin] .ba-cases{
+    display:flex!important;flex-direction:row!important;gap:12px!important;overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x mandatory;scroll-padding-inline:var(--bl-m-gutter);
+    margin-inline:calc(-1 * var(--bl-m-gutter));padding-inline:var(--bl-m-gutter);
+    scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  html body .bl-m-swipe::-webkit-scrollbar,html body[data-page] :is(.treat-track,.journal-grid,.standard-grid,.ba-cases)::-webkit-scrollbar{display:none}
+  html body .bl-m-swipe>*{flex:0 0 80%;scroll-snap-align:start;min-width:0}
+  /* swipe cards peek in from the side, so they never wait on the scroll reveal */
+  html.bl-reveal-on :is(.bl-m-swipe,.treat-track,.journal-grid,.standard-grid,.ba-cases) .bl-reveal{opacity:1;transform:none}
+
+  /* ---------- MAIN ---------- */
+  html body[data-page=main] .intro{min-height:0!important}
+  html body[data-page=main] .intro-inner{padding:64px 0;width:calc(100% - 48px)}
+  html body[data-page=main] .intro h2{font-size:24px!important}
+  html body[data-page=main] .intro p{margin-top:24px}
+  /* treatments: three swipe cards */
+  html body[data-page=main] .treatments{padding:56px 0 8px;background:#fff}
+  html body[data-page=main] .treat-track{margin:0!important;padding-inline:var(--bl-m-gutter)!important}
+  html body[data-page=main] .treat-panel{flex:0 0 78%!important;width:auto!important;height:auto!important;display:block!important;scroll-snap-align:start;background:none}
+  html body[data-page=main] .treat-image{height:auto!important;aspect-ratio:1/1}
+  html body[data-page=main] .treat-text{padding:18px 0 0!important;height:auto!important}
+  html body[data-page=main] .treat-index{margin-bottom:10px;font-size:11px}
+  html body[data-page=main] .treat-text h2{font-size:21px!important;margin-bottom:12px}
+  html body[data-page=main] .treat-text p{display:none}
+  html body[data-page=main] .treat-text .cta{margin-top:0;font-size:13px}
+  /* why: image + text side by side */
+  html body[data-page=main] .why{padding:64px 0!important}
+  html body[data-page=main] .why-head{margin-bottom:32px}
+  html body[data-page=main] .editorial-flow{gap:0}
+  html body[data-page=main] :is(.story-a,.story-b,.story-c){display:grid!important;grid-template-columns:38% 1fr!important;gap:18px!important;align-items:center!important;width:100%!important;margin:0!important;padding:20px 0;border-top:1px solid var(--bl-line)}
+  html body[data-page=main] .story .ph{order:0!important;aspect-ratio:1/1!important}
+  html body[data-page=main] .story .story-copy{order:1!important;padding:0!important}
+  html body[data-page=main] .story-copy .num{margin-bottom:8px}
+  html body[data-page=main] .story-copy h3{font-size:16.5px!important;line-height:1.45!important;margin:0}
+  html body[data-page=main] .story-copy p{display:none}
+  /* remake: shorter photo */
+  html body[data-page=main] .remake{min-height:0}
+  html body[data-page=main] .remake-image{min-height:0!important;aspect-ratio:16/10}
+  html body[data-page=main] .remake-copy{padding:40px 24px 56px}
+  /* journal: swipe cards, instagram as a 4-up strip */
+  html body[data-page=main] .journal{padding:64px 0!important}
+  html body[data-page=main] .journal-head{margin-bottom:28px}
+  html body[data-page=main] .journal-head h2{font-size:28px!important}
+  html body[data-page=main] .journal-card{flex:0 0 72%;margin:0!important;scroll-snap-align:start}
+  html body[data-page=main] .journal-card .ph{aspect-ratio:4/3!important}
+  html body[data-page=main] .journal-card .label{margin-top:14px}
+  html body[data-page=main] .journal-card h3{font-size:16px!important;margin-top:6px}
+  html body[data-page=main] .journal-card.follow .insta-grid{gap:6px}
+  html body[data-page=main] .journal-card.follow .insta-grid .ph{aspect-ratio:1/1!important}
+  /* visit: smaller photo, two-column facts */
+  html body .vs-image{min-height:0!important;aspect-ratio:16/10}
+  html body .vs-info{padding:44px var(--bl-m-gutter) 56px!important}
+  html body .vs-info h2{font-size:26px!important;margin:12px 0 28px!important}
+  html body .vs-grid{grid-template-columns:1fr 1fr!important;gap:0 20px!important}
+  html body .vs-item{padding:16px 0!important}
+  html body .vs-item:nth-child(1){order:1}html body .vs-item:nth-child(4){order:2}
+  html body .vs-item:nth-child(2){order:3;grid-column:1/-1}html body .vs-item:nth-child(3){order:4;grid-column:1/-1}html body .vs-item:nth-child(5){order:5;grid-column:1/-1}
+  html body .vs-item .v{font-size:14px!important}
+
+  /* ---------- ABOUT ---------- */
+  html body[data-page=about] section.hero{height:auto!important;min-height:0!important;padding-bottom:0}
+  html body[data-page=about] .hero-photo{position:relative!important;left:auto!important;bottom:auto!important;transform:none!important;margin:28px auto 0;height:52svh!important}
+  html body[data-page=about] .hero-word{top:58%!important}
+  html body[data-page=about] .standard h2{margin-bottom:28px}
+  html body[data-page=about] .standard-grid{border-top:0}
+  html body[data-page=about] .std{flex:0 0 78%;scroll-snap-align:start;min-height:0;padding:22px 20px!important;border:1px solid var(--bl-line)!important;background:#fff}
+  html body[data-page=about] .std h3{margin:16px 0 12px!important}
+  html body[data-page=about] .std p{font-size:14px!important}
+  html body[data-page=about] .team-roles{grid-template-columns:repeat(3,1fr)!important;gap:10px!important;text-align:center!important;padding-top:18px}
+  html body[data-page=about] .team-roles .member{margin:0!important}
+  html body[data-page=about] .team-roles .role{font-size:10px!important;letter-spacing:.08em;margin-top:0}
+  html body[data-page=about] .team-roles .member h3{font-size:13.5px!important;line-height:1.45!important;margin:8px 0 0!important}
+  html body[data-page=about] .team-roles .member p{display:none}
+  html body[data-page=about] .remake h2{font-size:26px!important}
+  html body[data-page=about] .remake .lead{font-size:14.5px!important}
+  html body[data-page=about] .career{min-height:0;padding:64px 0!important}
+  html body[data-page=about] .career-head{margin-bottom:28px}
+  html body[data-page=about] .album{grid-template-columns:1fr 1fr!important;gap:22px 12px!important}
+  html body[data-page=about] .album-photo{aspect-ratio:1/1!important}
+  html body[data-page=about] .album-caption{margin-top:8px}
+  html body[data-page=about] .album-caption p{font-size:13px;margin-top:3px}
+
+  /* ---------- LAMINATE ---------- */
+  html body[data-page=laminate] .signature-index{display:grid!important;grid-template-columns:repeat(4,auto);justify-content:space-between;gap:8px;font-size:10.5px!important;letter-spacing:.08em}
+  html body[data-page=laminate] :is(.director-grid,.ceramist-grid,.care-grid){gap:24px!important}
+  html body[data-page=resin] :is(.master-grid,.polishing-grid,.care-grid){gap:24px!important}
+  html body[data-page=laminate] .director-image{aspect-ratio:16/10!important;height:auto!important;min-height:0!important}
+  html body[data-page=laminate] :is(.director,.ceramist,.care) .copy p+p,html body[data-page=laminate] .ceramist .copy p+p{display:none}
+  html body[data-page=laminate] .keywords{display:grid!important;grid-template-columns:1fr 1fr;column-gap:20px}
+  html body[data-page=laminate] .keyword{display:flex!important;flex-direction:column;align-items:flex-start!important;gap:4px;padding:12px 0!important;font-size:11px}
+  html body[data-page=laminate] .collage{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:6px!important;height:auto!important}
+  html body[data-page=laminate] .collage{grid-template-rows:auto!important}
+  html body[data-page=laminate] .collage>div{min-height:0!important;grid-column:auto!important;grid-row:auto!important;aspect-ratio:1/1!important;height:auto!important;width:auto!important;margin:0!important}
+  html body[data-page=laminate] .ceramist-tags{display:grid!important;grid-template-columns:repeat(4,auto)!important;justify-content:space-between;gap:6px}
+  html body[data-page=laminate] .ceramist-tags>div{border:0!important;padding:10px 0!important;font-size:10.5px!important}
+  html body[data-page=laminate] .care-image{aspect-ratio:16/9!important;height:auto!important;min-height:0!important}
+  html body[data-page=laminate] .care-flow{display:flex!important;flex-direction:row!important;align-items:center;justify-content:space-between;gap:8px;font-size:10.5px!important}
+  html body[data-page=laminate] .care-flow .line{display:block!important;flex:1;height:1px;background:currentColor;opacity:.3;width:auto!important}
+  html body[data-page=laminate] .process-head>.eyebrow{display:none}
+  html body[data-page=laminate] .step{padding:18px 14px 20px 0!important;min-height:0!important}
+  html body[data-page=laminate] .step:nth-child(even){padding-left:14px!important}
+  html body[data-page=laminate] .step h4{margin:10px 0 8px!important;font-size:13px!important}
+  html body[data-page=laminate] .step p{font-size:13px!important;line-height:1.65!important}
+  html body[data-page=laminate] .remake-image{aspect-ratio:16/10!important;height:auto!important;min-height:0!important}
+  html body[data-page=laminate] .remake-list{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0 16px!important}
+  html body[data-page=laminate] .remake-item{padding:16px 0!important;border-left:0!important}
+  html body[data-page=laminate] .remake-item h4{font-size:15px!important;margin:6px 0 0!important}
+  html body[data-page=laminate] .remake-item p{display:none}
+  /* cases: swipe, before | after side by side */
+  html body[data-page=laminate] .ba .case{flex:0 0 86%!important;width:auto!important;margin:0!important;padding:16px!important;scroll-snap-align:start}
+  html body[data-page=laminate] .ba .case-grid{grid-template-columns:1fr 1fr!important;gap:6px!important}
+  html body[data-page=laminate] .ba .case-img{aspect-ratio:1/1!important}
+  html body[data-page=laminate] .ba .case-meta{display:flex!important;justify-content:space-between;gap:8px;font-size:12px}
+  html body[data-page=laminate] .ba .case-meta span{margin:0!important}
+
+  /* ---------- RESIN ---------- */
+  html body[data-page] .team-principle{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0!important}
+  html body[data-page] .team-principle{text-align:left!important;align-items:start}
+  html body[data-page] .team-principle .tp,html body[data-page] .team-principle .tp+.tp{padding:18px 0 0!important;margin:0!important;border-top:0!important;border-left:0!important}
+  html body[data-page] .team-principle .tp+.tp{padding-left:16px!important;border-left:1px solid var(--tp-line,var(--bl-line))!important}
+  html body[data-page] .team-principle .tp h3{font-size:15px!important;margin:6px 0 0!important}
+  html body[data-page] .team-principle .tp p{display:none}
+  html body[data-page=resin] .master-work{aspect-ratio:16/10;height:auto!important;overflow:hidden}
+  html body[data-page=resin] .master-work img{width:100%;height:100%;object-fit:cover}
+  html body[data-page=resin] :is(.master-copy,.polishing-copy,.care-copy,.repair-copy) p+p{display:none}
+  html body[data-page=resin] :is(.keylines,.repair-points){display:grid!important;grid-template-columns:1fr 1fr;column-gap:20px}
+  html body[data-page=resin] :is(.keyline,.repair-point){font-size:11px;padding:12px 0!important}
+  html body[data-page=resin] .layering-stage{display:grid!important;grid-template-columns:1fr 1.7fr!important;gap:8px!important;align-items:center}
+  html body[data-page=resin] .layering-caption{display:grid!important;grid-template-columns:1fr 1fr;column-gap:20px}
+  html body[data-page=resin] .layering-caption span{padding-left:0!important;margin:0!important}
+  html body[data-page=resin] .polishing-subs{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:6px!important}
+  html body[data-page=resin] .polishing-sub{aspect-ratio:1/1;height:auto!important;padding:6px!important}
+  html body[data-page=resin] .polishing-sub img{width:100%;height:100%;object-fit:contain}
+  html body[data-page=resin] .care-image{aspect-ratio:16/10;overflow:hidden}
+  html body[data-page=resin] .care-image img{width:100%;height:100%;object-fit:cover}
+  html body[data-page=resin] .repair-image{aspect-ratio:16/9;overflow:hidden;height:auto!important}
+  html body[data-page=resin] .repair-image img{width:100%;height:100%;object-fit:cover}
+  html body[data-page=resin] .repair-statement{font-size:19px!important;margin-top:28px!important}
+  html body[data-page=resin] .ba-head>.eyebrow{display:none}
+  html body[data-page=resin] .ba .case{flex:0 0 86%!important;width:auto!important;margin:0!important;scroll-snap-align:start}
+  html body[data-page=resin] .case-images{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important}
+  html body[data-page=resin] .case-images .case-img{aspect-ratio:1/1;overflow:hidden;margin:0!important}
+  html body[data-page=resin] .case-images .case-img img{width:100%;height:100%;object-fit:cover}
+  html body[data-page=resin] .ba .case-meta{display:flex!important;justify-content:space-between;gap:8px}
+
+  /* ---------- WHITENING ---------- */
+  html body[data-page=whitening] .editorial-case{display:flex!important;flex-direction:column!important;gap:16px!important;margin-top:40px!important}
+  html body[data-page=whitening] .editorial-case{align-items:stretch!important}
+  html body[data-page=whitening] :is(.editorial-text,.editorial-ba){width:100%!important;max-width:none!important;margin:0!important;justify-self:stretch!important}
+  html body[data-page=whitening] .single-ba-head{display:flex!important}
+  html body[data-page=whitening] .editorial-text{order:0!important}
+  html body[data-page=whitening] .editorial-ba{order:1!important}
+  html body[data-page=whitening] .pair{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important}
+  html body[data-page=whitening] .pair .case-img{aspect-ratio:1/1!important;height:auto!important;background-size:cover}
+  html body[data-page=whitening] .single-ba-head{font-size:11px!important}
+  html body[data-page=whitening] .gum-steps{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0 16px!important}
+  html body[data-page=whitening] .gum-steps{align-items:start}
+  html body[data-page=whitening] .gum-steps li,html body[data-page=whitening] .gum-steps li+li{padding:16px 0!important;margin:0!important;border-left:0!important;border-top:1px solid var(--line,var(--bl-line))!important}
+  html body[data-page=whitening] .gum-steps li h3{font-size:15px!important;margin:6px 0 4px!important}
+  html body[data-page=whitening] .gum-steps li p{font-size:13px!important}
+  html body[data-page=whitening] .end-grid>div:first-child{display:contents}
+  html body[data-page=whitening] .end-grid{display:flex!important;flex-direction:column;gap:0!important}
+  html body[data-page=whitening] .end-grid h2{margin-bottom:0!important}
+  html body[data-page=whitening] .end-grid .faq-list{order:1;margin-top:24px}
+  html body[data-page=whitening] .end-grid .cta-box{order:2;margin-top:40px}
+
+  /* ---------- GENERAL ---------- */
+  html body[data-page=general] .care-flow{grid-template-columns:1fr 1fr!important;gap:0 16px!important}
+  html body[data-page=general] .care-item{align-content:start;grid-template-columns:1fr!important;gap:4px!important;padding:16px 0!important;min-height:0!important}
+  html body[data-page=general] .care-num{padding:0}
+  html body[data-page=general] .care-text h3{font-size:15px!important;margin:0}
+  html body[data-page=general] .care-text p{display:none}
+}

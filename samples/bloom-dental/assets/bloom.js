@@ -52,6 +52,15 @@
     return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
   }
 
+  // laminate cases sit loose in .wrap; group them so phones can swipe through them
+  var lamCases = document.querySelectorAll('body[data-page=laminate] .ba .wrap > article.case');
+  if (lamCases.length) {
+    var row = document.createElement('div');
+    row.className = 'bl-m-swipe bl-cases';
+    lamCases[0].parentNode.insertBefore(row, lamCases[0]);
+    lamCases.forEach(function (c) { row.appendChild(c); });
+  }
+
   // ---- scroll reveal: section headings and content blocks rise in once
   if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var targets = document.querySelectorAll(
