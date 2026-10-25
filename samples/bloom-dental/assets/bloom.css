@@ -499,3 +499,6 @@ html body[data-page=laminate] .step h4 .num{font-family:var(--bloom-sans)!import
 html body[data-page=resin] .case-top{display:flex;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.14);font-size:12px;letter-spacing:.14em;color:#d8d5ce}
 /* General: Korean name on its own line */
 html body[data-page=general] .care-text h3 .ko{display:block;margin-top:4px}
+
+/* Booking: honeypot field bots fill in and people never see */
+.bl-form .bl-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}

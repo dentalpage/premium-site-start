@@ -3,7 +3,8 @@
   var TEL = 'tel:0200000000';
   var KAKAO = 'https://pf.kakao.com/_bloomdental';
   var TALKTALK = 'https://talk.naver.com/';
-  var ENDPOINT = ''; // booking receiver URL; empty = demo confirmation only
+  // Weegloo Script (space 블룸치과) that stores each request as a 예약 신청 entry; empty = demo confirmation only
+  var ENDPOINT = 'https://script.weegloo.com/v1/spaces/5C8hCCUR/scripts/3trmXRL1NYYyhScCwp6uydWZ3m8Dso/execute/anonymous';
   var LABELS = { 'about.html': '소개', 'laminate.html': '라미네이트', 'resin.html': '심미레진', 'whitening.html': '미백', 'general.html': '일반진료' };
   var INTEREST = { 'laminate.html': '라미네이트', 'resin.html': '심미레진', 'whitening.html': '치아 미백', 'general.html': '일반진료' };
   var OPTIONS = ['라미네이트', '라미네이트 재치료', '심미레진', '치아 미백', '잇몸 미백', '일반진료', '기타 / 잘 모르겠어요'];
@@ -115,6 +116,7 @@
         '<label>희망 날짜 (선택)<input name="date" type="date" min="' + today() + '"></label>' +
         '<label>희망 상담 시간<select name="time"><option>상관없음</option><option>평일 오전</option><option>평일 오후</option><option>토요일</option></select></label>' +
         '<label class="bl-full">궁금한 점 (선택)<textarea name="memo" rows="2" placeholder="예) 기존 라미네이트가 깨져서 재치료를 고민 중이에요."></textarea></label>' +
+        '<input class="bl-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">' +
         '<label class="bl-agree bl-full"><input type="checkbox" name="agree" required> <span>개인정보 수집·이용 동의 (성함, 연락처 / 상담 목적 / 1년 보관) <a href="info.html#privacy">보기</a></span></label>' +
         '<button type="submit" class="bl-full">예약 신청하기</button>' +
         '<p class="bl-form-msg bl-full" role="status" aria-live="polite"></p>' +
@@ -240,11 +242,17 @@
     var data = {};
     new FormData(form).forEach(function (v, k) { data[k] = v; });
     data.page = here;
+    // the Script's schema takes exactly these keys, all strings
+    var payload = {
+      name: data.name.trim(), phone: data.phone, interest: data.interest || '', date: data.date || '',
+      time: data.time || '', memo: (data.memo || '').trim(), page: here, website: data.website || ''
+    };
     var btn = form.querySelector('button');
     btn.disabled = true;
     var send = ENDPOINT
-      ? fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
-          .then(function (r) { if (!r.ok) throw new Error(r.status); })
+      ? fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+          .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then(function (res) { if (!res || !res.return || !res.return.ok) throw new Error('rejected'); })
       : Promise.resolve();
     send.then(function () {
       form.innerHTML = '<div class="bl-form-done" role="status"><h3>예약 신청이 접수되었습니다.</h3>' +
