@@ -494,7 +494,7 @@ html.bl-reveal-on .bl-reveal.is-in{opacity:1;transform:none}
 html body[data-page=laminate] .step{min-height:0!important;padding-bottom:28px}
 html body[data-page=laminate] .step h4{margin:8px 0 10px!important}
 html body[data-page=laminate] .step-ko{font-size:16px;color:#F1EFEA;letter-spacing:-.02em}
-html body[data-page=laminate] .step-ko .num{margin-right:10px;font-size:12px;letter-spacing:.1em}
+html body[data-page=laminate] .step h4 .num{font-family:var(--bloom-sans)!important;font-weight:600;font-size:inherit;letter-spacing:inherit;margin-right:8px}
 /* Resin cases: numbered header on every card */
 html body[data-page=resin] .case-top{display:flex;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.14);font-size:12px;letter-spacing:.14em;color:#d8d5ce}
 /* General: Korean name on its own line */
