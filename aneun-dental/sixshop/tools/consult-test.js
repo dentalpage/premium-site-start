@@ -27,7 +27,7 @@ ${scope(Handlebars.compile(style)(ctx))}</style></head><body><div class="filler"
 <div data-block-id="f">${html}</div>
 <script>window.__posts=[];window.__fail=false;
 (function(){const bm={container:document.querySelector('div[data-block-id="f"]'),context:${JSON.stringify(ctx)},
-do:async(a,p)=>{if(a!=='board:createPost')return;await new Promise(r=>setTimeout(r,150));if(window.__fail)throw new Error('테스트 오류');window.__posts.push(p.params);}};
+do:async(a,p)=>{if(a==='snackbar:open'){window.__snack=p.message;return;}if(a!=='board:createPost')return;await new Promise(r=>setTimeout(r,150));if(window.__fail)throw new Error('테스트 오류');window.__posts.push(p.params);}};
 ${script}})();</script></body></html>`;
 }
 
@@ -56,15 +56,18 @@ const base = {
     const dock = await p.$eval('.cta-dock', (el) => { const r = el.getBoundingClientRect(); return [r.left, r.top, r.width, r.height].map(Math.round); });
     const overflow = await p.evaluate(() => document.documentElement.scrollWidth > innerWidth);
 
+    const kakaoHref = await p.$eval('.dock-kakao', (el) => el.getAttribute('href'));
+    await p.click('.dock-naver');
+    const snack = await p.evaluate(() => window.__snack);
     await p.click('.dock-consult');
+    await p.waitForTimeout(300);
+    const collapsed = await p.$eval('.cta-dock', (el) => el.classList.contains('is-closed') && getComputedStyle(el.querySelector('.dock-channels')).visibility === 'hidden');
+    await shot('2-collapsed');
+    await p.click('.dock-consult');
+    await p.waitForTimeout(300);
+    const expanded = await p.$eval('.dock-consult', (el) => el.getAttribute('aria-expanded'));
+    await p.evaluate(() => window.dispatchEvent(new CustomEvent('aneun:book')));
     await p.waitForTimeout(200);
-    await shot('2-consult');
-    const kakaoHref = await p.$eval('#consult-dialog .channel-kakao', (el) => el.getAttribute('href'));
-    const naverOff = await p.$eval('#consult-dialog .channel-naver', (el) => el.disabled);
-
-    await p.click('#consult-dialog [data-book]');
-    await p.waitForTimeout(200);
-    const consultClosed = await p.$eval('#consult-dialog', (d) => !d.open);
     await shot('3-booking');
     await p.click('.submit-btn');
     const err1 = await p.$eval('.form-error', (e) => e.textContent);
@@ -94,7 +97,7 @@ const base = {
     const reset = await p.evaluate(() => !document.querySelector('.booking-form').hidden && document.querySelector('#bk-name').value === '');
     // dialog fits viewport
     const fits = await p.$eval('#booking-dialog', (d) => { const r = d.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.bottom <= innerHeight; });
-    results.push({ vp: vp.n, dock, overflow, kakaoHref, naverOff, consultClosed, err1, err2, phoneVal, err3, posts, reset, fits, errors });
+    results.push({ vp: vp.n, dock, overflow, kakaoHref, snack, collapsed, expanded, err1, err2, phoneVal, err3, posts, reset, fits, errors });
     await ctxB.close();
   }
   console.log(JSON.stringify(results, null, 1));
