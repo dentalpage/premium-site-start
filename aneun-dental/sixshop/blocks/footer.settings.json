@@ -2,9 +2,37 @@
  "title": "아는치과 · 푸터와 예약 안내",
  "tags": [
   "FOOTER",
-  "POPUP"
+  "POPUP",
+  "FORM"
  ],
  "settings": [
+  {
+   "type": "TITLE",
+   "content": "상담·예약 연결"
+  },
+  {
+   "type": "DESCRIPTION",
+   "content": "상담하기 버튼을 누르면 아래 두 채널이 보여요. 링크를 비워두면 '연결 준비 중'으로 표시돼요."
+  },
+  {
+   "type": "LINK",
+   "id": "kakaoLink",
+   "label": "카카오톡 상담 링크",
+   "description": "카카오톡 채널 채팅 주소를 넣어 주세요. 예: http://pf.kakao.com/_abcd/chat (비워두면 테마 SNS 설정의 카카오 주소를 써요)"
+  },
+  {
+   "type": "LINK",
+   "id": "talktalkLink",
+   "label": "네이버 톡톡 링크",
+   "description": "네이버 톡톡 주소를 넣어 주세요. 예: https://talk.naver.com/ct/w4abcd"
+  },
+  {
+   "type": "BOARD",
+   "id": "consultBoard",
+   "label": "예약 신청 접수 게시판",
+   "description": "예약하기 신청서가 이 게시판에 쌓여요. 운영자만 읽을 수 있는 게시판을 골라 주세요.",
+   "isPostsIncluded": false
+  },
   {
    "type": "TITLE",
    "content": "블록 여백 (PC)"
@@ -95,6 +123,28 @@
   }
  ],
  "property": {
+  "kakaoLink": {
+   "id": null,
+   "type": "",
+   "label": "",
+   "value": ""
+  },
+  "talktalkLink": {
+   "id": null,
+   "type": "",
+   "label": "",
+   "value": ""
+  },
+  "consultBoard": {
+   "id": "6183",
+   "tagIds": [],
+   "isCombinedFilterVisible": false,
+   "posts": {
+    "limit": 0,
+    "page": 1,
+    "sort": "createdDate,desc"
+   }
+  },
   "paddingTopDesktop": 0,
   "paddingTopMobile": 0,
   "paddingBottomDesktop": 0,
