@@ -23,8 +23,8 @@ function page(ctx) {
 <style>body{margin:0;background:#F8F7F5;font-family:sans-serif}.filler{height:1400px;background:linear-gradient(#e9eef3,#fff)}
 div[data-block-id] *, div[data-block-id] *::before, div[data-block-id] *::after{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline;box-sizing:border-box}
 div[data-block-id] ol, div[data-block-id] ul{list-style:none}div[data-block-id] button{background:none;color:inherit}
-${scope(Handlebars.compile(style)(ctx))}</style></head><body><div class="filler"></div>
-<div data-block-id="f">${html}</div>
+${scope(Handlebars.compile(style)(ctx))}</style></head><body><section data-section-id="hero" class="filler" style="height:900px"></section><section data-section-id="s2" class="filler"></section>
+<a id="adBanner" style="position:fixed;left:0;right:0;bottom:0;height:58px;background:#444;z-index:9999"></a><section data-section-id="foot" class="global-bottom"><div data-block-id="f" style="visibility:hidden">${html}</div></section>
 <script>window.__posts=[];window.__fail=false;
 (function(){const bm={container:document.querySelector('div[data-block-id="f"]'),context:${JSON.stringify(ctx)},
 do:async(a,p)=>{if(a==='snackbar:open'){window.__snack=p.message;return;}if(a!=='board:createPost')return;await new Promise(r=>setTimeout(r,150));if(window.__fail)throw new Error('테스트 오류');window.__posts.push(p.params);}};
@@ -52,7 +52,12 @@ const base = {
     await p.setContent(page(base));
     await p.waitForTimeout(400);
     const shot = (k) => p.screenshot({ path: path.join(outDir, `${vp.n}-${k}.png`) });
+    const awayTop = await p.$eval('.cta-dock', (el) => getComputedStyle(el).visibility);
+    await p.evaluate(() => window.scrollTo(0, 400));
+    await p.waitForTimeout(500);
     await shot('1-dock');
+    const shownAfterHero = await p.$eval('.cta-dock', (el) => getComputedStyle(el).visibility);
+    const gapAboveAd = await p.evaluate(() => Math.round(document.getElementById('adBanner').getBoundingClientRect().top - document.querySelector('.cta-dock').getBoundingClientRect().bottom));
     const dock = await p.$eval('.cta-dock', (el) => { const r = el.getBoundingClientRect(); return [r.left, r.top, r.width, r.height].map(Math.round); });
     const overflow = await p.evaluate(() => document.documentElement.scrollWidth > innerWidth);
 
@@ -97,7 +102,7 @@ const base = {
     const reset = await p.evaluate(() => !document.querySelector('.booking-form').hidden && document.querySelector('#bk-name').value === '');
     // dialog fits viewport
     const fits = await p.$eval('#booking-dialog', (d) => { const r = d.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.bottom <= innerHeight; });
-    results.push({ vp: vp.n, dock, overflow, kakaoHref, snack, collapsed, expanded, err1, err2, phoneVal, err3, posts, reset, fits, errors });
+    results.push({ vp: vp.n, awayTop, shownAfterHero, gapAboveAd, dock, overflow, kakaoHref, snack, collapsed, expanded, err1, err2, phoneVal, err3, posts, reset, fits, errors });
     await ctxB.close();
   }
   console.log(JSON.stringify(results, null, 1));
