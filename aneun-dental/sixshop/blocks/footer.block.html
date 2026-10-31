@@ -74,15 +74,28 @@
   .field-row{grid-template-columns:1fr}
   .chip span{min-height:40px;padding:0 13px}
 }
+/* 진단 반영: 전화·네이버 예약 바로 연결 */
+.tel-link{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.clinic-footer a.social-link{color:#456683;font:400 12px/1.8 var(--sans);text-decoration:none}
+.clinic-footer a.social-link:hover{text-decoration:underline}
+.dock-phone{background:#fff;color:var(--ink);border-color:#c9d6e3}
+.booking-alt{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.booking-alt:empty{display:none}
+.booking-alt a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border:1px solid #c9d6e3;border-radius:999px;font:500 14px/1 var(--sans);color:var(--accent);text-decoration:none}
+.booking-alt a:hover{background:#f3f7fb}
+@media(max-width:700px){.clinic-footer a.social-link{display:inline-flex;align-items:center;min-height:44px}}
 /* 블록 여백 설정 */
 .an-pad{padding:{{property.paddingTopDesktop}}px {{property.paddingRightDesktop}}px {{property.paddingBottomDesktop}}px {{property.paddingLeftDesktop}}px}@media (max-width:767px){.an-pad{padding:{{property.paddingTopMobile}}px {{property.paddingRightMobile}}px {{property.paddingBottomMobile}}px {{property.paddingLeftMobile}}px}}
 </style>
 
 <template>
-<div class="an-pad"><div class="an an-footer"><footer class="clinic-footer"><div class="footer-identity"><a href="/">아는치과</a><p>이 동네, 아는 치과의사가<br>생겼습니다.</p></div><div class="footer-business"><p>대표자 김○○ <span>｜</span> 사업자등록번호 123-45-67890</p><p>경기 ○○시 ○○로 123, ○○빌딩 3층 <span>｜</span> 전화번호 000-0000-0000</p><div class="footer-policies"><button type="button" data-info="개인정보처리방침">개인정보처리방침</button><button type="button" data-info="이용약관">이용약관</button><button type="button" data-info="비급여 진료 안내">비급여 진료 안내</button></div><small>© 2026 아는치과. 홈페이지 판매 샘플 · 의료진, 사진, 병원 정보는 예시입니다.</small></div><div class="footer-social"><button type="button" data-book="">네이버 예약</button><button type="button" data-consult="">카카오톡 상담</button><button type="button" data-info="블로그">블로그</button><button type="button" data-info="인스타그램">인스타그램</button></div></footer>
+<div class="an-pad"><div class="an an-footer"><footer class="clinic-footer"><div class="footer-identity"><a href="/">아는치과</a><p>이 동네, 아는 치과의사가<br>생겼습니다.</p></div><div class="footer-business"><p>대표자 김○○ <span>｜</span> 사업자등록번호 123-45-67890</p><p>경기 ○○시 ○○로 123, ○○빌딩 3층 <span>｜</span> 전화번호 <a class="tel-link" href="tel:{{property.phone}}">{{property.phone}}</a></p><div class="footer-policies"><button type="button" data-info="개인정보처리방침">개인정보처리방침</button><button type="button" data-info="이용약관">이용약관</button><button type="button" data-info="비급여 진료 안내">비급여 진료 안내</button></div><small>© 2026 아는치과. 홈페이지 판매 샘플 · 의료진, 사진, 병원 정보는 예시입니다.</small></div><div class="footer-social">{{#if property.naverBookingLink.value}}<a class="social-link" href="{{property.naverBookingLink.value}}" target="_blank" rel="noopener">네이버 예약</a>{{else}}<button type="button" data-book="">네이버 예약</button>{{/if}}<button type="button" data-consult="">카카오톡 상담</button><button type="button" data-info="블로그">블로그</button><button type="button" data-info="인스타그램">인스타그램</button></div></footer>
 <!-- 상담 채널 고정 버튼: 카카오톡·네이버 톡톡 + 상담하기(펼치기/접기) -->
 <div class="cta-dock is-away">
   <div class="dock-channels" id="dock-channels">
+    {{#if property.phone}}
+      <a class="dock-channel dock-phone" href="tel:{{property.phone}}" aria-label="전화 상담 {{property.phone}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z" stroke-linejoin="round"/></svg><span>전화 상담</span></a>
+    {{/if}}
     {{#if property.kakaoLink.value}}
       <a class="dock-channel dock-kakao" href="{{property.kakaoLink.value}}" target="_blank" rel="noopener" aria-label="카카오톡 상담"><svg viewBox="0 0 28 28" aria-hidden="true"><path fill="currentColor" d="M14 5C8.5 5 4 8.5 4 12.8c0 2.8 1.9 5.2 4.7 6.6l-1 3.6c-.1.3.3.6.6.4l4.2-2.8c.5.1 1 .1 1.5.1 5.5 0 10-3.5 10-7.9S19.5 5 14 5z"/></svg><span>카카오톡 상담</span></a>
     {{else}}{{#if social.kakao}}
@@ -105,6 +118,7 @@
   <div class="section-label">RESERVATION</div>
   <h2 id="booking-title">진료 예약 신청</h2>
   <p class="dialog-lead">남겨주시면 확인 후 전화로 예약 시간을 확정해 드립니다.</p>
+  <p class="booking-alt">{{#if property.naverBookingLink.value}}<a href="{{property.naverBookingLink.value}}" target="_blank" rel="noopener">네이버 예약으로 바로 잡기</a>{{/if}}{{#if property.phone}}<a href="tel:{{property.phone}}">전화 {{property.phone}}</a>{{/if}}</p>
   <form class="booking-form" novalidate>
     <div class="field-row">
       <div class="field"><label for="bk-name">이름<span class="req">*</span></label><input id="bk-name" name="name" type="text" autocomplete="name" maxlength="20" required></div>

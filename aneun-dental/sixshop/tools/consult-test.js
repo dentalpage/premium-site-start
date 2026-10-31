@@ -36,7 +36,7 @@ const base = {
   property: { paddingTopDesktop: 0, paddingRightDesktop: 0, paddingBottomDesktop: 0, paddingLeftDesktop: 0, paddingTopMobile: 0, paddingRightMobile: 0, paddingBottomMobile: 0, paddingLeftMobile: 0,
     kakaoLink: { id: null, type: 'url', label: '', value: 'http://pf.kakao.com/_test/chat' },
     talktalkLink: { id: null, type: '', label: '', value: '' },
-    consultBoard: { id: 6183, name: '상담 예약 접수' } },
+    consultBoard: { id: 6183, name: '상담 예약 접수' }, phone: '02-1234-5678', naverBookingLink: { id: null, type: 'url', label: '', value: 'https://booking.naver.com/test' } },
   customer: null,
   social: { email: 'clinic@example.com', kakao: '' },
 };
@@ -62,6 +62,8 @@ const base = {
     const overflow = await p.evaluate(() => document.documentElement.scrollWidth > innerWidth);
 
     const kakaoHref = await p.$eval('.dock-kakao', (el) => el.getAttribute('href'));
+    const telLinks = await p.$$eval('a[href^="tel:"]', (els) => els.map((e) => e.className || e.textContent.trim()));
+    const naverLinks = await p.$$eval('a[href*="booking.naver"]', (els) => els.map((e) => e.textContent.trim()));
     await p.click('.dock-naver');
     const snack = await p.evaluate(() => window.__snack);
     await p.click('.dock-consult');
@@ -102,7 +104,7 @@ const base = {
     const reset = await p.evaluate(() => !document.querySelector('.booking-form').hidden && document.querySelector('#bk-name').value === '');
     // dialog fits viewport
     const fits = await p.$eval('#booking-dialog', (d) => { const r = d.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth && r.top >= 0 && r.bottom <= innerHeight; });
-    results.push({ vp: vp.n, awayTop, shownAfterHero, gapAboveAd, dock, overflow, kakaoHref, snack, collapsed, expanded, err1, err2, phoneVal, err3, posts, reset, fits, errors });
+    results.push({ vp: vp.n, telLinks, naverLinks, awayTop, shownAfterHero, gapAboveAd, dock, overflow, kakaoHref, snack, collapsed, expanded, err1, err2, phoneVal, err3, posts, reset, fits, errors });
     await ctxB.close();
   }
   console.log(JSON.stringify(results, null, 1));

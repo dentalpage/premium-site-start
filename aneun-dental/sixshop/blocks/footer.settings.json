@@ -12,7 +12,7 @@
   },
   {
    "type": "DESCRIPTION",
-   "content": "상담하기 버튼 위에 카카오톡·네이버 톡톡 버튼이 항상 보여요. 링크를 비워두면 눌렀을 때 '준비 중' 안내가 떠요."
+   "content": "상담하기 버튼 위에 전화·카카오톡·네이버 톡톡 버튼이 보여요. 채팅 링크를 비워두면 눌렀을 때 '준비 중' 안내가 떠요."
   },
   {
    "type": "LINK",
@@ -32,6 +32,19 @@
    "label": "예약 신청 접수 게시판",
    "description": "예약 신청서가 이 게시판에 쌓여요. 운영자만 읽을 수 있는 게시판을 골라 주세요.",
    "isPostsIncluded": false
+  },
+  {
+   "type": "TEXT",
+   "id": "phone",
+   "label": "대표 전화번호",
+   "description": "누르면 바로 전화가 걸려요. 상담 버튼 묶음, 푸터, 예약 신청서에 함께 쓰여요. 비우면 전화 버튼이 숨겨져요.",
+   "placeholder": "예: 02-1234-5678"
+  },
+  {
+   "type": "LINK",
+   "id": "naverBookingLink",
+   "label": "네이버 예약 링크",
+   "description": "넣으면 푸터의 '네이버 예약'과 예약 신청서 위 버튼이 네이버 예약으로 바로 연결돼요. 예: https://booking.naver.com/..."
   },
   {
    "type": "TITLE",
@@ -152,6 +165,13 @@
   "paddingLeftDesktop": 0,
   "paddingLeftMobile": 0,
   "paddingRightDesktop": 0,
-  "paddingRightMobile": 0
+  "paddingRightMobile": 0,
+  "phone": "000-0000-0000",
+  "naverBookingLink": {
+   "id": null,
+   "type": "",
+   "label": "",
+   "value": ""
+  }
  }
 }

@@ -21,6 +21,23 @@
   },
   {
    "type": "TITLE",
+   "content": "연락처"
+  },
+  {
+   "type": "TEXT",
+   "id": "phone",
+   "label": "전화번호",
+   "description": "누르면 바로 전화가 걸려요.",
+   "placeholder": "예: 02-1234-5678"
+  },
+  {
+   "type": "LINK",
+   "id": "naverPlaceLink",
+   "label": "네이버 플레이스(지도) 링크",
+   "description": "넣으면 주소 아래에 '네이버 지도에서 보기' 버튼이 생겨요. 예: https://naver.me/..."
+  },
+  {
+   "type": "TITLE",
    "content": "블록 여백 (PC)"
   },
   {
@@ -109,7 +126,7 @@
   }
  ],
  "property": {
-  "imgLocationReference": "",
+  "imgLocationReference": "https://res.cloudinary.com/dlijrvmi/image/upload/f_auto,q_auto/aneun-dental/gpt-compare/location-reference.webp",
   "paddingTopDesktop": 0,
   "paddingTopMobile": 0,
   "paddingBottomDesktop": 0,
@@ -117,6 +134,13 @@
   "paddingLeftDesktop": 0,
   "paddingLeftMobile": 0,
   "paddingRightDesktop": 0,
-  "paddingRightMobile": 0
+  "paddingRightMobile": 0,
+  "phone": "000-0000-0000",
+  "naverPlaceLink": {
+   "id": null,
+   "type": "",
+   "label": "",
+   "value": ""
+  }
  }
 }

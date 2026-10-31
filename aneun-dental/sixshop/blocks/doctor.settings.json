@@ -114,8 +114,8 @@
   }
  ],
  "property": {
-  "imgDoctor": "",
-  "imgDoctorReference": "",
+  "imgDoctor": "https://res.cloudinary.com/dlijrvmi/image/upload/f_auto,q_auto/aneun-dental/gpt-compare/doctor.webp",
+  "imgDoctorReference": "https://res.cloudinary.com/dlijrvmi/image/upload/f_auto,q_auto/aneun-dental/gpt-compare/doctor-reference.webp",
   "paddingTopDesktop": 0,
   "paddingTopMobile": 0,
   "paddingBottomDesktop": 0,
