@@ -374,9 +374,25 @@ html body .hero h1{font-size:clamp(38px,4.1vw,62px);line-height:1.2;letter-spaci
     const max = treatments.offsetHeight - window.innerHeight;
     const passed = Math.min(Math.max(-rect.top,0),max);
     const progress = max ? passed/max : 0;
-    track.style.transform = `translateX(${-progress * (window.innerWidth*2)}px)`;
+    // snap: the track jumps panel to panel instead of sliding with the scroll
+    const index = Math.round(progress * 2);
+    track.style.transform = `translateX(${-index * window.innerWidth}px)`;
+    treatments.dataset.panel = index;
   }
-  addEventListener('scroll', onScroll, {passive:true});
+  // once scrolling stops inside the scroller, settle the page on the current panel
+  const desk = matchMedia('(min-width: 901px)');
+  let settleTimer = 0;
+  function settle(){
+    if (!desk.matches) return;
+    const vh = window.innerHeight;
+    const top = treatments.getBoundingClientRect().top + window.scrollY;
+    const passed = window.scrollY - top;
+    const max = treatments.offsetHeight - vh;
+    if (passed < -vh * .35 || passed > max + vh * .35) return;
+    const target = top + Math.min(Math.max(Math.round(passed / vh), 0), 2) * vh;
+    if (Math.abs(target - window.scrollY) > 2) window.scrollTo({top: target, behavior: 'smooth'});
+  }
+  addEventListener('scroll', () => { onScroll(); clearTimeout(settleTimer); settleTimer = setTimeout(settle, 140); }, {passive:true});
   addEventListener('resize', onScroll);
   onScroll();
 </script>
