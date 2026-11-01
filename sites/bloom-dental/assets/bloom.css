@@ -503,11 +503,7 @@ html body[data-page=general] .care-text h3 .ko{display:block;margin-top:4px}
 /* Booking: honeypot field bots fill in and people never see */
 .bl-form .bl-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
 
-/* ===== 2026-11 update: hero CTA, first-visit flow, fee popup, director credentials ===== */
-html body[data-page=main] .hero .bl-hero-cta{display:inline-block;margin-top:36px;font-size:14px;letter-spacing:.02em;color:rgba(241,239,234,.86);border-bottom:1px solid rgba(241,239,234,.5);padding-bottom:5px;text-decoration:none;transition:color .2s,border-color .2s}
-html body[data-page=main] .hero .bl-hero-cta:hover{color:#fff;border-color:#fff}
-html.bl-anim body[data-page=main] .hero .bl-hero-cta{animation:bl-fade 1s ease-out 1.3s both}
-@media(prefers-reduced-motion:reduce){html.bl-anim body[data-page=main] .hero .bl-hero-cta{animation:none!important;opacity:1}}
+/* ===== 2026-11 update: first-visit flow, fee popup, director credentials ===== */
 
 .bl-flow{background:var(--bl-paper);padding:var(--bl-section) 0}
 .bl-flow-head{max-width:620px;margin-bottom:64px}
