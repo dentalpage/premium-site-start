@@ -857,7 +857,7 @@ html{scroll-behavior:smooth}
   function show(sent){q('[data-sent]').forEach(function(p){if(p.getAttribute('data-sent')===(sent?'1':'0'))p.removeAttribute('hidden');else p.setAttribute('hidden','');});}
   var TYPES=['기존 치과 · 무료 진단','개원 준비 · 기획 상담'];
   // Weegloo 스크립트(익명 호출)로 저장 → 기존 웹훅이 메일 알림을 보냄. 페이지에 토큰 없음.
-  var APPLY_URL='https://script.weegloo.com/v1/spaces/RJeivmJ0/scripts/__LANDING_SCRIPT_ID__/execute/anonymous';
+  var APPLY_URL='https://script.weegloo.com/v1/spaces/RJeivmJ0/scripts/3trmXRLcxItHEz58re4X6lZemww6fJ/execute/anonymous';
   q('[data-submit]').forEach(function(b){b.addEventListener('click',function(){
     var f=b.closest('form'),err=f.querySelector('[data-err]');
     var seg=document.querySelector('[data-group="sit"][aria-checked="true"]'),type=seg?+seg.getAttribute('data-val'):0,opening=type===1;
