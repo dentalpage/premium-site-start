@@ -1,0 +1,123 @@
+{
+ "spaceId": "RJeivmJ0",
+ "name": "무료 진단 신청 접수 (랜딩 폼)",
+ "directCallEnabled": true,
+ "anonymousCallEnabled": true,
+ "definition": {
+  "method": "Post",
+  "payloadSchema": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "clinicName",
+    "doctorName",
+    "phone",
+    "email",
+    "situation",
+    "website",
+    "openingDate",
+    "specialty",
+    "hp"
+   ],
+   "properties": {
+    "clinicName": {
+     "type": "string",
+     "minLength": 1,
+     "maxLength": 50
+    },
+    "doctorName": {
+     "type": "string",
+     "minLength": 1,
+     "maxLength": 30
+    },
+    "phone": {
+     "type": "string",
+     "pattern": "^0[0-9]{8,10}$"
+    },
+    "email": {
+     "type": "string",
+     "maxLength": 100,
+     "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$"
+    },
+    "situation": {
+     "type": "string",
+     "enum": [
+      "기존 치과 · 무료 진단",
+      "개원 준비 · 기획 상담"
+     ]
+    },
+    "website": {
+     "type": "string",
+     "maxLength": 200
+    },
+    "openingDate": {
+     "type": "string",
+     "maxLength": 50
+    },
+    "specialty": {
+     "type": "string",
+     "maxLength": 50
+    },
+    "hp": {
+     "type": "string",
+     "maxLength": 0
+    }
+   }
+  },
+  "statements": [
+   {
+    "type": "ResourceCreate",
+    "name": "app",
+    "resource": "Content",
+    "contentType": {
+     "sys": {
+      "id": "3trmXRL6uNR0E6uJfV2Hf8y17peiL5"
+     }
+    },
+    "fields": {
+     "clinicName": {
+      "ko-KR": "{ /payload/clinicName }"
+     },
+     "doctorName": {
+      "ko-KR": "{ /payload/doctorName }"
+     },
+     "phone": {
+      "ko-KR": "{ /payload/phone }"
+     },
+     "email": {
+      "ko-KR": "{ /payload/email }"
+     },
+     "situation": {
+      "ko-KR": "{ /payload/situation }"
+     },
+     "website": {
+      "ko-KR": "{ /payload/website }"
+     },
+     "openingDate": {
+      "ko-KR": "{ /payload/openingDate }"
+     },
+     "specialty": {
+      "ko-KR": "{ /payload/specialty }"
+     },
+     "privacyConsent": {
+      "ko-KR": true
+     },
+     "status": {
+      "ko-KR": "접수"
+     }
+    },
+    "publish": false,
+    "propagateEvents": true
+   },
+   {
+    "type": "Return",
+    "value": {
+     "ok": true,
+     "id": "{ /app/sys/id }"
+    },
+    "isError": false,
+    "statusCode": 201
+   }
+  ]
+ }
+}

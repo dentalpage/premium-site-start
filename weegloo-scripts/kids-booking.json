@@ -1,0 +1,115 @@
+{
+ "spaceId": "bDVn2gM4",
+ "name": "첫 방문 예약 접수 (샘플 폼)",
+ "directCallEnabled": true,
+ "anonymousCallEnabled": true,
+ "definition": {
+  "method": "Post",
+  "payloadSchema": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "guardianName",
+    "phone",
+    "childAge",
+    "reason",
+    "timePreference",
+    "note",
+    "hp"
+   ],
+   "properties": {
+    "guardianName": {
+     "type": "string",
+     "minLength": 1,
+     "maxLength": 30
+    },
+    "phone": {
+     "type": "string",
+     "pattern": "^0[0-9]{8,10}$"
+    },
+    "childAge": {
+     "type": "string",
+     "enum": [
+      "3세 미만",
+      "3~4세",
+      "5~6세",
+      "7~9세",
+      "10세 이상"
+     ]
+    },
+    "reason": {
+     "type": "string",
+     "enum": [
+      "첫 검진·친해지기",
+      "아파서 진료가 필요해요"
+     ]
+    },
+    "timePreference": {
+     "type": "string",
+     "enum": [
+      "오전",
+      "오후",
+      "상관없음"
+     ]
+    },
+    "note": {
+     "type": "string",
+     "maxLength": 1000
+    },
+    "hp": {
+     "type": "string",
+     "maxLength": 0
+    }
+   }
+  },
+  "statements": [
+   {
+    "type": "ResourceCreate",
+    "name": "booking",
+    "resource": "Content",
+    "contentType": {
+     "sys": {
+      "id": "3trmXRL78gcauKXRtOzfKFUYJaqWEj"
+     }
+    },
+    "fields": {
+     "guardianName": {
+      "ko-KR": "{ /payload/guardianName }"
+     },
+     "phone": {
+      "ko-KR": "{ /payload/phone }"
+     },
+     "childAge": {
+      "ko-KR": "{ /payload/childAge }"
+     },
+     "reason": {
+      "ko-KR": "{ /payload/reason }"
+     },
+     "timePreference": {
+      "ko-KR": "{ /payload/timePreference }"
+     },
+     "note": {
+      "ko-KR": "{ /payload/note }"
+     },
+     "privacyConsent": {
+      "ko-KR": true
+     },
+     "status": {
+      "ko-KR": "접수"
+     }
+    },
+    "publish": false,
+    "propagateEvents": true
+   },
+   {
+    "type": "Return",
+    "value": {
+     "ok": true,
+     "id": "{ /booking/sys/id }"
+    },
+    "isError": false,
+    "statusCode": 201
+   }
+  ]
+ }
+}
