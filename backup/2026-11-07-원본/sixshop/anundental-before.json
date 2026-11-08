@@ -1,0 +1,18 @@
+{
+ "theme": "6ac520a2549e324bd9996b83",
+ "customCode": {
+  "head": "<!-- 아는치과 글꼴: 테마 타이포그래피 설정에서 Noto Sans KR / Noto Serif KR을 이미 불러오므로 중복 로딩 제거 -->\n<!-- 아는치과 모바일 가독성 보정 (작은 글씨 최소 크기) -->\n<style>\n@media (max-width:700px){\n  div[data-block-id] a.brand span{font-size:9px!important}\n  div[data-block-id] .header-book,div[data-block-id] .menu-toggle{font-size:13px!important}\n  div[data-block-id] .symptom-tabs button{font-size:13px!important}\n  div[data-block-id] .treatment-purpose{font-size:13px!important}\n  div[data-block-id] .symptom-note,div[data-block-id] .implant-sample-note,div[data-block-id] figcaption,div[data-block-id] .location-sample-note,div[data-block-id] .footer-business p,div[data-block-id] .footer-business small{font-size:12px!important}\n  div[data-block-id] .footer-policies button,div[data-block-id] .footer-social button{font-size:13px!important}\n}\n</style>",
+  "body": ""
+ },
+ "pages": {
+  "6ad0744b93d21d15a48e63ee home": {
+   "title": "아는치과",
+   "description": "아는치과는 치료를 정하기 전에 지금 할 것과 지켜볼 것부터 나눠 설명합니다. 첫 방문 검사, 보험 스케일링, 충치·신경치료, 임플란트, 사랑니 진료 안내와 진료 예약.",
+   "noindex": false
+  },
+  "6acf9f63b2ef8e8b95359261 새 페이지 1": {
+   "title": null,
+   "noindex": false
+  }
+ }
+}
