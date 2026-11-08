@@ -1,0 +1,122 @@
+{
+ "6aa2b7bd0879cc151813dc29": {
+  "signatureName": "김서연",
+  "portraitImageAlt": "스마일 아키텍트 김서연 대표원장",
+  "profileName": "김서연",
+  "profileHistory": "연세대학교 치과대학 졸업<br>연세대학교 치과교정과 전문의<br>대한치과교정학회 정회원<br>세계교정학회(WFO) 정회원"
+ },
+ "6aafd9e9ee0464a8a3b72ab5": {
+  "ctaStaticLine": "정확한 진단이\n좋은 결과를 만듭니다."
+ },
+ "6addab91ef1b7bf186d89894": {
+  "noticeText": "※ 위 사례는 환자분의 동의를 받아 게재한 것이며, 치료 결과와 기간은 개인의 구강 상태에 따라 다를 수 있습니다.\n교정 치료 시 일시적인 통증, 잇몸 염증, 치근 흡수, 재발 등의 부작용이 나타날 수 있으므로 충분한 상담 후 결정하시기 바랍니다."
+ },
+ "6aafe5a6008ed8c74fc76c98": {
+  "heroNoteText": "정확한 진단이, 아름다운 변화를 만듭니다.",
+  "heading": "설계는 정확한 진단에서 시작됩니다"
+ },
+ "6aad528aee0464a8a3aeee51": {
+  "cards": [
+   {
+    "cardNumber": "01",
+    "cardTitle": "연조직 중심 진단",
+    "cardDescription": "치아의 이동뿐 아니라, 입술, 코, 턱선 등 연조직의 조화를 함께 고려하여 자연스러운 아름다움을 설계합니다.",
+    "cardImage": "https://cdn.sixshop.io/sf-gateway/public/stores/dental1/themes/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%282%29_1789913409072.png"
+   },
+   {
+    "cardNumber": "02",
+    "cardTitle": "치조골 안전 범위",
+    "cardDescription": "치아 이동이 가능한 치조골의 양과 형태를 평가하여, 안전하고 안정적인 교정 치료를 계획합니다.",
+    "cardImage": "https://cdn.sixshop.io/sf-gateway/public/stores/dental1/themes/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%283%29_1789913416606.png"
+   },
+   {
+    "cardNumber": "03",
+    "cardTitle": "성장기 성장량 · 기도 평가",
+    "cardDescription": "성장기의 경우, 남은 성장량과 안면 골격의 발달 방향, 기도의 형태까지 종합적으로 평가하여 장기적인 변화를 예측합니다.",
+    "cardImage": "https://cdn.sixshop.io/sf-gateway/public/stores/dental1/themes/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%284%29_1789913426499.png"
+   },
+   {
+    "cardNumber": "04",
+    "cardTitle": "교합과 기능 안정성",
+    "cardDescription": "단순히 가지런한 치아가 아니라, 씹는 기능과 턱관절의 균형까지 고려한 안정적인 교합을 목표로 합니다.",
+    "cardImage": "https://cdn.sixshop.io/sf-gateway/public/stores/dental1/themes/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-%285%29_1789913434312.png"
+   }
+  ]
+ },
+ "6ae6c31e26fa3ab713310152": {
+  "phone": "02-1234-5678"
+ },
+ "6ae6c3230b29dac368f05d0a": {
+  "phone": "02-1234-5678"
+ },
+ "6ae6c32477a409176f3d22a7": {
+  "phone": "02-1234-5678"
+ },
+ "6ab1e7aa008ed8c74fce7d45": {
+  "accordionItems": [
+   {
+    "itemDescription": "일시적인 불편감, 이렇게 관리하세요.",
+    "itemDetails": [
+     {
+      "text": "장치 부착·조정 후 2~3일은 뻐근할 수 있어요. 대부분 일주일 안에 적응합니다."
+     },
+     {
+      "text": "죽, 두부, 계란찜처럼 부드러운 음식을 드세요."
+     },
+     {
+      "text": "장치가 볼이나 입술에 쓸리면 교정용 왁스를 붙여주세요."
+     },
+     {
+      "text": "입안이 헐었다면 미지근한 소금물로 가볍게 헹궈주세요."
+     },
+     {
+      "text": "통증이 일주일 넘게 계속되면 내원해 주세요."
+     }
+    ],
+    "itemImage": "",
+    "itemNumber": "02",
+    "itemTitle": "통증·불편감 대처법"
+   },
+   {
+    "itemDescription": "갑작스러운 상황에도 당황하지 마세요.",
+    "itemDetails": [
+     {
+      "text": "브라켓이 떨어지면 억지로 떼지 말고 그대로 둔 채 연락해 주세요."
+     },
+     {
+      "text": "와이어가 튀어나와 찌르면 왁스로 덮고 가까운 날 내원해 주세요."
+     },
+     {
+      "text": "빠진 장치는 케이스에 담아 내원 때 가져와 주세요."
+     },
+     {
+      "text": "붓기, 출혈, 심한 통증이 있으면 바로 연락해 주세요. (대표전화 02-1234-5678)"
+     }
+    ],
+    "itemImage": "",
+    "itemNumber": "03",
+    "itemTitle": "응급상황 대응"
+   },
+   {
+    "itemDescription": "바른 습관이 더 좋은 결과를 만듭니다.",
+    "itemDetails": [
+     {
+      "text": "손가락 빨기, 혀 내밀기는 앞니를 밀어내 교정 효과를 떨어뜨립니다."
+     },
+     {
+      "text": "입을 벌리고 자거나 입으로 숨을 쉰다면 내원 때 알려주세요."
+     },
+     {
+      "text": "손톱이나 연필을 깨무는 습관은 장치 파손의 원인이 됩니다."
+     },
+     {
+      "text": "턱을 괴거나 엎드려 자는 자세도 턱 성장에 영향을 줄 수 있어요."
+     }
+    ],
+    "itemImage": "",
+    "itemNumber": "04",
+    "itemTitle": "성장기 구강습관 관리"
+   }
+  ]
+ }
+}
